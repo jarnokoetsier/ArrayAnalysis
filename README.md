@@ -16,9 +16,20 @@ You can download ArrayAnalysis for Windows [here](https://github.com/jarnokoetsi
 Not available (yet).
 
 ### R package (Windows/MacOS/Linux)
+Install the ArrayAnalysis package
+
+```
+# install "remotes" package
+install.packages("remotes")
+
+# Install ArrayAnalysis from GitHub
+remotes::install_github("jarnokoetsier/ArrayAnalysis/Package") 
+```
+
 Run the ArrayAnalysis app directly from R:
 
-``
-install_github("ArrayAnalysis"
-``
+```
+# Run ArrayAnalysis
+ArrayAnalysis::runArrayAnalysis()
+```
 
