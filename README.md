@@ -19,8 +19,11 @@ Not available (yet).
 Install the ArrayAnalysis package
 
 ```
-install.packages("remotes") # install "remotes" package
-remotes::install_github("jarnokoetsier/ArrayAnalysis/Package") # Install ArrayAnalysis from GitHub
+# install "remotes" package
+install.packages("remotes")
+
+# Install ArrayAnalysis from GitHub
+remotes::install_github("jarnokoetsier/ArrayAnalysis/Package") 
 ```
 
 Run the ArrayAnalysis app directly from R:
