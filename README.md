@@ -18,14 +18,14 @@ Not available (yet).
 ### R package (Windows/MacOS/Linux)
 Install the ArrayAnalysis package
 
-``
+```
 install.packages("remotes") # install "remotes" package
 remotes::install_github("jarnokoetsier/ArrayAnalysis/Package") # Install ArrayAnalysis from GitHub
-``
+```
 
 Run the ArrayAnalysis app directly from R:
 
-``
+```
 ArrayAnalysis::runArrayAnalysis()
-``
+```
 
