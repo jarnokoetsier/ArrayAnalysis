@@ -1,0 +1,7 @@
+markdown: kramdown
+
+include: ['_pages']
+
+plugins:
+- jekyll-seo-tag
+- jekyll-sitemap
