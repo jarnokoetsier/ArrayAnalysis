@@ -1,7 +1,8 @@
 # ArrayAnalysis
 
 ## Prerequisites
-Before you can download and run ArrayAnalysis, please make sure to have [R](https://cran.r-project.org/) and [Rtools](https://cran.r-project.org/bin/windows/Rtools/) installed on your computer. 
+Before you can download and run ArrayAnalysis, please make sure to have [R](https://cran.r-project.org/) installed on your computer. 
+If you are using Windows, you also need to install [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
 
 ## Installation
 You can choose to install ArrayAnalysis as a desktop app or as an R package.
