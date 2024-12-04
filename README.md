@@ -29,6 +29,7 @@ remotes::install_github("jarnokoetsier/ArrayAnalysis/Package")
 Run the ArrayAnalysis app directly from R:
 
 ```
+# Run ArrayAnalysis
 ArrayAnalysis::runArrayAnalysis()
 ```
 
