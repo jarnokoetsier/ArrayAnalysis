@@ -6,7 +6,7 @@ layout: default
 <div class="container px-3">
   <div class="row">
     <div class="col-sm-12 px-3" style="text-align: justify">
-      <h2 id="about-the-bytemal-conference"><b>About ArrayAnalysis</b></h2>
+      <h2><b>About ArrayAnalysis</b></h2>
       <p>text</p>
       <br>
       <h2><b>Contact</b></h2>
