@@ -12,7 +12,7 @@ layout: default
   <br>
   <p style="text-align: justify">
     <h2><b>Contact</b></h2>
-    If you have any questions, feel free to contact us via e-mail: <a href = "mailto:jarno.koetsier@maastrichtuniversity.nl>jarno.koetsier@maastrichtuniversity.nl</a>
+    If you have any questions, feel free to contact us via e-mail: <a href = "mailto:jarno.koetsier@maastrichtuniversity.nl">jarno.koetsier@maastrichtuniversity.nl</a>
   </p>
   </div>
  </div>
