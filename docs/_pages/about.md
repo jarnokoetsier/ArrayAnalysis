@@ -3,7 +3,7 @@ title: "About ArrayAnalysis"
 permalink: /about
 layout: default
 ---
-</div>
+
 <div class="row">
   <div class="col-sm-12 px-3" style="text-align: justify">
     <h2 id="about-the-bytemal-conference"><b>About ArrayAnalysis</b></h2>
