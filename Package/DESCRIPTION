@@ -10,5 +10,35 @@ License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+biocViews:
 Imports:
-	shiny
+	shiny (>= 1.9.1),
+	BiocManager (>= 1.30.25),
+	tidyverse (>= 2.0.0),
+	fuzzyjoin (>= 0.1.6),
+	plotly (>= 4.10.4),
+	gplots (>= 3.2.0),
+	heatmaply (>= 1.5.0),
+	ggvenn (>= 0.1.10),
+	data.table (>= 1.16.2),
+	DT (>= 0.33),
+	shinyWidgets (>= 0.8.7),
+	shinycssloaders	(>= 1.1.0),
+	shinybusy (>= 0.3.3),
+	purrr (>= 1.0.2),
+	prompter (>= 1.2.0),
+	htmlwidgets (>= 1.6.4),
+	igraph (>= 2.1.1),
+	ggraph (>= 2.2.1),
+	biomaRt	(>= 2.58.2),
+	GEOquery (>= 2.70.0),
+	limma (>= 3.58.1),
+	makecdfenv (>= 1.78.0),
+	bioDist	(>= 1.74.0),
+	gcrma (>= 2.74.0),
+	plier (>= 1.72.0),
+	clusterProfiler	(>= 4.10.1),
+	affy (>= 1.80.0),
+	oligo (>= 1.66.0),
+	DESeq2 (>= 1.42.1),
+	apeglm (>= 1.24.0)
