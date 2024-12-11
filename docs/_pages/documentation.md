@@ -1,7 +1,7 @@
 ---
 title: "ArrayAnalysis Documentation"
 permalink: /documentation
-layout: documentation
+layout: default
 ---
 
 <br>
