@@ -3,6 +3,11 @@ title: "About ArrayAnalysis"
 permalink: /documentation
 layout: default
 ---
+
+<!DOCTYPE html>
+
+<html>
+
 <head>
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1937,5 +1942,6 @@ $(document).ready(function ()  {
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
-
+</body>
+</html>
 
