@@ -3,6 +3,8 @@ title: "About ArrayAnalysis"
 permalink: /about
 layout: default
 ---
+<br>
+<br>
 <div class="container px-1">
 <div class="row">
   <div class="col-sm-8 px-3">
@@ -12,7 +14,7 @@ layout: default
 		 to analyse and interpret transcriptomic experiments. The analysis of both RNA sequencing and microarray-based transcriptomic data are supported. 
 		 ArrayAnalysis can be easily installed as a desktop app or as an R package. Follow the installation guide and start using ArrayAnalysis today!</p>
 		 <h1><b>Cite</b> ArrayAnalysis</h1>
-		 <p>Koetsier et al. (2025). ArrayAnalysis: your transcriptomic data analysis assistent. </p>
+		 <p>ArrayAnalysis Team (2025). ArrayAnalysis: your transcriptomic data analysis assistent. </p>
 	  </div>
   </div>
   <div class="col-sm-4 px-3">
@@ -25,6 +27,7 @@ layout: default
 		  <br>
 	  </div>
   </div>
+</div>
 </div>
 <br>
 
