@@ -3,7 +3,20 @@ title: "About ArrayAnalysis"
 permalink: /documentation
 layout: documentation
 ---
-
+<div style = "background-color:#17A2B8; background-image:url('../assets/img/bg.png'); background-size: cover;">
+      <div class="text-center">
+      <a href="{{ "/" | relative_url}}"><img src="{{ "/assets/img/logo_main.PNG" | relative_url}}" alt="ArrayAnalysis" class = "center" 
+		style="width:750px;max-width:100%;height:auto;margin-top:40px;margin-bottom:20px;">
+        <ul>
+          <li class="text-center d-block d-sm-inline-block px-5 px-md-3"><a href="{{ "/about" | relative_url}}" style="color: white; font-size: 24px"><b>About</b></a></li>
+          <li class="text-center d-block d-sm-inline-block px-5 px-md-3"><a href="{{ "/installation" | relative_url}}" style="color: white; font-size: 24px"><b>Installation</b></a></li>
+          <li class="text-center d-block d-sm-inline-block px-5 px-md-3"><a href="{{ "/documentation" | relative_url}}" style="color: white; font-size: 24px"><b>Documentation</b></a></li>
+          <li class="text-center d-block d-sm-inline-block px-5 px-md-3"><a href="{{ "/news" | relative_url}}" style="color: white; font-size: 24px"><b>News</b></a></li>
+        </ul>
+        <br>
+      </div>
+</div>
+<br>
 <div id="header">
 <h1 class="title toc-ignore" style="color: #004080;"><b>ArrayAnalysis Documentation</b></h1>
 <p>Check our <a href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">website</a> for the most recent information and FAQs.</p>
