@@ -8,16 +8,15 @@ layout: default
 <div class="container px-1">
 
 <!-- Desktop app (Windows) -->
-<h1><b>DesktopApp</b> (Windows)</h1>
+<h1><b>Desktop App</b> (Windows)</h1>
 
-<div class="card-deck text-center">
+<div class="card-deck">
 
   <div class="card">
     <img src="{{ "/assets/img/icons/R_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="sharing-icon">
     <div class="card-body">
       <h5 class="card-title">1. Install R</h5>
-      <p class="card-text">If you don't have R on your computer, please first install R on your computer before you can install ArrayAnalysis. 
-      You can intall R by clicking on this <a href = "https://cran.r-project.org/">link</a></p>
+      <p class="card-text">If you don't have R on your computer, please first install R by clicking on this <a href = "https://cran.r-project.org/">link</a></p>
     </div>
   </div>
   
@@ -31,7 +30,7 @@ layout: default
   </div>
   
   <div class="card">
-    <img src="{{ "/assets/img/ArrayAnalysis_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="chat-icon">
+    <img src="{{ "/assets/img/icons/run_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="chat-icon">
     <div class="card-body">
       <h5 class="card-title">3. Run ArrayAnalysis</h5>
       <p class="card-text">Starting up ArrayAnalysis for the first time might take some time, 
@@ -46,14 +45,14 @@ layout: default
 <!-- Desktop app (Windows) -->
 <h1><b>R package</b> (Windows/MacOS/Linux)</h1>
 
-<div class="card-deck text-center">
+<div class="card-deck">
 
   <div class="card">
     <img src="{{ "/assets/img/icons/R_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="sharing-icon">
     <div class="card-body">
       <h5 class="card-title">1. Install R</h5>
-      <p class="card-text">If you don't have R on your computer, please first install R on your computer before you can install ArrayAnalysis. 
-      You can intall R by clicking on this <a href = "https://cran.r-project.org/">link</a>. If you work on a Windows system, you also need to 
+      <p class="card-text">If you don't have R on your computer, please first install R by clicking on this <a href = "https://cran.r-project.org/">link</a>. 
+      If you work on a Windows system, you also need to 
       install <a href = "https://cran.r-project.org/bin/windows/Rtools/">Rtools</a>.</p> 
     </div>
   </div>
@@ -76,7 +75,7 @@ layout: default
   </div>
   
   <div class="card">
-    <img src="{{ "/assets/img/ArrayAnalysis_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="chat-icon">
+    <img src="{{ "/assets/img/icons/run_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="chat-icon">
     <div class="card-body">
       <h5 class="card-title">3. Run ArrayAnalysis</h5>
             <p class="card-text">Run the following R code to run ArrayAnalysis:</p>
@@ -93,7 +92,7 @@ layout: default
   
 </div>
 <br>
-
+<br>
 
 </div>
 
