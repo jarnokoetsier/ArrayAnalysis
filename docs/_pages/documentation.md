@@ -4,8 +4,6 @@ permalink: /documentation
 layout: none
 ---
 
-<!DOCTYPE html>
-
 <html>
 
 <head>
@@ -1477,7 +1475,7 @@ border-radius: 0px;
 
 <body>
 
-
+{% include header.html %}
 <div class="container-fluid main-container">
 
 
