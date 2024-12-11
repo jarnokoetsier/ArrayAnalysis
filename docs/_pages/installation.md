@@ -1,5 +1,5 @@
 ---
-title: "About ArrayAnalysis"
+title: "ArrayAnalysis Installation"
 permalink: /installation
 layout: default
 ---
