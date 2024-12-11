@@ -1,7 +1,7 @@
 ---
 title: "About ArrayAnalysis"
 permalink: /documentation
-layout: default
+layout: none
 ---
 
 <!DOCTYPE html>
