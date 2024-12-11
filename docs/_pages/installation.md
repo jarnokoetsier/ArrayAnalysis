@@ -16,7 +16,7 @@ layout: default
     <img src="{{ "/assets/img/icons/R_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="sharing-icon">
     <div class="card-body">
       <h5 class="card-title">1. Install R</h5>
-      <p class="card-text">If you don't have R on your computer, please first install R by clicking on this <a href = "https://cran.r-project.org/">link</a></p>
+      <p class="card-text">If you don't have R on your computer, please first install <a href = "https://cran.r-project.org/">R</a>.</p>
     </div>
   </div>
   
@@ -40,7 +40,8 @@ layout: default
   
 </div>
 <br>
-
+<br>
+<br>
 
 <!-- Desktop app (Windows) -->
 <h1><b>R package</b> (Windows/MacOS/Linux)</h1>
@@ -51,7 +52,7 @@ layout: default
     <img src="{{ "/assets/img/icons/R_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="sharing-icon">
     <div class="card-body">
       <h5 class="card-title">1. Install R</h5>
-      <p class="card-text">If you don't have R on your computer, please first install R by clicking on this <a href = "https://cran.r-project.org/">link</a>. 
+      <p class="card-text">If you don't have R on your computer, please first install <a href = "https://cran.r-project.org/">R</a>. 
       If you work on a Windows system, you also need to 
       install <a href = "https://cran.r-project.org/bin/windows/Rtools/">Rtools</a>.</p> 
     </div>
@@ -78,14 +79,14 @@ layout: default
     <img src="{{ "/assets/img/icons/run_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="chat-icon">
     <div class="card-body">
       <h5 class="card-title">3. Run ArrayAnalysis</h5>
-            <p class="card-text">Run the following R code to run ArrayAnalysis:</p>
+            <p class="card-text">Run the following R code to run ArrayAnalysis:
       <pre>
       <code class="language-R">
      # Run ArrayAnalysis
      ArrayAnalysis::runArrayAnalysis()
      </code>
       </pre>
-      <p class="card-text">Starting up ArrayAnalysis for the first time might take some time, 
+      Starting up ArrayAnalysis for the first time might take some time, 
       because all packages still need to be installed. Don't worry! The second time you run the app, it will be way faster!</p>
     </div>
   </div>
