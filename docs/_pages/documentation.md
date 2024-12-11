@@ -3,7 +3,7 @@ title: "About ArrayAnalysis"
 permalink: /documentation
 layout: default
 ---
-
+<head>
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
 document.addEventListener('DOMContentLoaded', function(e) {
@@ -1492,7 +1492,7 @@ border-radius: 0px;
 
 
 
-<h1 class="title toc-ignore" style="color: #004080;"><b>ArrayAnalysis Documentation</b></h1>
+<h1 class="title toc-ignore"><b>Documentation</b></h1>
 <p>Check our <a href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">website</a> for the most recent information and FAQs.</p>
 </div>
 <br>

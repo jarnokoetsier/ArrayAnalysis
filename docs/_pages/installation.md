@@ -16,7 +16,7 @@ layout: default
     <img src="{{ "/assets/img/icons/R_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="sharing-icon">
     <div class="card-body">
       <h5 class="card-title">1. Install R</h5>
-      <p class="card-text">If you don't have R on your computer, please first install <a href = "https://cran.r-project.org/">R</a>.</p>
+      <p class="card-text">If you don't have R on your computer, please first install <a href = "https://cran.r-project.org/" target="_blank">R</a>.</p>
     </div>
   </div>
   
@@ -52,9 +52,9 @@ layout: default
     <img src="{{ "/assets/img/icons/R_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="sharing-icon">
     <div class="card-body">
       <h5 class="card-title">1. Install R</h5>
-      <p class="card-text">If you don't have R on your computer, please first install <a href = "https://cran.r-project.org/">R</a>. 
+      <p class="card-text">If you don't have R on your computer, please first install <a href = "https://cran.r-project.org/" target="_blank">R</a>. 
       If you work on a Windows system, you also need to 
-      install <a href = "https://cran.r-project.org/bin/windows/Rtools/">Rtools</a>.</p> 
+      install <a href = "https://cran.r-project.org/bin/windows/Rtools/" target="_blank">Rtools</a>.</p> 
     </div>
   </div>
   
