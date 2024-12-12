@@ -49,8 +49,7 @@ layout: default
 </div>
 <p><a class="btn btn-outline-dark btn-lg my-3" href="{{ "/details#Starting_from_raw_data" | relative_url}}" role="button">Read more</a></p>
 <br>
-<br>
-<br>
+
 
 <!-- Microarray data (processed) -->
 <h1>Starting from processed data</h1>
@@ -135,8 +134,6 @@ layout: default
   
 </div>
 <p><a class="btn btn-outline-dark btn-lg my-3" href="{{ "/details#Starting_from_raw_data5" | relative_url}}" role="button">Read more</a></p>
-<br>
-<br>
 <br>
 
 <!-- RNA-seq data (processed) -->
