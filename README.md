@@ -1,35 +1,16 @@
-# ArrayAnalysis
+![alt text]((https://github.com/jarnokoetsier/ArrayAnalysis/blob/main/docs/assets/img/logo_main.PNG)
+<h1 align="center">
+Click <a href="https://bytemal.github.io/bytemal-2024/">here for the ArrayAnalysis website!</a>
+</h1>
 
-## Prerequisites
-Before you can download and run ArrayAnalysis, please make sure to have [R](https://cran.r-project.org/) installed on your computer. 
-If you are using Windows, you also need to install [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
+[![CC BY 4.0][cc-by-shield]][cc-by]
 
-## Installation
-You can choose to install ArrayAnalysis as a desktop app or as an R package.
+This work is licensed under a
+[Creative Commons Attribution 4.0 International License][cc-by].
 
-### Desktop app (Windows)
-You can download ArrayAnalysis for Windows [here](https://github.com/jarnokoetsier/ArrayAnalysis/raw/refs/heads/main/Files/ArrayAnalysis_windows.zip).
+[![CC BY 4.0][cc-by-image]][cc-by]
 
-**Note!** Starting up ArrayAnalysis for the first time might take some time, because all packages still need to be installed. Don't worry! The second time you run the app, it will be way faster!
-
-### Desktop app (MacOS/Linux)
-Not available (yet).
-
-### R package (Windows/MacOS/Linux)
-Install the ArrayAnalysis package
-
-```
-# install "remotes" package
-install.packages("remotes")
-
-# Install ArrayAnalysis from GitHub
-remotes::install_github("jarnokoetsier/ArrayAnalysis/Package") 
-```
-
-Run the ArrayAnalysis app directly from R:
-
-```
-# Run ArrayAnalysis
-ArrayAnalysis::runArrayAnalysis()
-```
+[cc-by]: http://creativecommons.org/licenses/by/4.0/
+[cc-by-image]: https://i.creativecommons.org/l/by/4.0/88x31.png
+[cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg
 
