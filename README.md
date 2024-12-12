@@ -1,4 +1,4 @@
-![alt text]((https://github.com/jarnokoetsier/ArrayAnalysis/blob/main/docs/assets/img/logo_main.PNG)
+![ArrayAnalysis](/docs/assets/img/logo_main.PNG?raw=true "logo")
 <h1 align="center">
 Click <a href="https://bytemal.github.io/bytemal-2024/">here for the ArrayAnalysis website!</a>
 </h1>
