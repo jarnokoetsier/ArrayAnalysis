@@ -15,7 +15,7 @@ layout: default
 <div class="card-deck">
 
   <div class="card">
-    <img src="{{ "/assets/img/icons/install_logo.png" | relative_url}}" class="card-img-top px-3 py-1" alt="sharing-icon">
+    <img src="{{ "/assets/img/icons/install_logo.png" | relative_url}}" class="card-img-top px-5 py-1" alt="sharing-icon">
     <div class="card-body">
       <h5 class="card-title">Data upload</h5>
       <p class="card-text">Start your analysis by uploading CEL files and a metadata file.</p>
@@ -57,7 +57,7 @@ layout: default
 <div class="card-deck">
 
   <div class="card">
-    <img src="{{ "/assets/img/icons/install_logo.png" | relative_url}}" class="card-img-top px-3 py-1" alt="sharing-icon">
+    <img src="{{ "/assets/img/icons/install_logo.png" | relative_url}}" class="card-img-top px-5 py-1" alt="sharing-icon">
     <div class="card-body">
       <h5 class="card-title">Data upload</h5>
       <p class="card-text">Start your analysis by uploading a Series Matrix File and a metadata file.</p>
@@ -101,7 +101,7 @@ layout: default
 <div class="card-deck">
 
   <div class="card">
-    <img src="{{ "/assets/img/icons/install_logo.png" | relative_url}}" class="card-img-top px-3 py-1" alt="sharing-icon">
+    <img src="{{ "/assets/img/icons/install_logo.png" | relative_url}}" class="card-img-top px-5 py-1" alt="sharing-icon">
     <div class="card-body">
       <h5 class="card-title">Data upload</h5>
       <p class="card-text">Start your analysis by uploading a raw count matrix (.tsv/.csv) and a metadata file.</p>
@@ -142,7 +142,7 @@ layout: default
 <div class="card-deck">
 
   <div class="card">
-    <img src="{{ "/assets/img/icons/install_logo.png" | relative_url}}" class="card-img-top px-3 py-1" alt="sharing-icon">
+    <img src="{{ "/assets/img/icons/install_logo.png" | relative_url}}" class="card-img-top px-5 py-1" alt="sharing-icon">
     <div class="card-body">
       <h5 class="card-title">Data upload</h5>
       <p class="card-text">Start your analysis by uploading an expression matrix (.csv/.tsv) and a metadata file.</p>
