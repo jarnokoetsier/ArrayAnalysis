@@ -8,7 +8,7 @@ layout: default
 <div class="container px-1">
 <h1><b>Help</b></h1>
 <p>If you need help, please visit our doucmentation, FAQ, or tutorials page. 
-Moreover, you can submit your question in the ArrayAnalysis discussion group or create and issue on our <a href="https://github.com/jarnokoetsier/ArrayAnalysis/issues">GitHub</a> page.</p><p>
+Moreover, you can submit your question in the ArrayAnalysis discussion group or create an issue on our <a href="https://github.com/jarnokoetsier/ArrayAnalysis/issues">GitHub</a> page.</p><p>
 <br>
 <div class="card-deck text-center">
 
