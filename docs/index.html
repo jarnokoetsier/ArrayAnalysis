@@ -39,7 +39,7 @@ image: /assets/img/ArrayAnalysis_logo.png
 <br>
 
 <div class="row">
-  <div class="col-sm-6 px-3">
+  <div class="col-sm-8 px-3">
 	  <div class="jumbotron p-5 h-100" style="text-align: justify">
 	  <p class="lead">News |</p>
 	  <h1><b>ArrayAnalsis is back!</b></h1>
@@ -49,19 +49,21 @@ image: /assets/img/ArrayAnalysis_logo.png
 		  <p><a class="btn btn-outline-dark btn-lg my-3" href="{{ "/news" | relative_url}}" role="button">More news</a></p>
 	  </div>
   </div>
-  <div class="col-sm-6 px-3">
-	  <div class="jumbotron p-5 h-100" style="text-align: justify">
-	  <p class="lead">Information |</p>
-		   <h1><b>Questions?</b></h1>
-		   <p>If you have a question, please take a look at our <a href = "{{ "/documentation" | relative_url}}">documentation</a> and <a href = "{{ "/faqs" | relative_url}}">FAQ</a> pages. 
-		   Moreover, you can report issues on our <a href="https://github.com/jarnokoetsier/ArrayAnalysis_Shiny/issues">GitHub</a> page.</p>
-	  </div>
+ <div class="col-sm-4 px-3">
+    <div class="jumbotron p-5 bg-white border">
+      <iframe 
+        src="{{ '/assets/img/heatmap.html' | relative_url }}" 
+        class="img-fluid" 
+        style="width: 100%; height: 500px; border: none;" 
+        title="Heatmap">
+      </iframe>
+    </div>
   </div>
 </div>
 <br>
 
 <div class="row">
-  <div class="col-sm-12 px-3">
+  <div class="col-sm-8 px-3">
     <div class="jumbotron p-5 bg-white border">
       <iframe 
         src="{{ '/assets/img/volcano.html' | relative_url }}" 
@@ -70,6 +72,15 @@ image: /assets/img/ArrayAnalysis_logo.png
         title="Volcano Plot">
       </iframe>
     </div>
+  </div>
+  
+    <div class="col-sm-4 px-3">
+	  <div class="jumbotron p-5 h-100" style="text-align: justify">
+	  <p class="lead">Information |</p>
+		   <h1><b>Questions?</b></h1>
+		   <p>If you have a question, please take a look at our <a href = "{{ "/documentation" | relative_url}}">documentation</a> and <a href = "{{ "/faqs" | relative_url}}">FAQ</a> pages. 
+		   Moreover, you can report issues on our <a href="https://github.com/jarnokoetsier/ArrayAnalysis_Shiny/issues">GitHub</a> page.</p>
+	  </div>
   </div>
 </div>
 <br>
