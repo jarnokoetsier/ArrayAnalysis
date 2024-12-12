@@ -1,6 +1,6 @@
 ![ArrayAnalysis](/docs/assets/img/logo_main.PNG?raw=true "logo")
 <h1 align="center">
-Click <a href="https://bytemal.github.io/bytemal-2024/">here</a> for the ArrayAnalysis website!
+Click <a href="https://jarnokoetsier.github.io/ArrayAnalysis/">here</a> for the ArrayAnalysis website!
 </h1>
 
 [![CC BY 4.0][cc-by-shield]][cc-by]
