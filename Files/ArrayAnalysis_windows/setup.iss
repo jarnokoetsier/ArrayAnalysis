@@ -1,5 +1,5 @@
 #define MyAppName "ArrayAnalysis"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "0.0.1"
 #define MyAppPublisher "Maastricht University"
 #define MyAppURL "https://jarnokoetsier.github.io/ArrayAnalysis/"
 #define MyAppExeName "ArrayAnalysis.bat"
