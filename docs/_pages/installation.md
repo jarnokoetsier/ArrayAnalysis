@@ -27,9 +27,9 @@ layout: default
       <p class="card-text">You can download ArrayAnalysis for Windows 
       <a href = "https://github.com/jarnokoetsier/ArrayAnalysis/raw/refs/heads/main/Files/ArrayAnalysis_windows/ArrayAnalysis.exe">here</a>.</p>
       <br>
-      <p>Does Windows security prevent you from running the file? Right-click the <i>ArrayAnaysis.exe</i> file and then click <i>Properties</i>.
+      <p style="font-size: 9px">Does Windows security prevent you from running the file? Right-click the <i>ArrayAnaysis.exe</i> file and then click <i>Properties</i>.
       In the General tab, click <i>Unblock</i>. Now, click on <i>Apply</i> and then click <i>Ok</i>. 
-      You can find a more detailed explanation <a href = href="{{ "/unblock" | relative_url}}">here</a>.</p>
+      You can find a more detailed explanation <a href="{{ "/unblock" | relative_url}}">here</a>.</p>
     </div>
   </div>
   
