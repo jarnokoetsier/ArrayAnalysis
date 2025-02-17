@@ -71,7 +71,7 @@ as <b>Case - Control</b>.</p>
 <p>3. <b>Gene annotation</b>. You can add gene annotations from the Ensembl database using the biomaRt package. For example, if you have ENTREZ gene IDs annotations, 
 you can use this option to add gene symbols or Ensembl gene IDs to the statistics output. Please note that if you select this option, 
 the time required for the statistical analysis will increase significantly.</p>
-</br>
+<br>
 <p><b>Output</b></p>
 <p>For each of the selected statistical comparisons, the following output are provided:</p>
 <p>1. <b>Top table</b> (interactive). A table with the relevant statistics as calculated by <i>limma</i>.</p>
@@ -83,7 +83,8 @@ the time required for the statistical analysis will increase significantly.</p>
 <div id="mr_ora" class="section level2">
 <h3>Overrepresentation Analysis</h3>
 <p><b>Input</b></p>
-<p>After the statistical analysis, you can perform geneset (<i>i.e.</i>, <a href = "https://geneontology.org/" target="_blank">Gene Ontology</a> and 
+<p>After the statistical analysis, you can perform geneset (<i>i.e.</i>, <a href = "https://geneontology.org/" target="_blank">Gene Ontology</a>, 
+<a href = "https://www.genome.jp/kegg/pathway.html" target="_blank">KEGG</a> and 
 <a href = "https://www.wikipathways.org/" target="_blank">WikiPathways</a>) overrepresentation analysis (ORA). 
 For this, you can select from various options:</p>
 <p>1. <b>Statistical comparison</b>. Select the statistical comparison for which you want to perform ORA.</p>
@@ -159,7 +160,7 @@ as <b>Case - Control</b>.</p>
 <p>3. <b>Gene annotation</b>. You can add gene annotations from the Ensembl database using the biomaRt package. For example, if you have ENTREZ gene IDs annotations, 
 you can use this option to add gene symbols or Ensembl gene IDs to the statistics output. Please note that if you select this option, 
 the time required for the statistical analysis will increase significantly.</p>
-</br>
+<br>
 <p><b>Output</b></p>
 <p>For each of the selected statistical comparisons, the following output are provided:</p>
 <p>1. <b>Top table</b> (interactive). A table with the relevant statistics as calculated by <i>limma</i>.</p>
@@ -171,7 +172,8 @@ the time required for the statistical analysis will increase significantly.</p>
 <div id="mn_ora" class="section level2">
 <h3>Overrepresentation Analysis</h3>
 <p><b>Input</b></p>
-<p>After the statistical analysis, you can perform geneset (<i>i.e.</i>, <a href = "https://geneontology.org/" target="_blank">Gene Ontology</a> and 
+<p>After the statistical analysis, you can perform geneset (<i>i.e.</i>, <a href = "https://geneontology.org/" target="_blank">Gene Ontology</a>, 
+<a href = "https://www.genome.jp/kegg/pathway.html" target="_blank">KEGG</a> and 
 <a href = "https://www.wikipathways.org/" target="_blank">WikiPathways</a>) overrepresentation analysis (ORA). 
 For this, you can select from various options:</p>
 <p>1. <b>Statistical comparison</b>. Select the statistical comparison for which you want to perform ORA.</p>
@@ -253,7 +255,7 @@ as <b>Case - Control</b>.</p>
 <p>3. <b>Gene annotation</b>. You can add gene annotations from the Ensembl database using the biomaRt package. For example, if you have ENTREZ gene IDs annotations, 
 you can use this option to add gene symbols or Ensembl gene IDs to the statistics output. Please note that if you select this option, 
 the time required for the statistical analysis will increase significantly.</p>
-</br>
+<br>
 <p><b>Output</b></p>
 <p>For each of the selected statistical comparisons, the following output are provided:</p>
 <p>1. <b>Top table</b> (interactive). A table with the relevant statistics as calculated by <i>DESeq2</i>. 
@@ -266,7 +268,8 @@ The log2FC estimates are shrunken using the <a href = "https://doi.org/10.1093/b
 <div id="rr_ora" class="section level2">
 <h3>Overrepresentation Analysis</h3>
 <p><b>Input</b></p>
-<p>After the statistical analysis, you can perform geneset (<i>i.e.</i>, <a href = "https://geneontology.org/" target="_blank">Gene Ontology</a> and 
+<p>After the statistical analysis, you can perform geneset (<i>i.e.</i>, <a href = "https://geneontology.org/" target="_blank">Gene Ontology</a>, 
+<a href = "https://www.genome.jp/kegg/pathway.html" target="_blank">KEGG</a> and 
 <a href = "https://www.wikipathways.org/" target="_blank">WikiPathways</a>) overrepresentation analysis (ORA). 
 For this, you can select from various options:</p>
 <p>1. <b>Statistical comparison</b>. Select the statistical comparison for which you want to perform ORA.</p>
@@ -345,7 +348,7 @@ as <b>Case - Control</b>.</p>
 <p>3. <b>Gene annotation</b>. You can add gene annotations from the Ensembl database using the biomaRt package. For example, if you have ENTREZ gene IDs annotations, 
 you can use this option to add gene symbols or Ensembl gene IDs to the statistics output. Please note that if you select this option, 
 the time required for the statistical analysis will increase significantly.</p>
-</br>
+<br>
 <p><b>Output</b></p>
 <p>For each of the selected statistical comparisons, the following output are provided:</p>
 <p>1. <b>Top table</b> (interactive). A table with the relevant statistics as calculated by <i>limma</i>.</p>
@@ -357,7 +360,8 @@ the time required for the statistical analysis will increase significantly.</p>
 <div id="rn_ora" class="section level2">
 <h3>Overrepresentation Analysis</h3>
 <p><b>Input</b></p>
-<p>After the statistical analysis, you can perform geneset (<i>i.e.</i>, <a href = "https://geneontology.org/" target="_blank">Gene Ontology</a> and 
+<p>After the statistical analysis, you can perform geneset (<i>i.e.</i>, <a href = "https://geneontology.org/" target="_blank">Gene Ontology</a>, 
+<a href = "https://www.genome.jp/kegg/pathway.html" target="_blank">KEGG</a> and 
 <a href = "https://www.wikipathways.org/" target="_blank">WikiPathways</a>) overrepresentation analysis (ORA). 
 For this, you can select from various options:</p>
 <p>1. <b>Statistical comparison</b>. Select the statistical comparison for which you want to perform ORA.</p>

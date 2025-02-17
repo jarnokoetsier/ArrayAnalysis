@@ -96,7 +96,7 @@ layout: default
 <!-- RNA-seq (raw) -->
 <h1><b>RNA-seq data analysis</b></h1>
 <br>
-<h1>Starting from processed data</h1>
+<h1>Starting from raw data</h1>
 
 <div class="card-deck">
 
