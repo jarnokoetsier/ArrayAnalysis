@@ -28,5 +28,5 @@ done
 
 # Run the selected Shiny app
 cd "$RootDir"/app
-"$R" -e 'if (!requireNamespace("shiny", quietly = TRUE)){install.packages("shiny", ask = FALSE, repos = "https://cloud.r-project.org")}'
-"$R" -e 'shiny::runApp(launch.browser = TRUE)'
+R -e 'if (!requireNamespace("shiny", quietly = TRUE)){install.packages("shiny", ask = FALSE, repos = "https://cloud.r-project.org")}'
+R -e 'shiny::runApp(launch.browser = TRUE)'
