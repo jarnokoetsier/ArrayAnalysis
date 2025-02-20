@@ -20,7 +20,7 @@ layout: default
   <div class="col-sm-4 px-3">
 	  <div class="jumbotron p-5 bg-info text-white h-100" style="text-align: left">
 		  <p style="font-size: 30px"><b>Cite</b></p>
-		  <p>ArrayAnalysis Team (2025). ArrayAnalysis: your transcriptomic data analysis assistent.</p>
+		  <p>Noting to cite yet...</p>
 		  <br>
 	  </div>
   </div>
