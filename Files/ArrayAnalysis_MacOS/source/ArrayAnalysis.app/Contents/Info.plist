@@ -1,0 +1,14 @@
+<?xml version="0.0.1" encoding="UTF-8" standalone="no"?><plist version="1.0">
+  <dict>
+    <key>CFBundleExecutable</key>
+    <string>ArrayAnalysis.sh</string>
+    <key>CFBundleGetInfoString</key>
+    <string>ArrayAnalysis 0.0.1</string>
+    <key>CFBundleVersion</key>
+    <string>0.0.1</string>
+    <key>CFBundleShortVersionString</key>
+    <string>0.0.1</string>
+    <key>CFBundleIconFile</key>
+    <string>ArrayAnalysis.icns</string>
+</dict>
+</plist>

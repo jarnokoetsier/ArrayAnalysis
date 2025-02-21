@@ -7,8 +7,8 @@ layout: default
 <br>
 <div class="container px-1">
 
-<!-- Desktop app (Windows) -->
-<h1><b>Desktop App</b> (Windows)</h1>
+<!-- Desktop app -->
+<h1><b>Desktop app</b> (Windows/MacOS/Linux)</h1>
 
 <div class="card-deck">
 
@@ -24,8 +24,10 @@ layout: default
     <img src="{{ "/assets/img/icons/install_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="inspiration-icon">
     <div class="card-body">
       <h5 class="card-title">2. Install ArrayAnalysis</h5>
-      <p class="card-text">You can download ArrayAnalysis for Windows 
-      <a href = "https://github.com/jarnokoetsier/ArrayAnalysis/raw/refs/heads/main/Files/ArrayAnalysis_windows/ArrayAnalysis.exe">here</a>.</p>
+      <p class="card-text">You can download ArrayAnalysis for
+      <p><a href = "https://github.com/jarnokoetsier/ArrayAnalysis/raw/refs/heads/main/Files/ArrayAnalysis_linux/ArrayAnalysis.sh">Linux</a>.</p></p>
+      <p><a href = "https://github.com/jarnokoetsier/ArrayAnalysis/raw/refs/heads/main/Files/ArrayAnalysis_MacOS/ArrayAnalysis.dmg">MacOS</a>.</p></p>
+      <p><a href = "https://github.com/jarnokoetsier/ArrayAnalysis/raw/refs/heads/main/Files/ArrayAnalysis_windows/ArrayAnalysis.exe">Windows</a>.</p></p>
       <hr>
       <p style="font-size: 12px">Does Windows security prevent you from running the file?</p>
       <p style="font-size: 12px"> 1. Right-click the <i>ArrayAnaysis.exe</i> file and then click <i>Properties</i>.</p>
@@ -49,7 +51,7 @@ layout: default
 <br>
 <br>
 
-<!-- Desktop app (Windows) -->
+<!-- R package -->
 <h1><b>R package</b> (Windows/MacOS/Linux)</h1>
 
 <div class="card-deck">

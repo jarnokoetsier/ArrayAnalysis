@@ -1,8 +1,11 @@
+cd Desktop/ArrayAnalysis_MacOS
+
 create-dmg \
 --volname "ArrayAnalysis Installer" \
-  --volicon "ArrayAnalysis.ico" \
-  --icon "ArrayAnalysis.app" 200 190 \
-  --hide-extension "ArrayAnalysis.app" \
-"ArrayAnalysis_MacOS/ArrayAnalysis.dmg" \
-"ArrayAnalysis_MacOS/"
+--volicon "ArrayAnalysis.icns" \
+--background "installer_background.jpg" \
+--icon "ArrayAnalysis.app" 200 190 \
+--hide-extension "ArrayAnalysis.app" \
+"ArrayAnalysis.dmg" \
+"source/"
 
