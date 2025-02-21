@@ -2,7 +2,7 @@ Package: ArrayAnalysis
 Title: ArrayAnalysis: your transcriptomic data analysis assistant!
 Version: 0.0.1
 Authors@R: 
-    person("Jarno", "Koetsier", , "jarno.koetsier@maastrichtuniversity.nl", role = "aut",
+    person("Jarno", "Koetsier", , "jarno.koetsier@maastrichtuniversity.nl", role = c("aut", "cre"),
            comment = c(ORCID = "https://orcid.org/0000-0002-7981-1345"))
 Description: ArrayAnalysis provides a user-friendly interface for transcriptomic analyses.
 License: use_ccby_license()
