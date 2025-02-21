@@ -5,7 +5,7 @@ layout: default
 ---
 <br>
 <br>
-<h1>Unblock ArrayAnalysis on <b>Windows</b></h1>
+<h1 style="text-align:center;">Unblock ArrayAnalysis on <b>Windows</b></h1>
 <div class="container px-1">
 <div class="row">
   <div class="col-sm-6 px-3">
@@ -24,7 +24,7 @@ layout: default
 </div>
 </div>
 <br>
-<h1>Unblock ArrayAnalysis on <b>MacOS</b></h1>
+<h1 style="text-align:center;">Unblock ArrayAnalysis on <b>MacOS</b></h1>
 <div class="container px-1">
 <div class="row">
   <div class="col-sm-6 px-3">
@@ -35,7 +35,7 @@ layout: default
   
     <div class="col-sm-6 px-3">
     <div class="jumbotron p-5 h-100 bg-white border">
-    <p>In the General tab, click on <i>Open Anyway<i>.</p> 
+    <p>In the General tab, click on <i>Open Anyway</i>.</p> 
     </div>
   </div>  
 </div>
