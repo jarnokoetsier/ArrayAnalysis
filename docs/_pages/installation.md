@@ -24,7 +24,7 @@ layout: default
     <img src="{{ "/assets/img/icons/install_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="inspiration-icon">
     <div class="card-body">
       <h5 class="card-title">2. Install ArrayAnalysis</h5>
-      <p class="card-text">You can download ArrayAnalysis for
+      <p class="card-text">You can download ArrayAnalysis for</p>
       <p><a href = "https://github.com/jarnokoetsier/ArrayAnalysis/raw/refs/heads/main/Files/ArrayAnalysis_linux/ArrayAnalysis.sh">Linux</a></p>
       <p><a href = "https://github.com/jarnokoetsier/ArrayAnalysis/raw/refs/heads/main/Files/ArrayAnalysis_MacOS/ArrayAnalysis.dmg">MacOS</a></p>
       <p><a href = "https://github.com/jarnokoetsier/ArrayAnalysis/raw/refs/heads/main/Files/ArrayAnalysis_windows/ArrayAnalysis.exe">Windows</a></p>
