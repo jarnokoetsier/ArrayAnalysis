@@ -10,17 +10,39 @@ if (is.na(wd)) {
   # Get packages listed in req.txt
   req <- readLines(file.path(rd, "req.txt"))
 
-  # Set correct package install location if there is bundled R
-  lib_path <- if (
-    file.exists(file.path(rd, "R", "bin", "R.exe")) &
-    .libPaths()[1] != file.path(rd, "R", "library")
-  ) {
-    file.path(rd, "R", "library")
-  } else {
-    .libPaths()[1]
+  #============================================================================#
+  # Set R package library
+  #============================================================================#
+  
+  #  If R is bundles (not relevant in ArrayAnalysis app)
+  if (file.exists(file.path(rd, "R", "bin", "R.exe")) &
+    .libPaths()[1] != file.path(rd, "R", "library")){
+    lib_path <- file.path(rd, "R", "library")
+    
+  # If R is not bundled
+  } else{
+    
+    # If the libPath is already defined
+    if (length(.libPaths())>0){
+      lib_path <- .libPaths()[1]
+      
+    # If the libPath is not defined yet  
+    } else{
+      lib_path <- file.path(Sys.getenv("USERPROFILE"), "Documents", "R", "win-library", paste0(R.Version()$major, ".", R.Version()$minor))
+      
+      # Create the directory if it doesn't exist
+      if (!dir.exists(lib_path)) {
+        dir.create(lib_path, recursive = TRUE)
+      }
+      
+      .libPaths(lib_path)
+    }
   }
 
+  #============================================================================#
   # Install missing packages
+  #============================================================================#
+  
   if (length(req) > 0) {
     missing_packages <- req[!(req %in% installed.packages()[,"Package"])]
     if (length(missing_packages) > 0) {
@@ -36,7 +58,10 @@ if (is.na(wd)) {
   # Load packages
   suppressPackageStartupMessages(invisible(lapply(req, library, character.only = T)))
 
+  #============================================================================#
   # Run app
+  #============================================================================#
+  
   browser_path <- file.path(rd, "chrome", "chrome.exe")
   if (file.exists(browser_path)) {
 
