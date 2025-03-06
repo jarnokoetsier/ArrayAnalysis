@@ -5695,7 +5695,7 @@ server <- function(input, output, session){
             
             # Perform ORA
             if (input$topNorThres_rnaseq_norm == "Threshold"){
-              rv$ORA_data <- ORA(top_table = rv$top_table[[input$comparisons_view_ORA_microarray_rnaseq_norm]],
+              rv$ORA_data <- ORA(top_table = rv$top_table[[input$comparisons_view_ORA_rnaseq_norm]],
                                  geneset = input$geneset_ORA_rnaseq_norm,
                                  geneID_col = input$geneID_ORA_rnaseq_norm,
                                  geneID_type = input$selID_ORA_rnaseq_norm,
