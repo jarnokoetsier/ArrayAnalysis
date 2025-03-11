@@ -10,17 +10,29 @@ if exist "%RootDir%R\bin\x64\R.exe" (
     set "RPathFound=true"
 )
 
-:: If not found, search for R in default installation paths
+:: If not found, search for the latest installed R version
 if not !RPathFound! == true (
+    set "LatestRVersion="
+    
     for %%d in ("C:\Program Files\R" "C:\Program Files (x86)\R") do (
         for /d %%i in (%%d\R-*) do (
-            if exist "%%i\bin\x64\R.exe" (
-                set "R=%%i\bin\x64\R.exe"
-                set "RPathFound=true"
-                goto :findDir
+            for %%v in (%%~nxi) do (
+                set "RVersion=%%v"
+                set "RVersion=!RVersion:R-=!"
+                if not defined LatestRVersion (
+                    set "LatestRVersion=!RVersion!"
+                    set "R=%%i\bin\x64\R.exe"
+                ) else (
+                    if !RVersion! GTR !LatestRVersion! (
+                        set "LatestRVersion=!RVersion!"
+                        set "R=%%i\bin\x64\R.exe"
+                    )
+                )
             )
         )
     )
+
+    if defined LatestRVersion set "RPathFound=true"
 )
 
 :: If R is still not found, prompt the user

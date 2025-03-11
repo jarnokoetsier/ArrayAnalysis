@@ -1,3 +1,5 @@
+options(repos=c(CRAN="https://cran.r-project.org"))
+print(paste0("ArrayAnalysis is using ", R.Version()$version.string))
 wd <- commandArgs(T)[1] # Shiny app directory
 rd <- dirname(wd) # Root repo directory
 
