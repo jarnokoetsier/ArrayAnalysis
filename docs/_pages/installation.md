@@ -8,7 +8,7 @@ layout: default
 <div class="container px-1">
 
 <!-- Desktop app -->
-<h1><b>Desktop app</b> (Windows/MacOS/Linux)</h1>
+<h1><b>Desktop app</b></h1>
 
 <div class="card-deck">
 
@@ -48,7 +48,7 @@ layout: default
 <br>
 
 <!-- R package -->
-<h1><b>R package</b> (Windows/MacOS/Linux)</h1>
+<h1><b>R package</b></h1>
 
 <div class="card-deck">
 
@@ -101,7 +101,7 @@ layout: default
 
 
 <!-- Docker -->
-<h1><b>Docker</b> (Windows/MacOS/Linux)</h1>
+<h1><b>Docker image</b></h1>
 
 <div class="card-deck">
 
@@ -143,8 +143,8 @@ layout: default
 <br>
 <br>
 
-<!-- Zip file -->
-<h1><b>Zip file</b> (Windows/MacOS/Linux)</h1>
+<!-- Source file -->
+<h1><b>Source files</b></h1>
 
 <div class="card-deck">
 
@@ -159,8 +159,8 @@ layout: default
   <div class="card">
     <img src="{{ "/assets/img/icons/install_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="inspiration-icon">
     <div class="card-body">
-      <h5 class="card-title">2. Install ArrayAnalysis</h5>
-      <p class="card-text">You can download the ArrayAnalysis zipfile <a href = "https://github.com/jarnokoetsier/ArrayAnalysis_Shiny/archive/refs/heads/main.zip">here</a>. Once installed, unzip the file.</p>
+      <h5 class="card-title">2. Download ArrayAnalysis</h5>
+      <p class="card-text">You can download the ArrayAnalysis zip file <a href = "https://github.com/jarnokoetsier/ArrayAnalysis_Shiny/archive/refs/heads/main.zip">here</a>. Unzip the file.</p>
     </div>
   </div>
   
