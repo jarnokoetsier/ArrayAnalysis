@@ -5,6 +5,8 @@ setwd("/configure")
 #******************************************************************************#
 #CRAN packages
 #******************************************************************************#
+install.packages("textshaping", dependencies = TRUE,ask = FALSE,
+                 repos = "https://cloud.r-project.org")
 
 # Get required CRAN packages
 CRANpackages <- read.table("CRANpackages.txt", header = TRUE)

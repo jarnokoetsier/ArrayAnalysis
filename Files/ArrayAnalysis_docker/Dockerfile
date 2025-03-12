@@ -2,6 +2,13 @@
 FROM rocker/shiny
 
 # Copy the Shiny app code
+RUN apt-get update && apt-get install -y \
+    libharfbuzz-dev \
+    libfribidi-dev \
+    libfreetype6-dev \
+    libpng-dev \
+    libtiff5-dev \
+    libjpeg-dev
 COPY /app ./app
 COPY /configure ./configure
 
