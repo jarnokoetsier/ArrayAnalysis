@@ -15,7 +15,8 @@ layout: default
 		  The platform supports the analysis of both RNA sequencing and microarray-based transcriptomic data.  
 		  ArrayAnalysis is available as a desktop application or an R package. 
 		  So, follow the installation guide and start using ArrayAnalysis for your transcriptomic research today!</p>
-		  <a class="btn btn-outline-dark btn-lg my-3" href="{{ "/membership" | relative_url}}" role="button">Join us!</a>
+		  <p><a class="btn btn-info btn-lg my-3" href="{{ "/installation" | relative_url}}" role="button">Installation guide</a>
+		  <a class="btn btn-outline-dark btn-lg my-3" href="{{ "/membership" | relative_url}}" role="button">Join us!</a></p>
 	  </div>
   </div>
   <div class="col-sm-4 px-3">
