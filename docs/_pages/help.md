@@ -6,7 +6,8 @@ layout: default
 <br>
 <div class="container px-1">
 <p>If you need help, please visit our doucmentation, FAQ, or tutorials page. 
-Moreover, you can submit your question in the ArrayAnalysis discussion group or create an issue on our <a href="https://github.com/jarnokoetsier/ArrayAnalysis/issues">GitHub</a> page.</p><p>
+ Moreover, you can also post your question or start a discussion in the <a href="https://github.com/jarnokoetsier/ArrayAnalysis/discussions">ArrayAnalysis Discussions</a> forum.
+		   If you have identified bugs or have a feature request, you can create and issue on our <a href="https://github.com/jarnokoetsier/ArrayAnalysis/issues">GitHub</a> page.</p>
 <br>
 <div class="card-deck text-center">
 
