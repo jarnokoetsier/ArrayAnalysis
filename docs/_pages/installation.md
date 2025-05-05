@@ -25,7 +25,7 @@ layout: default
     <div class="card-body">
       <h5 class="card-title">2. Install ArrayAnalysis</h5>
       <p class="card-text">You can download ArrayAnalysis for
-      <a class="ml-onclick-form" onclick="ml('show', 'BJHXe4', true)" href = "https://zenodo.org/records/15228315/files/ArrayAnalysis_unix_0.0.1.sh?download=1">Linux</a>,
+      <a href = "https://zenodo.org/records/15228315/files/ArrayAnalysis_unix_0.0.1.sh?download=1">Linux</a>,
       <a href = "https://zenodo.org/records/15228315/files/ArrayAnalysis_macos_0.0.1.dmg?download=1">MacOS</a>, and 
       <a href = "https://zenodo.org/records/15228315/files/ArrayAnalysis_windows-x64_0.0.1.exe?download=1">Windows</a>.</p>
       <hr>
