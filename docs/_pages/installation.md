@@ -133,7 +133,7 @@ layout: default
             <p class="card-text">Run ArrayAnalysis with the following command:</p>
       <pre>
       <code>
-     docker run -d --rm -p 3838:3838 
+     docker run -d --rm -p 3838:3838 jarnokoetsier/arrayanalysis
      </code>
       </pre>
     </div>
