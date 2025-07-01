@@ -21,7 +21,7 @@ layout: default
 	  <div class="jumbotron p-5 h-100" style="text-align: left">
 		  <h3><b>I am not allowed to upload my data on an external server. Can I run ArrayAnalysis locally?</b></h3>
 		  <p>Yes, ArrayAnalysis can be installed locally as a Desktop app, R package, and Docker image. 
-		  Please follow the instructions in the <a "{{ "/installation" | relative_url}}">installation guide</a>.</p>
+		  Please follow the instructions in the <a href="{{ "/installation" | relative_url}}">installation guide</a>.</p>
 	  </div>
   </div>
 </div>
