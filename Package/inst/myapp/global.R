@@ -3,6 +3,9 @@
 # Description: global environment of the ArrayAnalysis Shiny app
 #==============================================================================#
 
+# ArrayAnalysis version:
+ArrayAnalysis_version <- "ArrayAnalysis version 0.1.0"
+
 #******************************************************************************#
 # Load functions
 #******************************************************************************#
@@ -38,9 +41,14 @@ for (pkg in 1:nrow(CRANpackages)) {
       
       #Install package if package version is too low:
       if (packageVersion(CRANpackages$name[pkg]) < CRANpackages$version[pkg]){
+        if (CRANpackages$name[pkg] %in% .packages()){
+          detach(paste0("package:", CRANpackages$name[pkg]), unload = TRUE,
+                 character.only = TRUE)
+        }
         install.packages(CRANpackages$name[pkg], 
                          ask = FALSE,
-                         repos = "https://cloud.r-project.org")
+                         repos = "https://cloud.r-project.org",
+                         upgrade = "never")
       }
     }
   }
@@ -57,9 +65,14 @@ for (pkg in 1:nrow(CRANpackages)) {
       
       #Install package if package version is not correct
       if (packageVersion(CRANpackages$name[pkg]) != CRANpackages$version[pkg]){
+        if (CRANpackages$name[pkg] %in% .packages()){
+          detach(paste0("package:", CRANpackages$name[pkg]), unload = TRUE,
+                 character.only = TRUE)
+        }
         remotes::install_version(CRANpackages$name[pkg],
                                  CRANpackages$version[pkg],
-                                 repos = "https://cloud.r-project.org")
+                                 repos = "https://cloud.r-project.org",
+                                 upgrade = "never")
       }
     }
   }

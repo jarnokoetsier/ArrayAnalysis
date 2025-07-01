@@ -14,7 +14,7 @@ layout: default
 		  <p>After more than a decade, ArrayAnalysis has returned—better than ever! 
 		  The platform now extends its capabilities to include RNA sequencing analysis, in addition to its long-standing support for microarray data.
 		  With enhanced workflows and new interactive visualizations, ArrayAnalysis enables the interpretation of transcriptomic experiments as never before. 
-		  Plus, ArrayAnalysis runs locally, ensuring your data remains secure and private without the need to upload it to external servers.</p>
+		  Plus, ArrayAnalysis can be run locally, ensuring your data remains secure and private without the need to upload it to external servers.</p>
 	  </div>
   </div>
 </div>
