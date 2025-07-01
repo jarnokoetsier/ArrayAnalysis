@@ -41,8 +41,8 @@ layout: default
      <div class="card">
     <img src="{{ "/assets/img/icons/ora_logo.png" | relative_url}}" class="card-img-top px-5 py-1" alt="inspiration-icon">
     <div class="card-body">
-      <h5 class="card-title">Overrepresentation Analysis</h5>
-      <p class="card-text">Identify overrepresented pathways and gene ontologies.</p>
+      <h5 class="card-title">Gene Set Analysis</h5>
+      <p class="card-text">Identify enriched pathways and gene ontologies.</p>
     </div>
   </div>
   
@@ -60,7 +60,7 @@ layout: default
     <img src="{{ "/assets/img/icons/install_logo.png" | relative_url}}" class="card-img-top px-5 py-1" alt="sharing-icon">
     <div class="card-body">
       <h5 class="card-title">Data upload</h5>
-      <p class="card-text">Start your analysis by uploading a Series Matrix File and a metadata file.</p>
+      <p class="card-text">Start your analysis by uploading an intensity matrix (.tsv/.csv/series_matrix.txt.gz) and a metadata file.</p>
     </div>
   </div>
   
@@ -83,8 +83,8 @@ layout: default
      <div class="card">
     <img src="{{ "/assets/img/icons/ora_logo.png" | relative_url}}" class="card-img-top px-5 py-1" alt="inspiration-icon">
     <div class="card-body">
-      <h5 class="card-title">Overrepresentation Analysis</h5>
-      <p class="card-text">Identify overrepresented pathways and gene ontologies.</p>
+      <h5 class="card-title">Gene Set Analysis</h5>
+      <p class="card-text">Identify enriched pathways and gene ontologies.</p>
     </div>
   </div>
   
@@ -127,8 +127,8 @@ layout: default
      <div class="card">
     <img src="{{ "/assets/img/icons/ora_logo.png" | relative_url}}" class="card-img-top px-5 py-1" alt="inspiration-icon">
     <div class="card-body">
-      <h5 class="card-title">Overrepresentation Analysis</h5>
-      <p class="card-text">Identify overrepresented pathways and gene ontologies.</p>
+      <h5 class="card-title">Gene Set Analysis</h5>
+      <p class="card-text">Identify enriched pathways and gene ontologies.</p>
     </div>
   </div>
   
@@ -169,8 +169,8 @@ layout: default
      <div class="card">
     <img src="{{ "/assets/img/icons/ora_logo.png" | relative_url}}" class="card-img-top px-5 py-1" alt="inspiration-icon">
     <div class="card-body">
-      <h5 class="card-title">Overrepresentation Analysis</h5>
-      <p class="card-text">Identify overrepresented pathways and gene ontologies.</p>
+      <h5 class="card-title">Gene Set Analysis</h5>
+      <p class="card-text">Identify enriched pathways and gene ontologies.</p>
     </div>
   </div>
   
