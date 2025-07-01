@@ -76,7 +76,7 @@ layout: default
     <img src="{{ "/assets/img/icons/run_logo.png" | relative_url}}" class="card-img-top px-5 py-1" alt="inspiration-icon">
     <div class="card-body">
       <h5 class="card-title">Statistical Analysis</h5>
-      <p class="card-text">Compare experimental groups.</p>>
+      <p class="card-text">Compare experimental groups.</p>
     </div>
   </div>
   
