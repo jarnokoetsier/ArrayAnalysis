@@ -160,7 +160,7 @@ layout: default
     <img src="{{ "/assets/img/icons/install_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="inspiration-icon">
     <div class="card-body">
       <h5 class="card-title">2. Download ArrayAnalysis</h5>
-      <p class="card-text">You can download the ArrayAnalysis zip file <a href = "https://github.com/jarnokoetsier/ArrayAnalysis_Shiny/archive/refs/heads/main.zip">here</a>. Unzip the file.</p>
+      <p class="card-text">You can download the ArrayAnalysis zip file <a href = "https://zenodo.org/records/15879270/files/jarnokoetsier/ArrayAnalysis_Shiny-v0.1.0.zip?download=1">here</a>. Unzip the file.</p>
     </div>
   </div>
   

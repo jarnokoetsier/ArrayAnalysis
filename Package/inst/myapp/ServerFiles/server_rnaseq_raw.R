@@ -77,8 +77,8 @@ observe({
   observeEvent(input$upload_rnaseq_raw,{
     
     # Show modal
-    show_modal_spinner(text = "Reading data...",
-                       color="#0dc5c1")
+    shinybusy::show_modal_spinner(text = "Reading data...",
+                                  color="#0dc5c1")
     
     # Read expression data
     if (!is.null(input$uploadExprData_rnaseq_raw)){
@@ -170,15 +170,14 @@ observe({
           tabsetPanel(
             tabPanel("Expression matrix",
                      h3(strong("Expression matrix")),
-                     h5("These are the first six entries of the expression matrix. Please check if the data 
+                     h5("The table shows the first six entries of the expression matrix. Please check if the data 
                has been correctly imported."),
                      hr(),
                      DT::dataTableOutput(outputId = "exprTable_upload_rnaseq_raw") %>% 
                        shinycssloaders::withSpinner(color="#0dc5c1")),
             tabPanel("Metadata",                  # Meta table
                      h3(strong("Metadata")),
-                     h5("This is a preview of the metadata table. Please check if the data 
-               has been correctly imported."),
+                     h5("Please check if the metadata has been correctly imported."),
                      hr(),
                      DT::dataTableOutput(outputId = "metaTable_rnaseq_raw") %>% 
                        shinycssloaders::withSpinner(color="#0dc5c1")),
@@ -304,15 +303,14 @@ observe({
           tabsetPanel(
             tabPanel("Expression matrix",
                      h3(strong("Expression matrix")),
-                     h5("These are the first six entries of the expression matrix. Please check if the data 
+                     h5("The table shows the first six entries of the expression matrix. Please check if the data 
                has been correctly imported."),
                      hr(),
                      DT::dataTableOutput(outputId = "exprTable_upload_rnaseq_raw") %>% 
                        shinycssloaders::withSpinner(color="#0dc5c1")),
             tabPanel("Metadata",                  # Meta table
                      h3(strong("Metadata")),
-                     h5("This is a preview of the metadata table. Please check if the data 
-               has been correctly imported."),
+                     h5("Please check if the metadata has been correctly imported."),
                      hr(),
                      DT::dataTableOutput(outputId = "metaTable_rnaseq_raw") %>% 
                        shinycssloaders::withSpinner(color="#0dc5c1")),
@@ -1705,11 +1703,19 @@ observe({
       # For PDF output, change this to "report.pdf"
       filename = "QCreport.html",
       content = function(file) {
+        shinybusy::show_modal_spinner(text = "Making QC report...",
+                                      color="#0dc5c1")
         # Copy the report file to a temporary directory before processing it, in
         # case we don't have write permissions to the current working dir (which
         # can happen when deployed).
         tempReport <- file.path(tempdir(), "QCreport_RNAseq_raw.Rmd")
         file.copy("Reports/QCreport_RNAseq_raw.Rmd", tempReport, overwrite = TRUE)
+        
+        tempLogo <- file.path(tempdir(), "logo_main.PNG")
+        file.copy("www/logo_main.PNG", tempLogo, overwrite = TRUE)
+        
+        tempHeader <- file.path(tempdir(), "header.html")
+        file.copy("www/header.html", tempHeader, overwrite = TRUE)
         
         # Set up parameters to pass to Rmd document
         params <- list(processingSettings = rv$processingSettings,
@@ -1717,7 +1723,9 @@ observe({
                        legendColors = colorsByFactor(rv$experimentFactor)$legendColors,
                        normData = rv$normData,
                        PCAData = rv$PCA_data,
-                       normData_vst = rv$normData_vst)
+                       normData_vst = rv$normData_vst,
+                       dir = tempdir(),
+                       ArrayAnalysis_version = ArrayAnalysis_version)
         
         # Knit the document, passing in the `params` list, and eval it in a
         # child of the global environment (this isolates the code in the document
@@ -1726,6 +1734,7 @@ observe({
                           params = params,
                           envir = new.env(parent = globalenv())
         )
+        shinybusy::remove_modal_spinner()
       }
     )
     
@@ -3071,16 +3080,26 @@ observe({
       # For PDF output, change this to "report.pdf"
       filename = "SAreport.html",
       content = function(file) {
+        shinybusy::show_modal_spinner(text = "Making statistical analysis report...",
+                                      color="#0dc5c1")
         # Copy the report file to a temporary directory before processing it, in
         # case we don't have write permissions to the current working dir (which
         # can happen when deployed).
         tempReport <- file.path(tempdir(), "SAreport_RNAseq_raw.Rmd")
         file.copy("Reports/SAreport_RNAseq_raw.Rmd", tempReport, overwrite = TRUE)
         
+        tempLogo <- file.path(tempdir(), "logo_main.PNG")
+        file.copy("www/logo_main.PNG", tempLogo, overwrite = TRUE)
+        
+        tempHeader <- file.path(tempdir(), "header.html")
+        file.copy("www/header.html", tempHeader, overwrite = TRUE)
+        
         # Set up parameters to pass to Rmd document
         params <- list(statSettings = rv$statSettings[[input$comparisons_view_rnaseq_raw]],
                        topTable = rv$top_table[[input$comparisons_view_rnaseq_raw]],
-                       volcanoTable = rv$summaryTable)
+                       volcanoTable = rv$summaryTable,
+                       dir = tempdir(),
+                       ArrayAnalysis_version = ArrayAnalysis_version)
         
         # Knit the document, passing in the `params` list, and eval it in a
         # child of the global environment (this isolates the code in the document
@@ -3089,6 +3108,7 @@ observe({
                           params = params,
                           envir = new.env(parent = globalenv())
         )
+        shinybusy::remove_modal_spinner()
       }
     )
     
@@ -3813,7 +3833,8 @@ observe({
                                       nSets = input$nSets_ORAplot_rnaseq_raw,
                                       color = input$color_ORAplot_rnaseq_raw)
             
-            output$ORAplot_rnaseq_raw <- plotly::renderPlotly(rv$ORAplot)
+            output$ORAplot_rnaseq_raw <- plotly::renderPlotly(rv$ORAplot%>% 
+                                                                plotly::layout(height = 500, width = 1000))
             
           })
           
@@ -4030,15 +4051,25 @@ observe({
             # For PDF output, change this to "report.pdf"
             filename = "ORAreport.html",
             content = function(file) {
+              shinybusy::show_modal_spinner(text = "Making ORA report...",
+                                            color="#0dc5c1")
               # Copy the report file to a temporary directory before processing it, in
               # case we don't have write permissions to the current working dir (which
               # can happen when deployed).
               tempReport <- file.path(tempdir(), "ORAreport_RNAseq_raw.Rmd")
               file.copy("Reports/ORAreport_RNAseq_raw.Rmd", tempReport, overwrite = TRUE)
               
+              tempLogo <- file.path(tempdir(), "logo_main.PNG")
+              file.copy("www/logo_main.PNG", tempLogo, overwrite = TRUE)
+              
+              tempHeader <- file.path(tempdir(), "header.html")
+              file.copy("www/header.html", tempHeader, overwrite = TRUE)
+              
               # Set up parameters to pass to Rmd document
               params <- list(ORASettings = rv$ORA_settings,
-                             ORATable = rv$ORA_data)
+                             ORATable = rv$ORA_data,
+                             dir = tempdir(),
+                             ArrayAnalysis_version = ArrayAnalysis_version)
               
               # Knit the document, passing in the `params` list, and eval it in a
               # child of the global environment (this isolates the code in the document
@@ -4047,6 +4078,7 @@ observe({
                                 params = params,
                                 envir = new.env(parent = globalenv())
               )
+              shinybusy::remove_modal_spinner()
             }
           )
           
@@ -4075,7 +4107,8 @@ observe({
                          
                          # Title + description of statistics table
                          h3(strong("Statistics table")),
-                         h5("The ORA statistics table encompasses the output of the overrepresentation analysis."),
+                         h5("Here you can view the statistics from the ORA. 
+                            Click on the table to get the statistics per gene."),
                          hr(),
                          
                          # Statistics table
@@ -4089,8 +4122,7 @@ observe({
                          
                          # Title + description of gene table
                          htmlOutput("text_ORAgene_table_rnaseq_raw"),
-                         h5(paste0("The gene table encompasses the statistics of all genes 
-                              from the selected gene set.")),
+                         h5("Here you can view the differential expression results for the selected gene set."),
                          hr(),
                          
                          # Gene table
@@ -4158,7 +4190,7 @@ observe({
                          
                          # Title + description of the network diagram
                          h3(strong("Network diagram")),
-                         h5("The network diagram visualize the similarity between the most significant gene sets."),
+                         h5("The network visualizes the similarity between the most significant gene sets."),
                          hr(),
                          actionButton("download_ORAnetwork_rnaseq_raw", 
                                       "Download figure",
@@ -4455,7 +4487,8 @@ observe({
                                                   input$midcol_GSEAplot_rnaseq_raw,
                                                   input$highcol_GSEAplot_rnaseq_raw))
             
-            output$GSEAplot_rnaseq_raw <- plotly::renderPlotly(rv$GSEAplot)
+            output$GSEAplot_rnaseq_raw <- plotly::renderPlotly(rv$GSEAplot%>% 
+                                                                 plotly::layout(height = 500, width = 1000))
             
           })
           
@@ -4674,15 +4707,25 @@ observe({
             # For PDF output, change this to "report.pdf"
             filename = "GSEAreport.html",
             content = function(file) {
+              shinybusy::show_modal_spinner(text = "Making GSEA report...",
+                                            color="#0dc5c1")
               # Copy the report file to a temporary directory before processing it, in
               # case we don't have write permissions to the current working dir (which
               # can happen when deployed).
               tempReport <- file.path(tempdir(), "GSEAreport_RNAseq_raw.Rmd")
               file.copy("Reports/GSEAreport_RNAseq_raw.Rmd", tempReport, overwrite = TRUE)
               
+              tempLogo <- file.path(tempdir(), "logo_main.PNG")
+              file.copy("www/logo_main.PNG", tempLogo, overwrite = TRUE)
+              
+              tempHeader <- file.path(tempdir(), "header.html")
+              file.copy("www/header.html", tempHeader, overwrite = TRUE)
+              
               # Set up parameters to pass to Rmd document
               params <- list(GSEASettings = rv$GSEA_settings,
-                             GSEATable = rv$GSEA_data)
+                             GSEATable = rv$GSEA_data,
+                             dir = tempdir(),
+                             ArrayAnalysis_version = ArrayAnalysis_version)
               
               # Knit the document, passing in the `params` list, and eval it in a
               # child of the global environment (this isolates the code in the document
@@ -4691,6 +4734,7 @@ observe({
                                 params = params,
                                 envir = new.env(parent = globalenv())
               )
+              shinybusy::remove_modal_spinner()
             }
           )
           
@@ -4718,7 +4762,8 @@ observe({
                          
                          # Title + description of statistics table
                          h3(strong("Statistics table")),
-                         h5("The statistics table encompasses the output of the Gene Set Enrichment Analysis."),
+                         h5("Here you can view the statistics from the GSEA. 
+                            Click on the table to get the statistics per gene."),
                          hr(),
                          
                          # Statistics table
@@ -4732,8 +4777,7 @@ observe({
                          
                          # Title + description of gene table
                          htmlOutput("text_GSEAgene_table_rnaseq_raw"),
-                         h5(paste0("The gene table encompasses the statistics of all genes
-                              from the selected gene set.")),
+                         h5("Here you can view the differential expression results for the selected gene set."),
                          hr(),
                          
                          # Gene table
