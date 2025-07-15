@@ -25,9 +25,9 @@ layout: default
     <div class="card-body">
       <h5 class="card-title">2. Install ArrayAnalysis</h5>
       <p class="card-text">You can download ArrayAnalysis for
-      <a href = "https://zenodo.org/records/15228315/files/ArrayAnalysis_unix_0.0.1.sh?download=1">Linux</a>,
-      <a href = "https://zenodo.org/records/15228315/files/ArrayAnalysis_macos_0.0.1.dmg?download=1">MacOS</a>, and 
-      <a href = "https://zenodo.org/records/15228315/files/ArrayAnalysis_windows-x64_0.0.1.exe?download=1">Windows</a>.</p>
+      <a href = "https://zenodo.org/records/15910769/files/ArrayAnalysis_unix_0.1.0.sh?download=1">Linux</a>,
+      <a href = "https://zenodo.org/records/15910769/files/ArrayAnalysis_macos_0.1.0.dmg?download=1">MacOS</a>, and 
+      <a href = "https://zenodo.org/records/15910769/files/ArrayAnalysis_windows-x64_0.1.0.exe?download=1">Windows</a>.</p>
       <hr>
       <p style="font-size: 12px">Does file security prevent you from running the file? Click <a href="{{ "/unblock" | relative_url}}">here</a> what to do.</p>
     </div>
