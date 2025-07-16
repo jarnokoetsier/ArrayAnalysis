@@ -71,7 +71,7 @@ as <b>Case - Control</b>.</p>
 <p>3. <b>Gene annotation</b>. You can add gene annotations from the Ensembl database using the biomaRt package. For example, if you have ENTREZ gene IDs annotations, 
 you can use this option to add gene symbols or Ensembl gene IDs to the statistics output. Please note that if you select this option, 
 the time required for the statistical analysis will increase significantly.</p>
-</br>
+<br>
 <p><b>Output</b></p>
 <p>For each of the selected statistical comparisons, the following output are provided:</p>
 <p>1. <b>Top table</b> (interactive). A table with the relevant statistics as calculated by <i>limma</i>.</p>
@@ -99,7 +99,7 @@ Furhermore, you can also indicate whether the input genes should be selected bas
 or whether ORA should simply be performed on the top most significantly up/downregulated genes. The background gene list includes all genes that passed QC. </p>
 <p>4. <b>Gene identifier</b>. Select which column of the statistics table contains the gene identifiers and what type of identifiers these are (<i>e.g.</i>, Entrez Gene, Ensembl Gene, or Gene Symbol). 
 Furthermore, indicate to which organism the gene identifiers belong.</p>
-</br>
+<br>
 <p><b>Output</b></p>
 <p>Data and preprocessing quality can be checked in the different outputs and QC plots:</p>
 <p>1. <b>ORA table</b>. Table with the statistics of the ORA. This table can be downloaded.</p>
@@ -117,7 +117,7 @@ You can select the network layout and number of genesets in the network.</p>
 <p>3. <b>Ranking variable</b>. Indicate which variable (logFC, -log P value, or signed -log P value) will be used to rank genes for the GSEA.</p>
 <p>4. <b>Gene identifier</b>. Select which column of the statistics table contains the gene identifiers and what type of identifiers these are (<i>e.g.</i>, Entrez Gene, Ensembl Gene, or Gene Symbol). 
 Furthermore, indicate to which organism the gene identifiers belong.</p>
-</br>
+<br>
 <p><b>Output</b></p>
 <p>Data and preprocessing quality can be checked in the different outputs and QC plots:</p>
 <p>1. <b>Interactive table</b> with GSEA statistics. This table can be downloaded.</p>
@@ -184,7 +184,7 @@ as <b>Case - Control</b>.</p>
 <p>3. <b>Gene annotation</b>. You can add gene annotations from the Ensembl database using the biomaRt package. For example, if you have ENTREZ gene IDs annotations, 
 you can use this option to add gene symbols or Ensembl gene IDs to the statistics output. Please note that if you select this option, 
 the time required for the statistical analysis will increase significantly.</p>
-</br>
+<br>
 <p><b>Output</b></p>
 <p>For each of the selected statistical comparisons, the following output are provided:</p>
 <p>1. <b>Top table</b> (interactive). A table with the relevant statistics as calculated by <i>limma</i>.</p>
@@ -212,7 +212,7 @@ Furhermore, you can also indicate whether the input genes should be selected bas
 or whether ORA should simply be performed on the top most significantly up/downregulated genes. The background gene list includes all genes that passed QC. </p>
 <p>4. <b>Gene identifier</b>. Select which column of the statistics table contains the gene identifiers and what type of identifiers these are (<i>e.g.</i>, Entrez Gene, Ensembl Gene, or Gene Symbol). 
 Furthermore, indicate to which organism the gene identifiers belong.</p>
-</br>
+<br>
 <p><b>Output</b></p>
 <p>Data and preprocessing quality can be checked in the different outputs and QC plots:</p>
 <p>1. <b>ORA table</b>. Table with the statistics of the ORA. This table can be downloaded.</p>
@@ -230,7 +230,7 @@ You can select the network layout and number of genesets in the network.</p>
 <p>3. <b>Ranking variable</b>. Indicate which variable (logFC, -log P value, or signed -log P value) will be used to rank genes for the GSEA.</p>
 <p>4. <b>Gene identifier</b>. Select which column of the statistics table contains the gene identifiers and what type of identifiers these are (<i>e.g.</i>, Entrez Gene, Ensembl Gene, or Gene Symbol). 
 Furthermore, indicate to which organism the gene identifiers belong.</p>
-</br>
+<br>
 <p><b>Output</b></p>
 <p>Data and preprocessing quality can be checked in the different outputs and QC plots:</p>
 <p>1. <b>Interactive table</b> with GSEA statistics. This table can be downloaded.</p>
@@ -302,10 +302,11 @@ To perform statistical analysis, you can provide three inputs:</p>
 <p>1. <b>Statistical comparison(s)</b>. You can select one or more statistical comparisons of interest. Note that the direction of the statistical comparison is usually defined 
 as <b>Case - Control</b>.</p>
 <p>2. <b>Covariates</b>. You can adjust for continuous (<i>e.g.</i>, age) and categorical (<i>e.g.</i>, sex, tissue) covariates.</p>
-<p>3. <b>Gene annotation</b>. You can add gene annotations from the Ensembl database using the biomaRt package. For example, if you have ENTREZ gene IDs annotations, 
+<p>3. <b>logFC shrinkage</b>. You can shrink imprecise logFCs towards 0 with the 'apeglm' method. This option is recommended to get more accurate estimates of the logFCs.</p>
+<p>4. <b>Gene annotation</b>. You can add gene annotations from the Ensembl database using the biomaRt package. For example, if you have ENTREZ gene IDs annotations, 
 you can use this option to add gene symbols or Ensembl gene IDs to the statistics output. Please note that if you select this option, 
 the time required for the statistical analysis will increase significantly.</p>
-</br>
+<br>
 <p><b>Output</b></p>
 <p>For each of the selected statistical comparisons, the following output are provided:</p>
 <p>1. <b>Top table</b> (interactive). A table with the relevant statistics as calculated by <i>DESeq2</i>. 
@@ -335,7 +336,7 @@ Furhermore, you can also indicate whether the input genes should be selected bas
 or whether ORA should simply be performed on the top most significantly up/downregulated genes. The background gene list includes all genes that passed QC. </p>
 <p>4. <b>Gene identifier</b>. Select which column of the statistics table contains the gene identifiers and what type of identifiers these are (<i>e.g.</i>, Entrez Gene, Ensembl Gene, or Gene Symbol). 
 Furthermore, indicate to which organism the gene identifiers belong.</p>
-</br>
+<br>
 <p><b>Output</b></p>
 <p>Data and preprocessing quality can be checked in the different outputs and QC plots:</p>
 <p>1. <b>ORA table</b>. Table with the statistics of the ORA. This table can be downloaded.</p>
@@ -353,7 +354,7 @@ You can select the network layout and number of genesets in the network.</p>
 <p>3. <b>Ranking variable</b>. Indicate which variable (logFC, -log P value, or signed -log P value) will be used to rank genes for the GSEA.</p>
 <p>4. <b>Gene identifier</b>. Select which column of the statistics table contains the gene identifiers and what type of identifiers these are (<i>e.g.</i>, Entrez Gene, Ensembl Gene, or Gene Symbol). 
 Furthermore, indicate to which organism the gene identifiers belong.</p>
-</br>
+<br>
 <p><b>Output</b></p>
 <p>Data and preprocessing quality can be checked in the different outputs and QC plots:</p>
 <p>1. <b>Interactive table</b> with GSEA statistics. This table can be downloaded.</p>
@@ -422,7 +423,7 @@ as <b>Case - Control</b>.</p>
 <p>3. <b>Gene annotation</b>. You can add gene annotations from the Ensembl database using the biomaRt package. For example, if you have ENTREZ gene IDs annotations, 
 you can use this option to add gene symbols or Ensembl gene IDs to the statistics output. Please note that if you select this option, 
 the time required for the statistical analysis will increase significantly.</p>
-</br>
+<br>
 <p><b>Output</b></p>
 <p>For each of the selected statistical comparisons, the following output are provided:</p>
 <p>1. <b>Top table</b> (interactive). A table with the relevant statistics as calculated by <i>limma</i>.</p>
@@ -450,7 +451,7 @@ Furhermore, you can also indicate whether the input genes should be selected bas
 or whether ORA should simply be performed on the top most significantly up/downregulated genes. The background gene list includes all genes that passed QC. </p>
 <p>4. <b>Gene identifier</b>. Select which column of the statistics table contains the gene identifiers and what type of identifiers these are (<i>e.g.</i>, Entrez Gene, Ensembl Gene, or Gene Symbol). 
 Furthermore, indicate to which organism the gene identifiers belong.</p>
-</br>
+<br>
 <p><b>Output</b></p>
 <p>Data and preprocessing quality can be checked in the different outputs and QC plots:</p>
 <p>1. <b>ORA table</b>. Table with the statistics of the ORA. This table can be downloaded.</p>
@@ -468,7 +469,7 @@ You can select the network layout and number of genesets in the network.</p>
 <p>3. <b>Ranking variable</b>. Indicate which variable (logFC, -log P value, or signed -log P value) will be used to rank genes for the GSEA.</p>
 <p>4. <b>Gene identifier</b>. Select which column of the statistics table contains the gene identifiers and what type of identifiers these are (<i>e.g.</i>, Entrez Gene, Ensembl Gene, or Gene Symbol). 
 Furthermore, indicate to which organism the gene identifiers belong.</p>
-</br>
+<br>
 <p><b>Output</b></p>
 <p>Data and preprocessing quality can be checked in the different outputs and QC plots:</p>
 <p>1. <b>GSEA table</b> (interactive) with GSEA statistics. This table can be downloaded.</p>
