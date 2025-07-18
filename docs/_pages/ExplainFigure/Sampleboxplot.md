@@ -22,7 +22,7 @@ layout: default
 <div class="row">
   <div class="col-sm-6 px-3">
 	     <div class="jumbotron p-5 h-100 bg-white border">
-	     <h3><span style="color:green">&#10003;<span> Good quality data</h3>
+	     <h3><span style="color:green">&#10003;</span> Good quality data</h3>
       <img 
         src="{{ '/assets/img/ExplainFigure/SampleBoxplot_good.png' | relative_url }}" 
         alt = "Good Sample-wise Expression Boxplot"
@@ -32,7 +32,7 @@ layout: default
   </div>
    <div class="col-sm-6 px-3">
 	     <div class="jumbotron p-5 h-100 bg-white border">
-	     <h3><span style="color:red">&#10007;<span> One outlying sample</h3>
+	     <h3><span style="color:red">&#10007;</span> One outlying sample</h3>
       <img 
         src="{{ '/assets/img/ExplainFigure/SampleBoxplot_bad.png' | relative_url }}" 
         alt = "Bad Sample-wise Expression Boxplot"
