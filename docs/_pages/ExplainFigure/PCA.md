@@ -9,7 +9,7 @@ layout: default
 <div class="row">
   <div class="col-sm-12 px-3">
 	  <div class="jumbotron p-5 h-100" style="text-align: justify">
-		  <h1><b>Principal Coordinate Analysis (PCA)</b></h1>
+		  <h1><b>Principal Component Analysis (PCA)</b></h1>
 		    <p>The PCA score plot shows the samples projected onto principal components (e.g., PC1 and PC2), which capture the largest sources of variation in the gene expression data. 
 		    Each point represents a sample, colored by experimental group. Samples that cluster close together have similar overall expression profiles. 
 		    This plot helps to assess whether samples group according to biological conditions and to detect potential outliers or batch effects.
