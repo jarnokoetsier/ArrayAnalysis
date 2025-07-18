@@ -11,7 +11,7 @@ layout: default
 	  <div class="jumbotron p-5 h-100" style="text-align: justify">
 		  <h1><b>Gene Expression Boxplot</b></h1>
 		    <p>This boxplot shows the expression levels of a single gene across two experimental groups. 
-		    Each dot represents the expression value (e.g., log-transformed count/intensity) in one sample. 
+		    Each dot represents the expression value (i.e., log-transformed count/intensity) in one sample. 
 		    The colored boxes summarize the distribution of values within each group: the line inside the box is the median, 
 		    the box edges show the 25th and 75th percentiles (interquartile range). 
 		    Use this plot to visually compare the gene’s expression between groups and assess variability within each group.</p>
@@ -27,7 +27,6 @@ layout: default
         alt = "Gene Expression Boxplot"
         style="width: 100%;; border: none;" 
         title="Gene Expression Boxplot">
-      </img>
     </div>
   </div>
 </div>
