@@ -25,7 +25,7 @@ layout: default
       <img 
         src="{{ '/assets/img/ExplainFigure/GeneBoxplot.png' | relative_url }}" 
         alt = "Gene Expression Boxplot"
-        style="width: 100%;; border: none;" 
+        style="width: 100%; border: none;" 
         title="Gene Expression Boxplot">
     </div>
   </div>

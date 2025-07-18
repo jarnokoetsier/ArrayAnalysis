@@ -22,21 +22,21 @@ layout: default
 <div class="row">
   <div class="col-sm-6 px-3">
 	     <div class="jumbotron p-5 h-100 bg-white border">
-	     <h2>&#10004; Good quality data</h2>
+	     <h3>&#10004; Good quality data</h2>
       <img 
         src="{{ '/assets/img/ExplainFigure/SampleBoxplot_good.png' | relative_url }}" 
         alt = "Gene Expression Boxplot"
-        style="border: none;" 
+        style="width: 100%;border: none;" 
         title="Gene Expression Boxplot">
     </div>
   </div>
    <div class="col-sm-6 px-3">
 	     <div class="jumbotron p-5 h-100 bg-white border">
-	     <h2>&#10008; One outlying sample</h2>
+	     <h3>&#10008; One outlying sample</h2>
       <img 
         src="{{ '/assets/img/ExplainFigure/SampleBoxplot_bad.png' | relative_url }}" 
         alt = "Gene Expression Boxplot"
-        style="border: none;" 
+        style="width: 100%;border: none;" 
         title="Gene Expression Boxplot">
     </div>
   </div>
