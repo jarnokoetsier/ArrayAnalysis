@@ -22,12 +22,12 @@ layout: default
 <div class="row">
   <div class="col-sm-12 px-3">
 	     <div class="jumbotron p-5 h-100 bg-white border">
-      <iframe 
+      <img 
         src="{{ '/assets/img/ExplainFigure/GeneBoxplot.png' | relative_url }}" 
-        class="img-fluid" 
+        alt = "Gene Expression Boxplot"
         style="width: 100%;; border: none;" 
-        title="Heatmap">
-      </iframe>
+        title="Gene Expression Boxplot">
+      </img>
     </div>
   </div>
 </div>
