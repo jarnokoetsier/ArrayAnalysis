@@ -9,7 +9,7 @@ layout: default
 <div class="row">
   <div class="col-sm-12 px-3">
 	  <div class="jumbotron p-5 h-100" style="text-align: justify">
-		  <h1><b>Bar Chart (Gene Set Analysis)</b></h1>
+		  <h1><b>Gene Set Analysis Bar Chart</b></h1>
 		    <p>The bar chart summarizes the results of the gene set analysis. Each bar represents a gene set, with longer bars indicating higher levels of statistical significance.
 For the Overrepresentation Analysis (ORA), bars are colored according to the number of significant genes within the gene set.
 For the Gene Set Enrichment Analysis (GSEA), bars are colored by the normalized enrichment score (NES), 
@@ -22,7 +22,7 @@ where positive scores indicate upregulation and negative scores indicate downreg
 <div class="row">
   <div class="col-sm-6 px-3">
 	     <div class="jumbotron p-5 h-100 bg-white border">
-	     <h3>Overrepresentation Analysis (ORA)</h3>
+	     <h3>ORA</h3>
       <img 
         src="{{ '/assets/img/ExplainFigure/ORA_barchart.png' | relative_url }}" 
         alt = "ORA Bar Chart"
@@ -32,7 +32,7 @@ where positive scores indicate upregulation and negative scores indicate downreg
   </div>
    <div class="col-sm-6 px-3">
 	     <div class="jumbotron p-5 h-100 bg-white border">
-	     <h3>Gene Set Enrichment Analysis (GSEA)</h3>
+	     <h3>GSEA</h3>
       <img 
         src="{{ '/assets/img/ExplainFigure/GSEA_barchart.png' | relative_url }}" 
         alt = "GSEA Bar Chart"

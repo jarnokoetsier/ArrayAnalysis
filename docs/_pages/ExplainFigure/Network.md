@@ -27,7 +27,7 @@ layout: default
 <div class="row">
   <div class="col-sm-6 px-3">
 	     <div class="jumbotron p-5 h-100 bg-white border">
-	     <h3>Overrepresentation Analysis (ORA)</h3>
+	     <h3>ORA</h3>
       <img 
         src="{{ '/assets/img/ExplainFigure/ORA_network.png' | relative_url }}" 
         alt = "ORA Bar Chart"
@@ -37,7 +37,7 @@ layout: default
   </div>
    <div class="col-sm-6 px-3">
 	     <div class="jumbotron p-5 h-100 bg-white border">
-	     <h3>Gene Set Enrichment Analysis (GSEA)</h3>
+	     <h3>GSEA</h3>
       <img 
         src="{{ '/assets/img/ExplainFigure/GSEA_network.png' | relative_url }}" 
         alt = "GSEA Bar Chart"
