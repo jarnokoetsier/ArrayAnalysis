@@ -23,7 +23,7 @@ layout: default
 <div class="row">
   <div class="col-sm-12 px-3">
 	     <div class="jumbotron p-5 h-100 bg-white border">
-	     <table>
+	     <table border = "1">
   <tr>
     <th>GeneID</th>
     <td>The identifier for the gene.</td>
