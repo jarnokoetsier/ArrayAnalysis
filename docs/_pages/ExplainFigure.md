@@ -1,6 +1,6 @@
 ---
-title: "Help"
-permalink: /help
+title: "Explain Figure"
+permalink: /ExplainFigure
 layout: default
 ---
 <br>
