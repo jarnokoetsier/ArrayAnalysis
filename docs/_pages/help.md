@@ -12,23 +12,30 @@ layout: default
 <div class="card-deck text-center">
 
   <div class="card">
-    <img src="{{ "/assets/img/icons/documentation-icon.png" | relative_url}}" class="card-img-top px-4 py-2" alt="sharing-icon">
+    <img src="{{ "/assets/img/icons/documentation-icon.png" | relative_url}}" class="card-img-top px-4 py-2" alt="documentation-icon">
     <div class="card-body">
       <h3 class="card-title"><a href = "{{ "/documentation" | relative_url}}">Documentation</a></h3>
     </div>
   </div>
   
   <div class="card">
-    <img src="{{ "/assets/img/icons/faq-icon.png" | relative_url}}" class="card-img-top px-4 py-1" alt="inspiration-icon">
+    <img src="{{ "/assets/img/icons/faq-icon.png" | relative_url}}" class="card-img-top px-4 py-1" alt="faq-icon">
     <div class="card-body">
        <h3 class="card-title"><a href = "{{ "/faq" | relative_url}}">FAQ</a></h3>
     </div>
   </div>
   
     <div class="card">
-    <img src="{{ "/assets/img/icons/tutorials-icon.png" | relative_url}}" class="card-img-top px-4 py-1" alt="inspiration-icon">
+    <img src="{{ "/assets/img/icons/tutorials-icon.png" | relative_url}}" class="card-img-top px-4 py-1" alt="tutorials-icon">
     <div class="card-body">
        <h3 class="card-title"><a href = "{{ "/tutorials" | relative_url}}">Tutorials</a></h3>
+    </div>
+  </div>
+  
+      <div class="card">
+    <img src="{{ "/assets/img/icons/chart-icon.png" | relative_url}}" class="card-img-top px-4 py-1" alt="chart-icon">
+    <div class="card-body">
+       <h3 class="card-title"><a href = "{{ "/explain" | relative_url}}">Figures & Tables</a></h3>
     </div>
   </div>
   
