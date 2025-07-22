@@ -33,7 +33,7 @@ layout: default
   </div>
   
       <div class="card">
-    <img src="{{ "/assets/img/icons/chart-icon.png" | relative_url}}" class="card-img-top px-4 py-1" alt="chart-icon">
+    <img src="{{ "/assets/img/icons/chart-icon.svg" | relative_url}}" class="card-img-top px-4 py-1" alt="chart-icon">
     <div class="card-body">
        <h3 class="card-title"><a href = "{{ "/explain" | relative_url}}">Figures & Tables</a></h3>
     </div>
