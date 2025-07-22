@@ -5,13 +5,14 @@ layout: default
 ---
 <br>
 <div class="container px-1">
+<h1>Information about ArrayAnalysis Figures and Tables</h1>
 <br>
 <div class="card-deck text-center">
 
   <div class="card">
-    <img src="{{ '/assets/img/ExplainFigure/ReadCount.png' | relative_url }}" class="card-img-top px-4 py-2" alt="sharing-icon">
+    <img src="{{ '/assets/img/QC.png' | relative_url }}" class="card-img-top px-4 py-2" alt="Pre-processing & Quality Control">
     <div class="card-body">
-      <h3 class="card-title">Quality Control</h3>
+      <h3 class="card-title">Pre-processing & Quality Control</h3>
     </div>
       <ul class="list-group list-group-flush">
     <li class="list-group-item"><a href = "{{ "/ExplainFigure/Geneboxplot" | relative_url}}">Gene Expression Boxplot</a></li>
@@ -23,7 +24,7 @@ layout: default
   </div>
   
   <div class="card">
-    <img src="{{ '/assets/img/ExplainFigure/VolcanoPlot.png' | relative_url }}" class="card-img-top px-4 py-1" alt="inspiration-icon">
+    <img src="{{ '/assets/img/DEA.png' | relative_url }}" class="card-img-top px-4 py-1" alt="Differential Gene Expression Analysis">
     <div class="card-body">
        <h3 class="card-title">Differential Gene Expression Analysis</h3>
     </div>
@@ -37,7 +38,7 @@ layout: default
   </div>
   
     <div class="card">
-    <img src="{{ '/assets/img/ExplainFigure/GSEA_network.png' | relative_url }}" class="card-img-top px-4 py-1" alt="inspiration-icon">
+    <img src="{{ '/assets/img/GSA.png' | relative_url }}" class="card-img-top px-4 py-1" alt="Gene Set Analysis">
     <div class="card-body">
        <h3 class="card-title">Gene Set Analysis</h3>
     </div>
