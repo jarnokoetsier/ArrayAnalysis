@@ -10,7 +10,7 @@ layout: default
 <div class="card-deck text-center">
 
   <div class="card">
-    <img src="{{ '/assets/img/QC.png' | relative_url }}" class="card-img-top px-4 py-2" alt="Pre-processing & Quality Control">
+    <img src="{{ '/assets/img/QC.png' | relative_url }}" class="card-img-top" alt="Pre-processing & Quality Control" style = "object-fit: cover;">
     <div class="card-body">
       <h3 class="card-title">Pre-processing & Quality Control</h3>
     </div>
@@ -24,7 +24,7 @@ layout: default
   </div>
   
   <div class="card">
-    <img src="{{ '/assets/img/DEA.png' | relative_url }}" class="card-img-top px-4 py-1" alt="Differential Gene Expression Analysis">
+    <img src="{{ '/assets/img/DEA.png' | relative_url }}" class="card-img-top" alt="Differential Gene Expression Analysis" style = "object-fit: cover;">
     <div class="card-body">
        <h3 class="card-title">Differential Gene Expression Analysis</h3>
     </div>
@@ -38,7 +38,7 @@ layout: default
   </div>
   
     <div class="card">
-    <img src="{{ '/assets/img/GSA.png' | relative_url }}" class="card-img-top px-4 py-1" alt="Gene Set Analysis">
+    <img src="{{ '/assets/img/GSA.png' | relative_url }}" class="card-img-top" alt="Gene Set Analysis" style = "object-fit: cover;">
     <div class="card-body">
        <h3 class="card-title">Gene Set Analysis</h3>
     </div>
