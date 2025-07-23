@@ -25,7 +25,7 @@ layout: default
 		  <p>Noting to cite yet...</p>
 		  <br>
 		  <p style="font-size: 30px"><b>Email</b></p>
-		  <p><a href="mailto:arrayanalysis-fhml@maastrichtuniversity" target="_blank" style="color: white;">arrayanalysis-fhml@maastrichtuniversity</a></p>
+		  <p><a href="mailto:arrayanalysis-fhml@maastrichtuniversity.nl" target="_blank" style="color: white;">arrayanalysis-fhml@maastrichtuniversity.nl</a></p>
 		  <br>
 		  <p style="font-size: 30px"><b>GitHub</b></p>
 		  <p><a href="https://github.com/jarnokoetsier/ArrayAnalysis" target="_blank" style="color: white;">jarnokoetsier/ArrayAnalysis</a></p>
@@ -42,8 +42,7 @@ layout: default
 		  <i>BMC genomics</i>, 16, 1-5.</p>
 		  <hr>
 		    <p> Eijssen, L. M., Jaillard, M., Adriaens, M. E., Gaj, S., de Groot, P. J., Müller, M., & Evelo, C. T. (2013). 
-		    User-friendly solutions for microarray quality control and pre-processing on ArrayAnalysis.org. <i>Nucleic acids research</i>
-		    , 41(W1), W71-W76.</p>
+		    User-friendly solutions for microarray quality control and pre-processing on ArrayAnalysis.org. <i>Nucleic acids research</i>, 41(W1), W71-W76.</p>
 	  </div>
   </div>
 </div>
