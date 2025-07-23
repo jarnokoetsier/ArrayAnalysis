@@ -5,7 +5,7 @@ layout: default
 ---
 <br>
 <div class="container px-1">
-<p>If you need help, please visit our doucmentation, FAQ, or tutorials page. 
+<p>If you need help, please visit our 'Doucmentation', 'FAQ', 'Tutorials', or 'Figures & Tables' page. 
  Moreover, you can also post your question or start a discussion in the <a href="https://github.com/jarnokoetsier/ArrayAnalysis/discussions">ArrayAnalysis Discussions</a> forum.
 		   If you have identified bugs or have a feature request, you can create an issue on our <a href="https://github.com/jarnokoetsier/ArrayAnalysis/issues">GitHub</a> page.</p>
 <br>
