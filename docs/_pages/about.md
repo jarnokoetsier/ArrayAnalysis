@@ -7,7 +7,7 @@ layout: default
 <br>
 <div class="container px-1">
 <div class="row">
-  <div class="col-sm-8 px-3">
+  <div class="col-sm-7 px-3">
 	  <div class="jumbotron p-5 h-100" style="text-align: justify">
 		  <h1><b>About</b> ArrayAnalysis</h1>
 		    <p>ArrayAnalysis is designed to make transcriptomic data analysis accessible to everyone. 
@@ -19,16 +19,16 @@ layout: default
 		  <a class="btn btn-outline-dark btn-lg my-3" href="{{ "/installation" | relative_url}}" role="button">Installation</a></p>
 	  </div>
   </div>
-  <div class="col-sm-4 px-3">
+  <div class="col-sm-5 px-3">
 	  <div class="jumbotron p-5 bg-info text-white h-100" style="text-align: left">
 		  <p style="font-size: 30px"><b>Cite</b></p>
 		  <p>Noting to cite yet...</p>
 		  <br>
 		  <p style="font-size: 30px"><b>Email</b></p>
-		  <p><a href="mailto:arrayanalysis-fhml@maastrichtuniversity" target="_blank">arrayanalysis-fhml@maastrichtuniversity</a></p>
+		  <p><a href="mailto:arrayanalysis-fhml@maastrichtuniversity" target="_blank" style="color: white;">arrayanalysis-fhml@maastrichtuniversity</a></p>
 		  <br>
 		  <p style="font-size: 30px"><b>GitHub</b></p>
-		  <p><a href="https://github.com/jarnokoetsier/ArrayAnalysis" target="_blank">jarnokoetsier/ArrayAnalysis</a></p>
+		  <p><a href="https://github.com/jarnokoetsier/ArrayAnalysis" target="_blank" style="color: white;">jarnokoetsier/ArrayAnalysis</a></p>
 	  </div>
   </div>
 </div>
