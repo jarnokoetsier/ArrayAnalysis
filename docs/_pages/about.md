@@ -24,6 +24,11 @@ layout: default
 		  <p style="font-size: 30px"><b>Cite</b></p>
 		  <p>Noting to cite yet...</p>
 		  <br>
+		  <p style="font-size: 30px"><b>Email</b></p>
+		  <p><a href="mailto:arrayanalysis-fhml@maastrichtuniversity" target="_blank">arrayanalysis-fhml@maastrichtuniversity</a></p>
+		  <br>
+		  <p style="font-size: 30px"><b>GitHub</b></p>
+		  <p><a href="https://github.com/jarnokoetsier/ArrayAnalysis" target="_blank">jarnokoetsier/ArrayAnalysis</a></p>
 	  </div>
   </div>
 </div>
