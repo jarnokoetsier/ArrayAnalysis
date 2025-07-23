@@ -17,7 +17,8 @@ layout: default
       <ul class="list-group list-group-flush">
     <li class="list-group-item"><a href = "{{ "/ExplainFigure/Geneboxplot" | relative_url}}">Gene Expression Boxplot</a></li>
     <li class="list-group-item"><a href = "{{ "/ExplainFigure/Sampleboxplot" | relative_url}}">Sample-wise Expression Boxplot</a></li>
-    <li class="list-group-item"><a href = "{{ "/ExplainFigure/Densityplot" | relative_url}}">Density plot</a></li>
+    <li class="list-group-item"><a href = "{{ "/ExplainFigure/Densityplot" | relative_url}}">Density Plot</a></li>
+    <li class="list-group-item"><a href = "{{ "/ExplainFigure/Readcount" | relative_url}}">Total Raw Read Counts</a></li>
     <li class="list-group-item"><a href = "{{ "/ExplainFigure/Sampleheatmap" | relative_url}}">Sample-Sample Correlation Heatmap</a></li>
     <li class="list-group-item"><a href = "{{ "/ExplainFigure/PCA" | relative_url}}">Principal Component Analysis (PCA)</a></li>
   </ul>
