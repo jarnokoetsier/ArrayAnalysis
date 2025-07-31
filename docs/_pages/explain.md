@@ -31,7 +31,7 @@ layout: default
     </div>
       <ul class="list-group list-group-flush">
     <li class="list-group-item"><a href = "{{ "/ExplainFigure/Toptable" | relative_url}}">Top Table</a></li>
-    <li class="list-group-item"><a href = "{{ "/ExplainFigure/Phistogram" | relative_url}}">P Value Histogram</a></li>
+    <li class="list-group-item"><a href = "{{ "/ExplainFigure/Phistogram" | relative_url}}">p-value Histogram</a></li>
     <li class="list-group-item"><a href = "{{ "/ExplainFigure/logFChistogram" | relative_url}}">log<sub>2</sub>FC Histogram</a></li>
     <li class="list-group-item"><a href = "{{ "/ExplainFigure/Volcanoplot" | relative_url}}">Volcano Plot</a></li>
     <li class="list-group-item"><a href = "{{ "/ExplainFigure/MAplot" | relative_url}}">MA Plot</a></li>
