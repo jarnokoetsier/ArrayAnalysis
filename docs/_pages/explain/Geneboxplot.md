@@ -1,6 +1,6 @@
 ---
 title: "Gene Expression Boxplot"
-permalink: /ExplainFigure/Geneboxplot
+permalink: /explain/Geneboxplot
 layout: default
 ---
 <br>

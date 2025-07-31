@@ -1,6 +1,6 @@
 ---
 title: "Network"
-permalink: /ExplainFigure/Network
+permalink: /explain/Network
 layout: default
 ---
 <br>

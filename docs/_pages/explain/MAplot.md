@@ -1,6 +1,6 @@
 ---
 title: "MA Plot"
-permalink: /ExplainFigure/MAplot
+permalink: /explain/MAplot
 layout: default
 ---
 <br>

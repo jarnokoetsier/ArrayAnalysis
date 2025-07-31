@@ -1,6 +1,6 @@
 ---
 title: "P Value Histogram"
-permalink: /ExplainFigure/Phistogram
+permalink: /explain/Phistogram
 layout: default
 ---
 <br>

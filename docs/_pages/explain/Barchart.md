@@ -1,6 +1,6 @@
 ---
 title: "Bar Chart"
-permalink: /ExplainFigure/Barchart
+permalink: /explain/Barchart
 layout: default
 ---
 <br>

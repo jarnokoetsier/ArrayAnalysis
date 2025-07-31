@@ -1,6 +1,6 @@
 ---
 title: "ORA Statistics Table"
-permalink: /ExplainFigure/ORAtable
+permalink: /explain/ORAtable
 layout: default
 ---
 <br>

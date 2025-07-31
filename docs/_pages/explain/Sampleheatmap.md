@@ -1,6 +1,6 @@
 ---
 title: "Sample-Sample Correlation Heatmap"
-permalink: /ExplainFigure/Sampleheatmap
+permalink: /explain/Sampleheatmap
 layout: default
 ---
 <br>

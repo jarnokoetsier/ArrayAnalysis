@@ -1,6 +1,6 @@
 ---
 title: "Density Plot"
-permalink: /ExplainFigure/Densityplot
+permalink: /explain/Densityplot
 layout: default
 ---
 <br>

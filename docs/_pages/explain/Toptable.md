@@ -1,6 +1,6 @@
 ---
 title: "Top Table"
-permalink: /ExplainFigure/Toptable
+permalink: /explain/Toptable
 layout: default
 ---
 <br>

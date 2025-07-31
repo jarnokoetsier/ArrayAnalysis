@@ -1,6 +1,6 @@
 ---
 title: "Raw Read Counts"
-permalink: /ExplainFigure/Readcount
+permalink: /explain/Readcount
 layout: default
 ---
 <br>

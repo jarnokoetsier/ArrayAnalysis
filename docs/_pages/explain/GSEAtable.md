@@ -1,6 +1,6 @@
 ---
 title: "GSEA Statistics Table"
-permalink: /ExplainFigure/GSEAtable
+permalink: /explain/GSEAtable
 layout: default
 ---
 <br>

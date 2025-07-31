@@ -1,6 +1,6 @@
 ---
 title: "logFC Histogram"
-permalink: /ExplainFigure/logFChistogram
+permalink: /explain/logFChistogram
 layout: default
 ---
 <br>

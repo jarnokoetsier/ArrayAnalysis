@@ -1,6 +1,6 @@
 ---
 title: "Sample-wise Expression Boxplot"
-permalink: /ExplainFigure/Sampleboxplot
+permalink: /explain/Sampleboxplot
 layout: default
 ---
 <br>

@@ -1,6 +1,6 @@
 ---
 title: "PCA"
-permalink: /ExplainFigure/PCA
+permalink: /explain/PCA
 layout: default
 ---
 <br>

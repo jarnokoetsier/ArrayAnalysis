@@ -1,6 +1,6 @@
 ---
 title: "Volcano Plot"
-permalink: /ExplainFigure/Volcanoplot
+permalink: /explain/Volcanoplot
 layout: default
 ---
 <br>
