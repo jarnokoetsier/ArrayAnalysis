@@ -1,0 +1,13 @@
+SampleID	Group	Genotype
+1COR1-1_S4	Corrected	ACTA2 +/+
+1COR1-2_S5	Corrected	ACTA2 +/+
+1COR1-3_S6	Corrected	ACTA2 +/+
+1HET-1_S9	Heterozygous	ACTA2 R179H/+
+1HET-2_S10	Heterozygous	ACTA2 R179H/+
+1HET-3_S11	Heterozygous	ACTA2 R179H/+
+1HOM-1_S12	Homozygous	ACTA2 R179H/R179H
+1HOM-2_S13	Homozygous	ACTA2 R179H/R179H
+1HOM-3_S14	Homozygous	ACTA2 R179H/R179H
+1WT-1_S1	Wildtype	ACTA2 +/+
+1WT-2_S2	Wildtype	ACTA2 +/+
+1WT-3_S3	Wildtype	ACTA2 +/+
