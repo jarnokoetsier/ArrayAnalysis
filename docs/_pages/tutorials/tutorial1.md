@@ -10,8 +10,9 @@ layout: default
 <div class="row">
 <div class="col-sm-12 px-3">
 <h1><b>Tutorial 1:</b> ACTA2-mutant iPSC-derived smooth muscle cells</h1>
+<br>
 <h3>Introduction</h3>
-<p><a href = "https://www.ncbi.nlm.nih.gov/pubmed/40378078">Ding <i>et al.</i> (GEO accession: GSE290426)</a> studied the transcriptomic profile of wildtype, heterozygous and homozygous ACTA2 (R179H) mutant, 
+<p><a href = "https://www.ncbi.nlm.nih.gov/pubmed/40378078">Ding <i>et al.</i></a> (GEO accession: GSE290426) studied the transcriptomic profile of wildtype, heterozygous and homozygous ACTA2 (R179H) mutant, 
 and CRISPR/Cas9-corrected iPSC-derived smooth muscle cells.
 To follow the tutorial, please download the <a href = "{{ '/assets/tutorials/tutorial1/CountTable_tutorial1.tsv' | relative_url }}">raw RNA-seq expression matrix</a> and the 
 <a href = "{{ '/assets/tutorials/tutorial1/Metadata_tutorial1.tsv' | relative_url }}">metadata</a> files.</p> 
@@ -42,7 +43,6 @@ In the next tab, upload the expression matrix and metadata files and click "Read
 <div class="col-sm-12 px-3">
 <h3>Pre-processing</h3>
 <p>Perform pre-processing with default settings (Remove samples: "keep all samples", Select experimental group: "Group", Filtering: "10").</p>
-<div class="jumbotron p-5 h-100 bg-white border">
  <img 
         src="{{ '/assets/tutorials/tutorial1/preprocessing.png' | relative_url }}"
         alt = "Pre-processing"
@@ -50,14 +50,13 @@ In the next tab, upload the expression matrix and metadata files and click "Read
         title="Pre-processing">
 </div>
 </div>
-</div>
-
 
 <br>
+
 <div class="row">
 <div class="col-sm-12 px-3">
-<div class="jumbotron p-5 h-100" style="text-align: justify">
-<p><br>Question:</b> are there outliers? Do the samples cluster as expected?</p>
+<div class="jumbotron p-5 h-100 bg-white border">
+<h4><b>Question 1:</b> Are there outliers? Do the samples cluster as expected?</h4>
 <details>
 <summary>Show answer</summary>
 <br>
@@ -68,6 +67,62 @@ In these plots, you can see that, compared to wildtype samples, heterozygous mut
         alt = "Sample clustering"
         style="width: 100%; border: none;" 
         title="Sample clustering">
+</details>
+</div>
+</div>
+</div>
+
+<br>
+
+<div class="row">
+<div class="col-sm-12 px-3">
+<h3>Differential gene expression analysis</h3>
+<p>Given the observation in the pre-processing step, we would like to identify genes that are differentially expressed between homozygous mutant and heterozygous mutant. 
+Select the comparison "Heterozygous - Homozygous". Furthermore, add gene symbols to the data, this will aid with the interpretation of the data:</p>
+ <img 
+        src="{{ '/assets/tutorials/tutorial1/geneannotation.png' | relative_url }}"
+        alt = "Gene annotation"
+        style="width: 100%; border: none;" 
+        title="Gene annotation">
+</div>
+</div>
+
+<br>
+
+<div class="row">
+<div class="col-sm-12 px-3">
+<div class="jumbotron p-5 h-100 bg-white border">
+<h4><b>Question 2:</b>How many genes are downregulated (adj. p-value &lt; 0.05 and log<sub>2</sub>FC &lt; 1) in heterozygous versus homozygous samples?</h4>
+<details>
+<summary>Show answer</summary>
+<br>
+<p>In the <i>Summary</i> tab you can calculate how many genes are up and downregulated for different p-value and log<sub>2</sub>FC thresholds. 
+Here you can see that 1057 genes are downregulated.</p>
+ <img 
+        src="{{ '/assets/tutorials/tutorial1/downregulatedgenes.png' | relative_url }}"
+        alt = "Downregulated genes"
+        style="width: 100%; border: none;" 
+        title="Downregulated genes">
+</details>
+</div>
+</div>
+</div>
+
+<br>
+
+<div class="row">
+<div class="col-sm-12 px-3">
+<div class="jumbotron p-5 h-100 bg-white border">
+<h4><b>Question 3:</b> Does <i>MMP9</i> have more deviating expression levels in homozygous or heterozygous mutant samples?</h4>
+<details>
+<summary>Show answer</summary>
+<br>
+<p>You can look up <i>MMP9</i> in the Top table. In the boxplots, you can see that <i>MMP9</i> is stronger upregulated in heterozygous mutant samples.</p>
+ <img 
+        src="{{ '/assets/tutorials/tutorial1/MMP9.png' | relative_url }}"
+        alt = "MMP9"
+        style="width: 100%; border: none;" 
+        title="MMP9">
 </details>
 </div>
 </div>
