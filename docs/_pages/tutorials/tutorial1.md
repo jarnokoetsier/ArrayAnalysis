@@ -163,7 +163,7 @@ Here you can see that 1057 genes are downregulated.</p>
 <div class="row">
 <div class="col-sm-12 px-3">
 <div class="jumbotron p-5 h-100 bg-white border">
-<h4><b>Question 3:</b> Wich biological processes are downregulated in heterozygous mutant versus homozygous mutant?</h4>
+<h4><b>Question 4:</b> Wich biological processes are downregulated in heterozygous mutant versus homozygous mutant?</h4>
 <details>
 <summary>Show answer</summary>
 <br>
