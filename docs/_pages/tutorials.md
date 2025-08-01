@@ -22,7 +22,8 @@ Get started by choosing one of the tutorials below!</p>
 		  <h3><b>ACTA2-mutant smooth muscle cells</b></h3>
 		  <p>Follow this tutorial to re-analyze RNA sequencing data from ACTA2-mutant iPSC-derived smooth muscle cells 
 		  (<a href = "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE290426" target = "_blank">GSE290426</a>).</p>
-		  <p class="lead">RNA-seq | iPSC | Vascular smooth muscle | Aneurysm</p>
+		  <br>
+		  <p><b>Keywords:</b> RNA-seq; iPSC; Vascular smooth muscle; Aneurysm</p>
 		  <p><a class="btn btn-outline-dark btn-lg my-3" href="{{ "/tutorials/tutorial1" | relative_url}}" role="button">Follow tutorial</a></p>
 	  </div>
   </div>

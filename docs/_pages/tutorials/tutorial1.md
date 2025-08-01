@@ -30,7 +30,7 @@ The ACTA2 R179H mutation causes multisystemic smooth muscle dysfunction syndrome
 In the next tab, upload the expression matrix and metadata files and click "Read data".</p>
 
 <details>
-<summary>Help</summary>
+<summary>Click here for help</summary>
 <br>
  <img 
         src="{{ '/assets/tutorials/tutorial1/upload.png' | relative_url }}"
@@ -38,7 +38,7 @@ In the next tab, upload the expression matrix and metadata files and click "Read
         style="width: 100%; border: none;" 
         title="Data upload">
 </details>
-        
+<br>        
 <p>After uploading the data, you can see the metadata and a preview of the count table. In the metadata, you can see that there are four experimental groups: 
 <b>Wildtype</b> (2x wildtype ACTA2 allele), <b>Homozygous</b> (2x mutant ACTA2 allele), <b>Heterozygous</b> (mutant/wildtype ACTA2 allele), and <b>Corrected</b> (ACTA2 mutation corrected by CRISPR/Cas9).</p>
 </div>
@@ -53,7 +53,7 @@ In the next tab, upload the expression matrix and metadata files and click "Read
 <h3>Pre-processing</h3>
 <p>Perform pre-processing with default settings (Remove samples: "keep all samples", Select experimental group: "Group", Filtering: "10").</p>
 <details>
-<summary>Help</summary>
+<summary>Click here for help</summary>
 <br>
  <img 
         src="{{ '/assets/tutorials/tutorial1/preprocessing.png' | relative_url }}"
@@ -95,7 +95,7 @@ In these plots, you can see that, compared to wildtype samples, heterozygous mut
 <p>Given the observation in the pre-processing step, we would like to identify genes that are differentially expressed between homozygous mutant and heterozygous mutant. 
 Select the comparison "Heterozygous - Homozygous". Furthermore, add gene symbols to the data, this will aid with the interpretation of the data.</p>
 <details>
-<summary>Help</summary>
+<summary>Click here for help</summary>
 <br>
  <img 
         src="{{ '/assets/tutorials/tutorial1/geneannotation.png' | relative_url }}"
