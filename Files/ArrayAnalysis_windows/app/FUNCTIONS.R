@@ -16,7 +16,8 @@
 
 firstup <- function(x) {
   substr(x, 1, 1) <- toupper(substr(x, 1, 1))
-  x
+  x <- str_replace(str_replace(str_replace(x,"MRNA", "mRNA"), "NcRNA", "ncRNA"), "RRNA", "rRNA")
+  return(x)
 }
 
 #==============================================================================#
@@ -673,6 +674,7 @@ geneBoxplot <- function(experimentFactor,
   if(is.null(groupOrder)){groupOrder <- levels(experimentFactor)}
   if(is.null(legendColors)){legendColors <- colorsByFactor(experimentFactor)$legendColors}
   if(is.null(jitter)){jitter <- 0.1}
+  if(is.null(sel_row)){sel_row <- 1}
   plotExpr <- data.frame(
     logExpr = as.numeric(normMatrix[sel_row,]),
     Grouping = factor(experimentFactor, levels = groupOrder)
@@ -791,14 +793,14 @@ getBoxplots <- function(experimentFactor,
   
   if (!isTRUE(RNASeq)){
     tmain <- " "
-    tmtext2 <- "Normalized log intensity\n\n\n"
+    tmtext2 <- expression("Normalized "~log[2]~"intensity")
     description <- NULL
     samples <- sampleNames(normData)
   }
   if (isTRUE(RNASeq)){
     tmain <- NULL
     description <- NULL
-    tmtext2 <- "Normalized log counts\n\n\n"
+    tmtext2 <- expression("Normalized "~log[2]~"counts")
     samples <- colnames(normData)
   }
   
@@ -831,7 +833,7 @@ getBoxplots <- function(experimentFactor,
     axis(1,at=1:length(samples),las=2,
          labels=samples, cex.axis=cexval)
     axis(2, cex.axis=0.7)
-    mtext(tmtext2, side=2, cex=0.8)
+    mtext(tmtext2, side = 2, cex=0.8, line = 2)
     mtext(description, side=3,
           font=1, cex=0.7)
     dev.off()
@@ -868,7 +870,7 @@ getBoxplots <- function(experimentFactor,
     axis(1,at=1:length(samples),las=2,
          labels=samples, cex.axis=cexval)
     axis(2, cex.axis=0.7)
-    mtext(tmtext2, side=2, cex=0.8)
+    mtext(tmtext2, side = 2, cex=0.8, line = 2)
     mtext(description, side=3,
           font=1, cex=0.7)
     dev.off()
@@ -930,13 +932,13 @@ getBoxplots_download <- function(experimentFactor,
   
   if (!isTRUE(RNASeq)){
     tmain <- "Boxplot of normalized intensities"
-    tmtext2 <- "Normalized log intensity\n\n\n"
+    tmtext2 <- expression("Normalized "~log[2]~"intensity")
     description <- "Distributions should be comparable between arrays\n"
     samples <- sampleNames(normData)
   }
   if (isTRUE(RNASeq)){
     tmain <- "Boxplot of normalized counts"
-    tmtext2 <- "Normalized log counts\n\n\n"
+    tmtext2 <- expression("Normalized "~log[2]~"counts")
     description <- "Distributions should be comparable between samples\n"
     samples <- colnames(normData)
   }
@@ -966,7 +968,8 @@ getBoxplots_download <- function(experimentFactor,
     axis(1,at=1:length(samples),las=2,
          labels=samples, cex.axis=cexval)
     axis(2, cex.axis=0.7)
-    mtext(tmtext2, side=2, cex=0.8)
+    #mtext(tmtext2, side=2, cex=0.8)
+    mtext(tmtext2, side = 2, cex=0.8, line = 2)
     mtext(description, side=3,
           font=1, cex=0.7)
     #dev.off()
@@ -1112,13 +1115,101 @@ getDensityplots_static <- function(experimentFactor, legendColors,
                    axis.text.y = ggplot2::element_blank(),
                    axis.ticks.y = ggplot2::element_blank(),
                    legend.title = ggplot2::element_blank()) +
-    ggplot2::guides(shape=guide_legend(title="Group",
+    ggplot2::guides(shape=ggplot2::guide_legend(title="Group",
                                        override.aes = list(
                                          colour = legendColors)),
                     colour = "none")
   
   return(densityPlot)
   
+}
+
+
+#==============================================================================#
+# getReadCount()
+#==============================================================================#
+
+# DESCRIPTION:
+# Make static boxplots
+
+# VARIABLES:
+# experimentFactor: factor with experimental groups (will be used for colouring)
+# normData: normalized expression data (ExpressionSet)
+
+getReadCount <- function(experimentFactor, 
+                        legendColors,
+                        gxData_fil, 
+                        report = FALSE){
+  
+  plotColors <- colorsByFactor(experimentFactor)$plotColors
+  names(legendColors) <- levels(experimentFactor)
+  
+  for (i in 1:length(legendColors)){
+    group_length <- sum(experimentFactor == levels(experimentFactor)[i])
+    if (group_length > 1){
+      colors <-  c(colorspace::lighten(legendColors[i], amount = rev(seq(0,0.5,length.out = round(group_length/2)))),
+                   colorspace::darken(legendColors[i], amount = seq(0,0.5,length.out = group_length - round(group_length/2)+1)[-1])
+      )
+    } else{
+      colors <- legendColors[i]
+    }
+    
+    plotColors[experimentFactor == levels(experimentFactor)[i]] <- colors
+  }
+  
+    names(plotColors) <- colnames(gxData_fil)
+  
+    
+    plotDF <- data.frame(SampleID = colnames(gxData_fil),
+                         ExperimentFactor = experimentFactor,
+                         Count = colSums(gxData_fil))
+    
+    if (report){
+      p <- ggplot2::ggplot() +
+        ggplot2::geom_bar(data = plotDF, ggplot2::aes(x = SampleID, y = Count/1000000, fill = SampleID),
+                          stat = "identity", position = ggplot2::position_dodge()) +
+        ggplot2::geom_point(data = plotDF, ggplot2::aes(x = SampleID, y = -1*Count/1000000, color = ExperimentFactor),
+                            shape = 15, size = 8) +
+        ggplot2::labs(x = NULL, y = "# raw counts (millions)") +
+        ggplot2::theme_minimal() +
+        ggplot2::scale_fill_manual(values = plotColors) +
+        ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, hjust = 1,
+                                                           size = 10),
+                       axis.text.y = element_text(size = 10),
+                       axis.title.y = element_text(size = 11.5),
+                       legend.title = ggplot2::element_text(size = 11.5),
+                       legend.text = ggplot2::element_text(size = 10)) +
+        ggplot2::coord_cartesian(ylim = c(0, max(plotDF$Count)/1000000)) +
+        ggplot2::guides(color=ggplot2::guide_legend(title=" ",
+                                                    override.aes = list(
+                                                      colour = legendColors)),
+                        alpha = "none",
+                        fill = "none")
+    }else{
+      p <- ggplot2::ggplot() +
+        ggplot2::geom_bar(data = plotDF, ggplot2::aes(x = SampleID, y = Count/1000000, fill = SampleID),
+                          stat = "identity", position = ggplot2::position_dodge()) +
+        ggplot2::geom_point(data = plotDF, ggplot2::aes(x = SampleID, y = -1*Count/1000000, color = ExperimentFactor),
+                            shape = 15, size = 8) +
+        ggplot2::labs(x = NULL, y = "# raw counts (millions)") +
+        ggplot2::theme_minimal() +
+        ggplot2::scale_fill_manual(values = plotColors) +
+        ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, hjust = 1,
+                                                           size = 20),
+                       axis.text.y = element_text(size = 20),
+                       axis.title.y = element_text(size = 23),
+                       legend.title = ggplot2::element_text(size = 23),
+                       legend.text = ggplot2::element_text(size = 20)) +
+        ggplot2::coord_cartesian(ylim = c(0, max(plotDF$Count)/1000000)) +
+        ggplot2::guides(color=ggplot2::guide_legend(title=" ",
+                                                    override.aes = list(
+                                                      colour = legendColors)),
+                        alpha = "none",
+                        fill = "none")
+    }
+
+
+  return(p)
 }
 
 #==============================================================================#
@@ -1502,7 +1593,7 @@ plot_PCA <- function(PC_data, colorFactor, legendColors, xpc = 1, ypc = 2, zpc =
 # Make interactive PCA plot
 
 # VARIABLES:
-# PCA_data: PCA object retrieved from the prcomp function
+# PC_data: PCA object retrieved from the prcomp function
 # colorFactor: A factor the color the samples in the plot
 # xpc: Principal component on horizontal axis
 # ypc: Principal component on vertical axis
@@ -1563,6 +1654,40 @@ plot_PCA_static <- function(PC_data, colorFactor, legendColors, xpc = 1, ypc = 2
   return(p)
 }
 
+#==============================================================================#
+# outlierDetect()
+#==============================================================================#
+
+# DESCRIPTION:
+# Function to detect outliers
+
+# VARIABLES:
+# PC_data: PCA object retrieved from the prcomp function
+# PC_threshold: minimum variance explained by PC used for outlier detection
+
+outlierDetect <- function(PC_data, PC_threshold = 0.1){
+  
+  # Get percentage explained
+  perc_expl <- ((PC_data$sdev^2)/sum(PC_data$sdev^2))
+  
+  
+  nPCs <- max(which(perc_expl > PC_threshold))
+  
+  outlier <- NULL
+  for (i in 1:nPCs){
+    x <- PC_data$x[,i]
+    if(sum((abs(x - median(x))/mad(x))>6)>0){
+      outlier <- c(outlier,rownames(PC_data$x)[which((abs(x - median(x))/mad(x))>6)])
+    }
+  }
+  outlier <- unique(outlier)
+  
+  if (length(outlier) > 0){
+    return(outlier)
+  } else{
+    return(NA)
+  }
+}
 #==============================================================================#
 # makeComparisons()
 #==============================================================================#
@@ -1737,7 +1862,7 @@ getStatistics <- function(normMatrix,
                                     "p-value", "adj. p-value")
     }
     message <- "Statistical analysis has been performed. 
-    You can download the results as well as view them in interactive plots."
+    You can download the results and view them in interactive plots."
     
     # Add annotations to table if this option is selected
     if (addAnnotation == TRUE){
@@ -1779,7 +1904,7 @@ getStatistics <- function(normMatrix,
           
           message <- "Statistical analysis has been performed. 
           Gene annotation was performed with biomaRt. You can download 
-              the results as well as view them in interactive plots."
+              the results and view them in interactive plots."
           dataset <- paste0(biomart_dataset, " (", searchDatasets(mart = ensembl, pattern = "hsapiens")$version, ")")
           list(annotations, message, dataset)
         },
@@ -1844,7 +1969,7 @@ getStatistics <- function(normMatrix,
           message <- "Statistical analysis has been performed. 
           The Ensembl database was not available.
           So, the gene annotation was performed with the bioconductor annotation package. 
-          You can download the results as well as view them in interactive plots."
+          You can download the results and view them in interactive plots."
           dataset <- paste0(pkg, " (", packageVersion(pkg),")")
           list(annotations, message, dataset)
         })
@@ -1961,8 +2086,8 @@ makePHistogram <- function(P, color = "#d3d3d3", bins = 100, static = FALSE){
   # Make plot
   p <- ggplot2::ggplot(data = plotDF, ggplot2::aes(x = Value)) +
     ggplot2::geom_histogram(bins = bins, colour = color_edge, fill = color) +
-    ggplot2::labs(title = "P value histogram") +
-    ggplot2::xlab("P value") +
+    ggplot2::labs(title = "p-value histogram") +
+    ggplot2::xlab("p-value") +
     ggplot2::ylab("Count") +
     ggplot2::theme_classic() +
     ggplot2::theme(plot.title = ggplot2::element_text(face = "bold", hjust = 0.5))
@@ -2100,7 +2225,7 @@ makeVolcano <- function(top_table,
         name = "Upregulated"
       )%>%
       layout(xaxis = list(title = 'log<sub>2</sub>FC'), 
-             yaxis = list(title = '-log<sub>10</sub> P value'),
+             yaxis = list(title = '-log<sub>10</sub> p-value'),
              shapes = list(vline(logFC_threshold), 
                            vline(-1*logFC_threshold),
                            hline(-log10(p_threshold))),
@@ -2154,7 +2279,7 @@ makeVolcano <- function(top_table,
         name = "Upregulated"
       )%>%
       layout(xaxis = list(title = 'log<sub>2</sub>FC'), 
-             yaxis = list(title = '-log<sub>10</sub> adj. P value'),
+             yaxis = list(title = '-log<sub>10</sub> adj. p-value'),
              shapes = list(vline(logFC_threshold), 
                            vline(-1*logFC_threshold),
                            hline(-log10(p_threshold))),
@@ -2204,6 +2329,7 @@ makeVolcano_static <- function(top_table,
                        Pvalue = top_table[,"p-value"],
                        logP = -log10(top_table[,"p-value"]),
                        adjPvalue = top_table[,"adj. p-value"],
+                       logAdjP = -log10(top_table[,"p-value"]),
                        GeneID = top_table[,"GeneID"])
   
   
@@ -2226,7 +2352,7 @@ makeVolcano_static <- function(top_table,
       ggplot2::scale_color_manual(values = setNames(c(unchanged_color, down_color, up_color),
                                            c("Unchanged", "Downregulated", "Upregulated"))) +
       ggplot2::xlab(expression(log[2]~"FC")) +
-      ggplot2::ylab(expression(-log[10]~"P value")) +
+      ggplot2::ylab(expression(-log[10]~"p-value")) +
       ggplot2::labs(color = NULL) +
       ggplot2::theme_minimal()
     
@@ -2241,18 +2367,18 @@ makeVolcano_static <- function(top_table,
     
     volcano <- ggplot2::ggplot() +
       ggplot2:: geom_point(data = plotDF[plotDF$Colour == "unchanged",],
-                           ggplot2::aes(x = log2FC, y = logP, color = "Unchanged")) +
+                           ggplot2::aes(x = log2FC, y = logAdjP, color = "Unchanged")) +
       ggplot2::geom_point(data = plotDF[plotDF$Colour == "downregulated",],
-                          ggplot2::aes(x = log2FC, y = logP, color = "Downregulated")) +
+                          ggplot2::aes(x = log2FC, y = logAdjP, color = "Downregulated")) +
       ggplot2::geom_point(data = plotDF[plotDF$Colour == "upregulated",],
-                          ggplot2::aes(x = log2FC, y = logP, color = "Upregulated")) +
+                          ggplot2::aes(x = log2FC, y = logAdjP, color = "Upregulated")) +
       ggplot2::geom_hline(yintercept = -log10(p_threshold), linetype = "dashed", color = "lightgrey") +
       ggplot2::geom_vline(xintercept = -1*logFC_threshold, linetype = "dashed", color = "lightgrey") +
       ggplot2::geom_vline(xintercept = logFC_threshold, linetype = "dashed", color = "lightgrey") +
       ggplot2::scale_color_manual(values = setNames(c(unchanged_color, down_color, up_color),
                                                     c("Unchanged", "Downregulated", "Upregulated"))) +
       ggplot2::xlab(expression(log[2]~"FC")) +
-      ggplot2::ylab(expression(-log[10]~"P value")) +
+      ggplot2::ylab(expression(-log[10]~"p-value")) +
       ggplot2::labs(color = NULL) +
       ggplot2::theme_minimal()
     
@@ -2726,7 +2852,7 @@ ORA <- function(top_table,
           keyType = geneID_type,
           ont = "BP",
           pvalueCutoff = Inf,
-          pAdjustMethod = "fdr",
+          pAdjustMethod = "BH",
           universe = universe,
           qvalueCutoff = Inf,
           minGSSize = 10,
@@ -2744,7 +2870,7 @@ ORA <- function(top_table,
           keyType = geneID_type,
           ont = "MF",
           pvalueCutoff = Inf,
-          pAdjustMethod = "fdr",
+          pAdjustMethod = "BH",
           universe = universe,
           qvalueCutoff = Inf,
           minGSSize = 10,
@@ -2762,7 +2888,7 @@ ORA <- function(top_table,
           keyType = geneID_type,
           ont = "CC",
           pvalueCutoff = Inf,
-          pAdjustMethod = "fdr",
+          pAdjustMethod = "BH",
           universe = universe,
           qvalueCutoff = Inf,
           minGSSize = 10,
@@ -2791,7 +2917,7 @@ ORA <- function(top_table,
         ORA_data <- clusterProfiler::enricher(
           gene = geneList,
           pvalueCutoff = Inf,
-          pAdjustMethod = "fdr",
+          pAdjustMethod = "BH",
           universe = universe,
           minGSSize = 10,
           maxGSSize = 500,
@@ -2827,7 +2953,7 @@ ORA <- function(top_table,
         ORA_data <- clusterProfiler::enricher(
           gene = geneList,
           pvalueCutoff = Inf,
-          pAdjustMethod = "fdr",
+          pAdjustMethod = "BH",
           universe = universe,
           minGSSize = 10,
           maxGSSize = 500,
@@ -2858,9 +2984,11 @@ ORA <- function(top_table,
     
     ORA_data@result <- arrange(output, by = `p-value`)
     
-    return(ORA_data)
+    return(list(data = ORA_data,
+                error = FALSE))
   }, error = function(cond){
-    NULL
+    list(data = NULL,
+         error = TRUE)
   })
 }
 
@@ -2978,7 +3106,7 @@ performGSEA <- function(top_table,
           keyType = geneID_type,
           ont = "BP",
           pvalueCutoff = Inf,
-          pAdjustMethod = "fdr",
+          pAdjustMethod = "BH",
           minGSSize = 10,
           maxGSSize = 500
         )
@@ -2993,7 +3121,7 @@ performGSEA <- function(top_table,
           keyType = geneID_type,
           ont = "MF",
           pvalueCutoff = Inf,
-          pAdjustMethod = "fdr",
+          pAdjustMethod = "BH",
           minGSSize = 10,
           maxGSSize = 500
         )
@@ -3008,7 +3136,7 @@ performGSEA <- function(top_table,
           keyType = geneID_type,
           ont = "CC",
           pvalueCutoff = Inf,
-          pAdjustMethod = "fdr",
+          pAdjustMethod = "BH",
           minGSSize = 10,
           maxGSSize = 500
         )
@@ -3034,7 +3162,7 @@ performGSEA <- function(top_table,
           minGSSize = 10,
           maxGSSize = 500,
           pvalueCutoff = Inf,
-          pAdjustMethod = "fdr",
+          pAdjustMethod = "BH",
           TERM2GENE = path2gene,
           TERM2NAME = path2name
         )
@@ -3044,6 +3172,11 @@ performGSEA <- function(top_table,
       
       # KEGG
       if (geneset == "KEGG"){
+        
+        gmt_KEGG <- AnnotationDbi::select(BiocGenerics::get(pkg), 
+                                          columns = c(geneID_type, "PATH"), 
+                                          keys = AnnotationDbi::keys(BiocGenerics::get(pkg)))
+        gmt_KEGG <- gmt_KEGG[!is.na(gmt_KEGG$PATH),]
         
         # Get correct organism name
         KEGG_org <- switch(organism,
@@ -3062,14 +3195,15 @@ performGSEA <- function(top_table,
         path2name <- read.table(url(paste0("https://rest.kegg.jp/list/pathway/", KEGG_org)), sep = "\t")
         colnames(path2name) <- c("path", "name")
         
+        
         # Perform GSEA
         set.seed(123)
-        GSEA_data <- GSEA(
+        GSEA_data <- clusterProfiler::GSEA(
           geneList = gsea_input,
           minGSSize = 10,
           maxGSSize = 500,
           pvalueCutoff = Inf,
-          pAdjustMethod = "fdr",
+          pAdjustMethod = "BH",
           TERM2GENE = path2gene,
           TERM2NAME = path2name
         )
@@ -3096,9 +3230,11 @@ performGSEA <- function(top_table,
     GSEA_data@result <- arrange(output, by = `p-value`)
     
     # Return output
-    return(GSEA_data)
+    return(list(data = GSEA_data,
+                error = FALSE))
   }, error = function(cond){
-    NULL
+    list(data = NULL,
+         error = TRUE)
   })
 }
 
@@ -3210,6 +3346,7 @@ makeORAplot <- function(ORA_data, nSets, color = "Viridis", static = FALSE){
   
   # Retrieve data from ORA object and make a data frame
   plotDF <- ORA_data@result
+  plotDF$nSig <- unlist(lapply(stringr::str_split(plotDF$GeneRatio, "/"), function(x) as.numeric(x[1])))
   plotDF$Name <- paste0(firstup(plotDF$Description), " (", plotDF$ID, ")")
   plotDF$Name <- factor(plotDF$Name, levels = rev(plotDF$Name))
   
@@ -3223,16 +3360,17 @@ makeORAplot <- function(ORA_data, nSets, color = "Viridis", static = FALSE){
                                                   "FDR-adj. p-value: ", `adj. p-value`, "\n"))) +
     ggplot2::geom_bar(ggplot2::aes(x = -log10(`p-value`), 
                                    y = Name, 
-                                   fill = -log10(`p-value`)),
+                                   fill = nSig),
                       position = ggplot2::position_dodge(), 
                       stat = "identity", 
                       color = "black",
                       size = 0.5) +
     ggplot2::xlab(expression(-log[10]~"p-value")) +
     ggplot2::ylab(NULL) +
+    ggplot2::labs(fill = "Significant\ngenes") +
     ggplot2::theme_minimal() +
     gradient +
-    ggplot2::theme(legend.position = "none")
+    ggplot2::theme(legend.position = "right")
   
   
   if (static){
@@ -3768,7 +3906,7 @@ getStatistics_RNASeq <- function(rawMatrix,
   }
   
   message <- "Statistical analysis has been performed. 
-    You can download the results as well as view them in interactive plots."
+    You can download the results and view them in interactive plots."
   
   # Add annotations to table if this option is selected
   if (addAnnotation == TRUE){
@@ -3810,7 +3948,7 @@ getStatistics_RNASeq <- function(rawMatrix,
         
         message <- "Statistical analysis has been performed. 
           Gene annotation was performed with biomaRt. You can download 
-              the results as well as view them in interactive plots."
+              the results and view them in interactive plots."
         dataset <- paste0(biomart_dataset, " (", searchDatasets(mart = ensembl, pattern = "hsapiens")$version, ")")
         list(annotations, message, dataset)
       },
@@ -3875,7 +4013,7 @@ getStatistics_RNASeq <- function(rawMatrix,
         message <- "Statistical analysis has been performed. 
           The Ensembl database was not available.
           So, the gene annotation was performed with the bioconductor annotation package. 
-          You can download the results as well as view them in interactive plots."
+          You can download the results and view them in interactive plots."
         dataset <- paste0(pkg, " (", packageVersion(pkg),")")
         list(annotations, message, dataset)
       })
@@ -4044,7 +4182,7 @@ getStatistics_RNASeq_processed <- function(normMatrix,
                                     "p-value", "adj. p-value")
     }
     message <- "Statistical analysis has been performed. 
-    You can download the results as well as view them in interactive plots."
+    You can download the results and view them in interactive plots."
     
     # Add annotations to table if this option is selected
     if (addAnnotation == TRUE){
@@ -4086,7 +4224,7 @@ getStatistics_RNASeq_processed <- function(normMatrix,
           
           message <- "Statistical analysis has been performed. 
           Gene annotation was performed with biomaRt. You can download 
-              the results as well as view them in interactive plots."
+              the results and view them in interactive plots."
           dataset <- paste0(biomart_dataset, " (", searchDatasets(mart = ensembl, pattern = "hsapiens")$version, ")")
           list(annotations, message, dataset)
         },
@@ -4151,7 +4289,7 @@ getStatistics_RNASeq_processed <- function(normMatrix,
           message <- "Statistical analysis has been performed. 
           The Ensembl database was not available.
           So, the gene annotation was performed with the bioconductor annotation package. 
-          You can download the results as well as view them in interactive plots."
+          You can download the results and view them in interactive plots."
           dataset <- paste0(pkg, " (", packageVersion(pkg),")")
           list(annotations, message, dataset)
         })

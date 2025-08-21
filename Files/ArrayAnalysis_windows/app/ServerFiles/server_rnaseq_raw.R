@@ -2,8 +2,34 @@ observe({
   # Make list for reactive values
   rv <- reactiveValues()
   
-  # Download session info
-  output$downloadSessionInfo_rnaseq_raw <- downloadHandler(
+  # Download session info:
+  
+  # QC
+  output$downloadSessionInfo_QC_rnaseq_raw <- downloadHandler(
+    filename = "sessionInfo.txt",
+    content = function(file){
+      writeLines(capture.output(sessionInfo()), file)
+    }
+  )
+  
+  # Statistical analysis
+  output$downloadSessionInfo_SA_rnaseq_raw <- downloadHandler(
+    filename = "sessionInfo.txt",
+    content = function(file){
+      writeLines(capture.output(sessionInfo()), file)
+    }
+  )
+  
+  # ORA
+  output$downloadSessionInfo_ORA_rnaseq_raw <- downloadHandler(
+    filename = "sessionInfo.txt",
+    content = function(file){
+      writeLines(capture.output(sessionInfo()), file)
+    }
+  )
+  
+  # GSEA
+  output$downloadSessionInfo_GSEA_rnaseq_raw <- downloadHandler(
     filename = "sessionInfo.txt",
     content = function(file){
       writeLines(capture.output(sessionInfo()), file)
@@ -45,7 +71,6 @@ observe({
     hideTab("navbar", target = "panel_preprocessing_microarray_norm")
     hideTab("navbar", target = "panel_statistics_microarray_norm")
     hideTab("navbar", target = "panel_ORA_microarray_norm")
-    
     
     # Go to microarray tab
     updateNavbarPage(session, "navbar",
@@ -193,8 +218,30 @@ observe({
         # Remove modal
         shinybusy::remove_modal_spinner()
         
-        # Show RNA-seq upload tab
+        # Show pre-processing tab
         showTab("navbar", target = "panel_preprocessing_rnaseq_raw")
+        
+        # Remove the other RNA-seq (raw) tabs
+        hideTab("navbar", target = "panel_statistics_rnaseq_raw" )
+        hideTab("navbar", target = "panel_ORA_rnaseq_raw")
+        
+        # Remove the other RNA-seq (norm) tabs
+        hideTab("navbar", target = "panel_upload_rnaseq_norm")
+        hideTab("navbar", target = "panel_preprocessing_rnaseq_norm")
+        hideTab("navbar", target = "panel_statistics_rnaseq_norm")
+        hideTab("navbar", target = "panel_ORA_rnaseq_norm")
+        
+        # Remove the other microarray (raw) tabs
+        hideTab("navbar", target = "panel_upload_microarray_raw")
+        hideTab("navbar", target = "panel_preprocessing_microarray_raw")
+        hideTab("navbar", target = "panel_statistics_microarray_raw" )
+        hideTab("navbar", target = "panel_ORA_microarray_raw")
+        
+        # Remove the other microarray (norm) tabs
+        hideTab("navbar", target = "panel_upload_microarray_norm")
+        hideTab("navbar", target = "panel_preprocessing_microarray_norm")
+        hideTab("navbar", target = "panel_statistics_microarray_norm")
+        hideTab("navbar", target = "panel_ORA_microarray_norm")
         
         # Show message
         if (nrow(rv$metaData) >= ncol(rv$gxData)){
@@ -326,8 +373,30 @@ observe({
         # Remove modal
         shinybusy::remove_modal_spinner()
         
-        # Show RNA-seq upload tab
+        # Show pre-processing tab
         showTab("navbar", target = "panel_preprocessing_rnaseq_raw")
+        
+        # Remove the other RNA-seq (raw) tabs
+        hideTab("navbar", target = "panel_statistics_rnaseq_raw" )
+        hideTab("navbar", target = "panel_ORA_rnaseq_raw")
+        
+        # Remove the other RNA-seq (norm) tabs
+        hideTab("navbar", target = "panel_upload_rnaseq_norm")
+        hideTab("navbar", target = "panel_preprocessing_rnaseq_norm")
+        hideTab("navbar", target = "panel_statistics_rnaseq_norm")
+        hideTab("navbar", target = "panel_ORA_rnaseq_norm")
+        
+        # Remove the other microarray (raw) tabs
+        hideTab("navbar", target = "panel_upload_microarray_raw")
+        hideTab("navbar", target = "panel_preprocessing_microarray_raw")
+        hideTab("navbar", target = "panel_statistics_microarray_raw" )
+        hideTab("navbar", target = "panel_ORA_microarray_raw")
+        
+        # Remove the other microarray (norm) tabs
+        hideTab("navbar", target = "panel_upload_microarray_norm")
+        hideTab("navbar", target = "panel_preprocessing_microarray_norm")
+        hideTab("navbar", target = "panel_statistics_microarray_norm")
+        hideTab("navbar", target = "panel_ORA_microarray_norm")
         
         # Show message
         if (nrow(rv$metaData) >= ncol(rv$gxData)){
@@ -500,6 +569,13 @@ observe({
                    rv$filterThreshold
       )
     )
+    
+    #Perform PCA
+    rv$PCA_data <- prcomp(t(rv$normData_vst[apply(rv$normData_vst, 1, var) != 0,]),
+                          retx = TRUE, 
+                          center = TRUE,
+                          scale.= TRUE)
+    
     #======================#
     # Make QC plots/tables
     #======================#
@@ -510,20 +586,39 @@ observe({
     
     # Print expression table
     output$exprTable_rnaseq_raw <- DT::renderDataTable({
+      req(rv$PCA_data)
+      
+      # Get suggested outliers
+      rv$suggestedOutliers <- outlierDetect(rv$PCA_data)
       
       # Remove modal
       shinybusy::remove_modal_spinner()
       
       # Show message
-      shinyWidgets::sendSweetAlert(
-        session = session,
-        title = "Info",
-        text = "The data has been pre-processed. Please check the different 
+      if (is.na(rv$suggestedOutliers[1])){
+        shinyWidgets::sendSweetAlert(
+          session = session,
+          title = "Info",
+          text = "The data has been pre-processed. Please check the different 
               QC plots on this page to assess the pre-processing quality.",
-        type = "info")
+          type = "info")
+      } else{
+        shinyWidgets::sendSweetAlert(
+          session = session,
+          title = "Warning",
+          text = HTML(paste0("<p>The data has been pre-processed, but the following sample(s) 
+          might be outliers:</p><br><p><b>", paste(rv$suggestedOutliers, collapse = ", "),
+                             "</b></p><br><p>Please review the QC plots on this page to assess the pre-processing quality 
+          and determine whether these outliers should be removed.</p>")),
+          type = "warning",
+          html = TRUE)
+      }
+      
+      
       
       # Show microarray statistics tab
       showTab("navbar", target = "panel_statistics_rnaseq_raw")
+      hideTab("navbar", target = "panel_ORA_rnaseq_raw")
       
       output <- rv$normData
       return(output)
@@ -618,7 +713,7 @@ observe({
         size = "m",
         footer = tagList(
           fluidRow(
-            column(6,align = "left",
+            column(12,align = "left",
                    shinyWidgets::prettyRadioButtons(
                      inputId = "geneboxplot_file_rnaseq_raw",
                      label = NULL,
@@ -658,33 +753,6 @@ observe({
     #********************************************************************#
     # Output 2: Boxplots
     #********************************************************************#
-    
-    # Boxplots of all genes together
-    output$boxplots_rnaseq_raw <- renderImage({
-      req(session$clientData$output_boxplots_rnaseq_raw_width)
-      req(session$clientData$output_boxplots_rnaseq_raw_height)
-      
-      if (length(levels(rv$experimentFactor)) > 5){
-        legendColors <- colorsByFactor(rv$experimentFactor)$legendColors
-      } else{
-        legendColors <- c(input$boxplots_col1_rnaseq_raw,
-                          input$boxplots_col2_rnaseq_raw,
-                          input$boxplots_col3_rnaseq_raw,
-                          input$boxplots_col4_rnaseq_raw,
-                          input$boxplots_col5_rnaseq_raw)
-      }
-      if (length(legendColors) != length(levels(rv$experimentFactor))){
-        legendColors <- colorsByFactor(rv$experimentFactor)$legendColors
-      }
-      names(legendColors) <- levels(rv$experimentFactor)
-      
-      getBoxplots(experimentFactor = rv$experimentFactor,
-                  legendColors = legendColors,
-                  normData = rv$normData,
-                  RNASeq = TRUE,
-                  width = session$clientData$output_boxplots_rnaseq_raw_width,
-                  height = session$clientData$output_boxplots_rnaseq_raw_height)
-    }, deleteFile = TRUE)
     
     # Allow users to set colors
     observe({
@@ -743,7 +811,6 @@ observe({
             )
           )
         })
-        
       }
       if (test == 5){
         output$UI_color_boxplots_rnaseq_raw <- renderUI({
@@ -768,7 +835,6 @@ observe({
             )
           )
         })
-        
       }
       if (test > 5){
         output$UI_color_boxplots_rnaseq_raw <- renderUI({
@@ -781,6 +847,37 @@ observe({
         })
       }
       
+      observe({
+        if (length(levels(rv$experimentFactor)) > 5){
+          rv$legendColors_boxplots <- colorsByFactor(rv$experimentFactor)$legendColors
+        } else{
+          rv$legendColors_boxplots <- c(input$boxplots_col1_rnaseq_raw,
+                                        input$boxplots_col2_rnaseq_raw,
+                                        input$boxplots_col3_rnaseq_raw,
+                                        input$boxplots_col4_rnaseq_raw,
+                                        input$boxplots_col5_rnaseq_raw)
+        }
+        
+        # Boxplots of all genes together
+        output$boxplots_rnaseq_raw <- renderImage({
+          req(session$clientData$output_boxplots_rnaseq_raw_width)
+          req(session$clientData$output_boxplots_rnaseq_raw_height)
+          req(rv$legendColors_boxplots)
+          
+          legendColors <- rv$legendColors_boxplots
+          if (length(legendColors) != length(levels(rv$experimentFactor))){
+            legendColors <- colorsByFactor(rv$experimentFactor)$legendColors
+          }
+          names(legendColors) <- levels(rv$experimentFactor)
+          
+          getBoxplots(experimentFactor = rv$experimentFactor,
+                      legendColors = legendColors,
+                      normData = rv$normData,
+                      RNASeq = TRUE,
+                      width = session$clientData$output_boxplots_rnaseq_raw_width,
+                      height = session$clientData$output_boxplots_rnaseq_raw_height)
+        }, deleteFile = TRUE)
+      })
     })
     
     #***************************#
@@ -850,7 +947,7 @@ observe({
         size = "m",
         footer = tagList(
           fluidRow(
-            column(6,align = "left",
+            column(12,align = "left",
                    shinyWidgets::prettyRadioButtons(
                      inputId = "boxplots_file_rnaseq_raw",
                      label = NULL,
@@ -893,34 +990,11 @@ observe({
     # Output 3: Density plots
     #********************************************************************#
     
-    # Density plots of all genes together
-    output$densityplots_rnaseq_raw <- plotly::renderPlotly({
-      
-      if (length(levels(rv$experimentFactor)) > 5){
-        legendColors <- colorsByFactor(rv$experimentFactor)$legendColors
-      } else{
-        legendColors <- c(input$density_col1_rnaseq_raw,
-                          input$density_col2_rnaseq_raw,
-                          input$density_col3_rnaseq_raw,
-                          input$density_col4_rnaseq_raw,
-                          input$density_col5_rnaseq_raw)
-      }
-      if (length(legendColors) != length(levels(rv$experimentFactor))){
-        legendColors <- colorsByFactor(rv$experimentFactor)$legendColors
-      }
-      names(legendColors) <- levels(rv$experimentFactor)
-      
-      rv$density <- getDensityplots(experimentFactor = rv$experimentFactor,
-                                    legendColors = legendColors,
-                                    normMatrix = rv$normData,
-                                    RNASeq = TRUE)
-      
-    })
     
     # Allow users to set colors
     observe({
-      test <- length(levels(rv$experimentFactor))
       
+      test <- length(levels(rv$experimentFactor))
       if (test == 2){
         output$UI_color_density_rnaseq_raw <- renderUI({
           tagList(
@@ -935,6 +1009,7 @@ observe({
             )
           )
         })
+        
       }
       if (test == 3){
         output$UI_color_density_rnaseq_raw <- renderUI({
@@ -1000,6 +1075,7 @@ observe({
           )
         })
         
+        
       }
       if (test > 5){
         output$UI_color_density_rnaseq_raw <- renderUI({
@@ -1012,8 +1088,39 @@ observe({
         
       }
       
+      
+      # Make plot
+      observe({
+        if (length(levels(rv$experimentFactor)) > 5){
+          rv$legendColors_density <- colorsByFactor(rv$experimentFactor)$legendColors
+        } else{
+          rv$legendColors_density <- c(input$density_col1_rnaseq_raw,
+                                       input$density_col2_rnaseq_raw,
+                                       input$density_col3_rnaseq_raw,
+                                       input$density_col4_rnaseq_raw,
+                                       input$density_col5_rnaseq_raw)
+        }
+        
+        output$densityplots_rnaseq_raw <- plotly::renderPlotly({
+          req(rv$legendColors_density)
+          legendColors <- rv$legendColors_density
+          
+          if (length(legendColors) != length(levels(rv$experimentFactor))){
+            legendColors <- colorsByFactor(rv$experimentFactor)$legendColors
+          }
+          names(legendColors) <- levels(rv$experimentFactor)
+          
+          rv$density <- getDensityplots(experimentFactor = rv$experimentFactor,
+                                        legendColors = legendColors,
+                                        normMatrix = rv$normData,
+                                        RNASeq = TRUE)
+          
+          return(rv$density)
+        })
+      })
+      
+      
     })
-    
     
     #***************************#
     # Modal to download figure
@@ -1070,7 +1177,7 @@ observe({
         size = "m",
         footer = tagList(
           fluidRow(
-            column(6,align = "left",
+            column(12, align = "left",
                    shinyWidgets::prettyRadioButtons(
                      inputId = "density_file_rnaseq_raw",
                      label = NULL,
@@ -1116,51 +1223,228 @@ observe({
       ))
     })
     
-    #********************************************************************#
-    # Output 4: Heatmap
-    #********************************************************************#
     
-    output$heatmap_rnaseq_raw  <- plotly::renderPlotly({
-      
-      # Make color factor
-      if(length(input$colorFactor_heatmap_rnaseq_raw) > 1){
-        colorFactor <- factor(apply(rv$metaData_fil[,input$colorFactor_heatmap_rnaseq_raw], 1, paste, collapse = "_" ))
-      } else{
-        colorFactor <- factor(rv$metaData_fil[,input$colorFactor_heatmap_rnaseq_raw])
-      }
-      
-      # Set colors
-      if (length(levels(colorFactor)) > 5){
-        legendColors <- colorsByFactor(colorFactor)$legendColors
-      } else{
-        legendColors <- c(input$heatmap_col1_rnaseq_raw,
-                          input$heatmap_col2_rnaseq_raw,
-                          input$heatmap_col3_rnaseq_raw,
-                          input$heatmap_col4_rnaseq_raw,
-                          input$heatmap_col5_rnaseq_raw)
-      }
-      if (length(legendColors) != length(levels(colorFactor))){
-        legendColors <- colorsByFactor(colorFactor)$legendColors
-      }
-      names(legendColors) <- levels(colorFactor)
-      
-      # Make heatmap
-      rv$heatmap <- getHeatmap(experimentFactor = colorFactor,
-                               legendColors = legendColors,
-                               normMatrix = rv$normData_vst,
-                               clusterOption1 = input$clusteroption1_rnaseq_raw,
-                               clusterOption2 = input$clusteroption2_rnaseq_raw,
-                               theme = input$heatmaptheme_rnaseq_raw)
-    })
+    #********************************************************************#
+    # Output 4: Raw read count
+    #********************************************************************#
     
     # Allow users to set colors
     observe({
-      req(input$colorFactor_heatmap_rnaseq_raw)
-      if(length(input$colorFactor_heatmap_rnaseq_raw) > 1){
-        colorFactor <- factor(apply(rv$metaData_fil[,input$colorFactor_heatmap_rnaseq_raw], 1, paste, collapse = "_" ))
-      } else{
-        colorFactor <- factor(rv$metaData_fil[,input$colorFactor_heatmap_rnaseq_raw])
+      test <- length(levels(rv$experimentFactor))
+      
+      if (test == 2){
+        output$UI_color_readcount_rnaseq_raw <- renderUI({
+          tagList(
+            tags$div(class = "dropdown-content",
+                     h4("Colors"),
+                     colourpicker::colourInput("readcount_col1_rnaseq_raw", 
+                                               NULL, 
+                                               colorsByFactor(rv$experimentFactor)$legendColors[1]),
+                     colourpicker::colourInput("readcount_col2_rnaseq_raw", 
+                                               NULL, 
+                                               colorsByFactor(rv$experimentFactor)$legendColors[2])
+            )
+          )
+        })
       }
+      if (test == 3){
+        output$UI_color_readcount_rnaseq_raw <- renderUI({
+          tagList(
+            tags$div(class = "dropdown-content",
+                     h4("Colors"),
+                     colourpicker::colourInput("readcount_col1_rnaseq_raw", 
+                                               NULL, 
+                                               colorsByFactor(rv$experimentFactor)$legendColors[1]),
+                     colourpicker::colourInput("readcount_rnaseq_raw", 
+                                               NULL, 
+                                               colorsByFactor(rv$experimentFactor)$legendColors[2]),
+                     colourpicker::colourInput("readcount_col3_rnaseq_raw", 
+                                               NULL, 
+                                               colorsByFactor(rv$experimentFactor)$legendColors[3])
+            )
+          )
+        })
+      }
+      if (test == 4){
+        output$UI_color_readcount_rnaseq_raw <- renderUI({
+          tagList(
+            tags$div(class = "dropdown-content",
+                     h4("Colors"),
+                     colourpicker::colourInput("readcount_col1_rnaseq_raw", 
+                                               NULL, 
+                                               colorsByFactor(rv$experimentFactor)$legendColors[1]),
+                     colourpicker::colourInput("readcount_col2_rnaseq_raw", 
+                                               NULL, 
+                                               colorsByFactor(rv$experimentFactor)$legendColors[2]),
+                     colourpicker::colourInput("readcount_col3_rnaseq_raw", 
+                                               NULL, 
+                                               colorsByFactor(rv$experimentFactor)$legendColors[3]),
+                     colourpicker::colourInput("readcount_col4_rnaseq_raw", 
+                                               NULL, 
+                                               colorsByFactor(rv$experimentFactor)$legendColors[4])
+            )
+          )
+        })
+      }
+      if (test == 5){
+        output$UI_color_readcount_rnaseq_raw <- renderUI({
+          tagList(
+            tags$div(class = "dropdown-content",
+                     h4("Colors"),
+                     colourpicker::colourInput("readcount_col1_rnaseq_raw", 
+                                               NULL, 
+                                               colorsByFactor(rv$experimentFactor)$legendColors[1]),
+                     colourpicker::colourInput("readcount_col2_rnaseq_raw", 
+                                               NULL, 
+                                               colorsByFactor(rv$experimentFactor)$legendColors[2]),
+                     colourpicker::colourInput("readcount_col3_rnaseq_raw", 
+                                               NULL, 
+                                               colorsByFactor(rv$experimentFactor)$legendColors[3]),
+                     colourpicker::colourInput("readcount_col4_rnaseq_raw", 
+                                               NULL, 
+                                               colorsByFactor(rv$experimentFactor)$legendColors[4]),
+                     colourpicker::colourInput("readcount_col5_rnaseq_raw", 
+                                               NULL, 
+                                               colorsByFactor(rv$experimentFactor)$legendColors[5])
+            )
+          )
+        })
+        
+        
+        
+      }
+      if (test > 5){
+        output$UI_color_readcount_rnaseq_raw <- renderUI({
+          tagList(
+            tags$div(class = "dropdown-content",
+                     h5("There are too many experimental groups to select colour manually")
+            )
+          )
+        })
+      }
+      
+      
+      # Plot of raw read count
+      observe({
+        if (length(levels(rv$experimentFactor)) > 5){
+          rv$legendColors_readcount <- colorsByFactor(rv$experimentFactor)$legendColors
+        } else{
+          rv$legendColors_readcount <- c(input$readcount_col1_rnaseq_raw,
+                                         input$readcount_col2_rnaseq_raw,
+                                         input$readcount_col3_rnaseq_raw,
+                                         input$readcount_col4_rnaseq_raw,
+                                         input$readcount_col5_rnaseq_raw)
+        }
+        
+        output$readcount_rnaseq_raw <- renderPlot({
+          req(rv$legendColors_readcount)
+          legendColors <- rv$legendColors_readcount
+          if (length(legendColors) != length(levels(rv$experimentFactor))){
+            legendColors <- colorsByFactor(rv$experimentFactor)$legendColors
+          }
+          names(legendColors) <- levels(rv$experimentFactor)
+          
+          rv$readcount <- getReadCount(experimentFactor = rv$experimentFactor,
+                                       legendColors = legendColors,
+                                       gxData_fil = rv$gxData_fil)
+          return(rv$readcount)
+          
+        })
+      })
+      
+    })
+    
+    
+    #***************************#
+    # Modal to download figure
+    #***************************#
+    
+    # Download plot
+    observe({
+      req(input$readcount_file_rnaseq_raw)
+      output$realdownload_readcount_rnaseq_raw <- downloadHandler(
+        filename = ifelse(input$readcount_file_rnaseq_raw == "PNG", "QC_ReadCount.png",
+                          ifelse(input$readcount_file_rnaseq_raw == "PDF", "QC_ReadCount.pdf",
+                                 "QC_ReadCount.tif")),
+        content = function(file){
+          
+          ggplot2::ggsave(plot = rv$readcount, 
+                          filename = file,
+                          width = input$width_readcount_rnaseq_raw*2.5,
+                          height = input$height_readcount_rnaseq_raw*2.5,
+                          units = "px")
+          
+        }
+      )
+    })
+    
+    # Make modal
+    observeEvent(input$download_readcount_rnaseq_raw, {
+      showModal(modalDialog(
+        title = NULL,
+        easyClose = TRUE,
+        size = "m",
+        footer = tagList(
+          fluidRow(
+            column(12, align = "left",
+                   shinyWidgets::prettyRadioButtons(
+                     inputId = "readcount_file_rnaseq_raw",
+                     label = NULL,
+                     choices = c("PNG","PDF", "TIF"),
+                     selected = "PNG",
+                     inline = TRUE,
+                     fill = TRUE
+                   )
+            )
+          ),
+          fluidRow(
+            column(6,
+                   sliderInput("height_readcount_rnaseq_raw", 
+                               "Height",
+                               min = 800, max = 2000,
+                               value = 1200, step = 10)
+                   
+            ),
+            column(6,
+                   sliderInput("width_readcount_rnaseq_raw", 
+                               "Width",
+                               min = 800, max = 2000,
+                               value = 1500, step = 10,
+                               width = "100%")
+            )
+          ),
+          
+          fluidRow(
+            column(12, align = "left",
+                   downloadButton('realdownload_readcount_rnaseq_raw', 
+                                  'Download')
+            )
+          )
+          
+        )
+        
+      ))
+    })
+    #*******************************************************************#
+    # Output 5: Heatmap
+    #********************************************************************#
+    
+    # Make color factor
+    observe({
+      req(input$colorFactor_heatmap_rnaseq_raw)
+      
+      if(length(input$colorFactor_heatmap_rnaseq_raw) > 1){
+        rv$colorFactor_heatmap <- factor(apply(rv$metaData_fil[,input$colorFactor_heatmap_rnaseq_raw], 1, paste, collapse = "_" ))
+      } else{
+        rv$colorFactor_heatmap <- factor(rv$metaData_fil[,input$colorFactor_heatmap_rnaseq_raw])
+      }
+    })
+    
+    
+    # Allow users to set colors
+    observe({
+      req(rv$colorFactor_heatmap)
+      colorFactor <- rv$colorFactor_heatmap
       test <- length(levels(colorFactor))
       
       if (test == 2){
@@ -1170,17 +1454,17 @@ observe({
                      h4("Heatmap theme"),
                      selectInput(inputId = 'heatmaptheme_rnaseq_raw',
                                  label = NULL,
-                                 choices = c("Default", 
-                                             "Yellow-red", 
-                                             "Blues", 
+                                 choices = c("Default",
+                                             "Yellow-red",
+                                             "Blues",
                                              "Reds")),
                      br(),
                      h4("Side color"),
-                     colourpicker::colourInput("heatmap_col1_rnaseq_raw", 
-                                               NULL, 
+                     colourpicker::colourInput("heatmap_col1_rnaseq_raw",
+                                               NULL,
                                                colorsByFactor(colorFactor)$legendColors[1]),
-                     colourpicker::colourInput("heatmap_col2_rnaseq_raw", 
-                                               NULL, 
+                     colourpicker::colourInput("heatmap_col2_rnaseq_raw",
+                                               NULL,
                                                colorsByFactor(colorFactor)$legendColors[2])
             )
           )
@@ -1194,20 +1478,20 @@ observe({
                      h4("Heatmap theme"),
                      selectInput(inputId = 'heatmaptheme_rnaseq_raw',
                                  label = NULL,
-                                 choices = c("Default", 
-                                             "Yellow-red", 
-                                             "Blues", 
+                                 choices = c("Default",
+                                             "Yellow-red",
+                                             "Blues",
                                              "Reds")),
                      br(),
                      h4("Side color"),
-                     colourpicker::colourInput("heatmap_col1_rnaseq_raw", 
-                                               NULL, 
+                     colourpicker::colourInput("heatmap_col1_rnaseq_raw",
+                                               NULL,
                                                colorsByFactor(colorFactor)$legendColors[1]),
-                     colourpicker::colourInput("heatmap_col2_rnaseq_raw", 
-                                               NULL, 
+                     colourpicker::colourInput("heatmap_col2_rnaseq_raw",
+                                               NULL,
                                                colorsByFactor(colorFactor)$legendColors[2]),
-                     colourpicker::colourInput("heatmap_col3_rnaseq_raw", 
-                                               NULL, 
+                     colourpicker::colourInput("heatmap_col3_rnaseq_raw",
+                                               NULL,
                                                colorsByFactor(colorFactor)$legendColors[3])
             )
           )
@@ -1220,28 +1504,27 @@ observe({
                      h4("Heatmap theme"),
                      selectInput(inputId = 'heatmaptheme_rnaseq_raw',
                                  label = NULL,
-                                 choices = c("Default", 
-                                             "Yellow-red", 
-                                             "Blues", 
+                                 choices = c("Default",
+                                             "Yellow-red",
+                                             "Blues",
                                              "Reds")),
                      br(),
                      h4("Side color"),
-                     colourpicker::colourInput("heatmap_col1_rnaseq_raw", 
-                                               NULL, 
+                     colourpicker::colourInput("heatmap_col1_rnaseq_raw",
+                                               NULL,
                                                colorsByFactor(colorFactor)$legendColors[1]),
-                     colourpicker::colourInput("heatmap_col2_rnaseq_raw", 
-                                               NULL, 
+                     colourpicker::colourInput("heatmap_col2_rnaseq_raw",
+                                               NULL,
                                                colorsByFactor(colorFactor)$legendColors[2]),
-                     colourpicker::colourInput("heatmap_col3_rnaseq_raw", 
-                                               NULL, 
+                     colourpicker::colourInput("heatmap_col3_rnaseq_raw",
+                                               NULL,
                                                colorsByFactor(colorFactor)$legendColors[3]),
-                     colourpicker::colourInput("heatmap_col4_rnaseq_raw", 
-                                               NULL, 
+                     colourpicker::colourInput("heatmap_col4_rnaseq_raw",
+                                               NULL,
                                                colorsByFactor(colorFactor)$legendColors[4])
             )
           )
         })
-        
       }
       if (test == 5){
         output$UI_color_heatmap <- renderUI({
@@ -1250,31 +1533,30 @@ observe({
                      h4("Heatmap theme"),
                      selectInput(inputId = 'heatmaptheme_rnaseq_raw',
                                  label = NULL,
-                                 choices = c("Default", 
-                                             "Yellow-red", 
-                                             "Blues", 
+                                 choices = c("Default",
+                                             "Yellow-red",
+                                             "Blues",
                                              "Reds")),
                      br(),
                      h4("Side color"),
-                     colourpicker::colourInput("heatmap_col1_rnaseq_raw", 
-                                               NULL, 
+                     colourpicker::colourInput("heatmap_col1_rnaseq_raw",
+                                               NULL,
                                                colorsByFactor(colorFactor)$legendColors[1]),
-                     colourpicker::colourInput("heatmap_col2_rnaseq_raw", 
-                                               NULL, 
+                     colourpicker::colourInput("heatmap_col2_rnaseq_raw",
+                                               NULL,
                                                colorsByFactor(colorFactor)$legendColors[2]),
-                     colourpicker::colourInput("heatmap_col3_rnaseq_raw", 
-                                               NULL, 
+                     colourpicker::colourInput("heatmap_col3_rnaseq_raw",
+                                               NULL,
                                                colorsByFactor(colorFactor)$legendColors[3]),
-                     colourpicker::colourInput("heatmap_col4_rnaseq_raw", 
-                                               NULL, 
+                     colourpicker::colourInput("heatmap_col4_rnaseq_raw",
+                                               NULL,
                                                colorsByFactor(colorFactor)$legendColors[4]),
-                     colourpicker::colourInput("heatmap_col5_rnaseq_raw", 
-                                               NULL, 
+                     colourpicker::colourInput("heatmap_col5_rnaseq_raw",
+                                               NULL,
                                                colorsByFactor(colorFactor)$legendColors[5])
             )
           )
         })
-        
       }
       if (test > 5){
         output$UI_color_heatmap <- renderUI({
@@ -1283,18 +1565,60 @@ observe({
                      h4("Heatmap theme"),
                      selectInput(inputId = 'heatmaptheme_rnaseq_raw',
                                  label = NULL,
-                                 choices = c("Default", 
-                                             "Yellow-red", 
-                                             "Blues", 
+                                 choices = c("Default",
+                                             "Yellow-red",
+                                             "Blues",
                                              "Reds")),
-                     br(),
+                     br()
             )
           )
         })
-        
       }
-      
     })
+    
+    observe({
+      req(rv$colorFactor_heatmap)
+      
+      # Set colors
+      if (length(levels(rv$colorFactor_heatmap)) > 5){
+        rv$legendColors_heatmap <- colorsByFactor(rv$colorFactor_heatmap)$legendColors
+      } else{
+        rv$legendColors_heatmap <- c(input$heatmap_col1_rnaseq_raw,
+                                     input$heatmap_col2_rnaseq_raw,
+                                     input$heatmap_col3_rnaseq_raw,
+                                     input$heatmap_col4_rnaseq_raw,
+                                     input$heatmap_col5_rnaseq_raw)[1:length(levels(rv$colorFactor_heatmap))]
+      }
+    })
+    
+    
+    observe({
+      req(input$heatmaptheme_rnaseq_raw)
+      req(rv$legendColors_heatmap)
+      req(rv$colorFactor_heatmap)
+      req(input$clusteroption1_rnaseq_raw)
+      req(input$clusteroption2_rnaseq_raw)
+      
+      output$heatmap_rnaseq_raw  <- plotly::renderPlotly({
+        
+        colorFactor <- rv$colorFactor_heatmap
+        legendColors <- rv$legendColors_heatmap
+        if (length(legendColors) != length(levels(colorFactor))){
+          legendColors <- colorsByFactor(colorFactor)$legendColors
+        }
+        names(legendColors) <- levels(colorFactor)
+        
+        # Make heatmap
+        rv$heatmap <- getHeatmap(experimentFactor = colorFactor,
+                                 legendColors = legendColors,
+                                 normMatrix = rv$normData_vst,
+                                 clusterOption1 = input$clusteroption1_rnaseq_raw,
+                                 clusterOption2 = input$clusteroption2_rnaseq_raw,
+                                 theme = input$heatmaptheme_rnaseq_raw)
+        return(rv$heatmap)
+      })
+    })
+    
     
     #***************************#
     # Modal to download figure
@@ -1327,7 +1651,7 @@ observe({
                                 input$heatmap_col2_rnaseq_raw,
                                 input$heatmap_col3_rnaseq_raw,
                                 input$heatmap_col4_rnaseq_raw,
-                                input$heatmap_col5_rnaseq_raw)
+                                input$heatmap_col5_rnaseq_raw)[1:length(levels(colorFactor))]
             }
             if (length(legendColors) != length(levels(colorFactor))){
               legendColors <- colorsByFactor(colorFactor)$legendColors
@@ -1335,7 +1659,6 @@ observe({
             names(legendColors) <- levels(colorFactor)
             
             # Make heatmap
-            
             getHeatmap_static(experimentFactor = colorFactor,
                               legendColors = legendColors,
                               normMatrix = rv$normData_vst,
@@ -1363,7 +1686,7 @@ observe({
         size = "m",
         footer = tagList(
           fluidRow(
-            column(6,align = "left",
+            column(12,align = "left",
                    shinyWidgets::prettyRadioButtons(
                      inputId = "heatmap_file_rnaseq_raw",
                      label = NULL,
@@ -1413,61 +1736,23 @@ observe({
     
     
     #********************************************************************#
-    # Output 5: PCA
+    # Output 6: PCA
     #********************************************************************#
-    
-    #Perform PCA
-    rv$PCA_data <- prcomp(t(rv$normData_vst[apply(rv$normData_vst, 1, var) != 0,]),
-                          retx = TRUE, 
-                          center = TRUE,
-                          scale.= TRUE)
-    
-    
-    # Make PCA plot
-    output$PCA_rnaseq_raw <- plotly::renderPlotly({
-      
-      # Get factor to color by
-      if(length(input$colorFactor_PCA_rnaseq_raw) > 1){
-        colorFactor <- factor(apply(rv$metaData_fil[,input$colorFactor_PCA_rnaseq_raw], 1, paste, collapse = "_" ))
-      } else{
-        colorFactor <- factor(rv$metaData_fil[,input$colorFactor_PCA_rnaseq_raw])
-      }
-      
-      # Set colors
-      if (length(levels(colorFactor)) > 5){
-        legendColors <- colorsByFactor(colorFactor)$legendColors
-      } else{
-        legendColors <- c(input$PCA_col1_rnaseq_raw,
-                          input$PCA_col2_rnaseq_raw,
-                          input$PCA_col3_rnaseq_raw,
-                          input$PCA_col4_rnaseq_raw,
-                          input$PCA_col5_rnaseq_raw)
-      }
-      if (length(legendColors) != length(levels(colorFactor))){
-        legendColors <- colorsByFactor(colorFactor)$legendColors
-      }
-      
-      # Make PCA score plot
-      rv$PCAplot <- plot_PCA(PC_data = rv$PCA_data, 
-                             colorFactor = colorFactor,
-                             legendColors = legendColors, 
-                             xpc = as.numeric(stringr::str_remove(input$xpca_rnaseq_raw,"PC")), 
-                             ypc = as.numeric(stringr::str_remove(input$ypca_rnaseq_raw,"PC")), 
-                             zpc = ifelse(input$xyz_rnaseq_raw,as.numeric(stringr::str_remove(input$zpca_rnaseq_raw,"PC")),3), 
-                             xyz = input$xyz_rnaseq_raw)
-      
-      return(rv$PCAplot)
-    })
     
     
     # Allow users to set colors
     observe({
       req(input$colorFactor_PCA_rnaseq_raw)
       if(length(input$colorFactor_PCA_rnaseq_raw) > 1){
-        colorFactor <- factor(apply(rv$metaData_fil[,input$colorFactor_PCA_rnaseq_raw], 1, paste, collapse = "_" ))
+        rv$colorFactor_PCA  <- factor(apply(rv$metaData_fil[,input$colorFactor_PCA_rnaseq_raw], 1, paste, collapse = "_" ))
       } else{
-        colorFactor <- factor(rv$metaData_fil[,input$colorFactor_PCA_rnaseq_raw])
+        rv$colorFactor_PCA <- factor(rv$metaData_fil[,input$colorFactor_PCA_rnaseq_raw])
       }
+    })
+    
+    observe({
+      req(rv$colorFactor_PCA)
+      colorFactor <- rv$colorFactor_PCA
       test <- length(levels(colorFactor))
       
       if (test == 2){
@@ -1561,8 +1846,51 @@ observe({
         })
         
       }
-      
     })
+    
+    
+    observe({
+      req(rv$colorFactor_PCA)
+      
+      # Get colors
+      if (length(levels(rv$colorFactor_PCA)) > 5){
+        rv$legendColors_PCA <- colorsByFactor(rv$colorFactor_PCA)$legendColors
+      } else{
+        rv$legendColors_PCA <- c(input$PCA_col1_rnaseq_raw,
+                                 input$PCA_col2_rnaseq_raw,
+                                 input$PCA_col3_rnaseq_raw,
+                                 input$PCA_col4_rnaseq_raw,
+                                 input$PCA_col5_rnaseq_raw)[1:length(levels(rv$colorFactor_PCA))]
+      }
+    })
+    
+    observe({
+      req(rv$legendColors_PCA)
+      req(rv$colorFactor_PCA)
+      
+      # Make PCA plot
+      output$PCA_rnaseq_raw <- plotly::renderPlotly({
+        
+        # Set colors
+        colorFactor <- rv$colorFactor_PCA
+        legendColors <- rv$legendColors_PCA
+        if (length(legendColors) != length(levels(colorFactor))){
+          legendColors <- colorsByFactor(colorFactor)$legendColors
+        }
+        
+        # Make PCA score plot
+        rv$PCAplot <- plot_PCA(PC_data = rv$PCA_data, 
+                               colorFactor = colorFactor,
+                               legendColors = legendColors, 
+                               xpc = as.numeric(stringr::str_remove(input$xpca_rnaseq_raw,"PC")), 
+                               ypc = as.numeric(stringr::str_remove(input$ypca_rnaseq_raw,"PC")), 
+                               zpc = ifelse(input$xyz_rnaseq_raw,as.numeric(stringr::str_remove(input$zpca_rnaseq_raw,"PC")),3), 
+                               xyz = input$xyz_rnaseq_raw)
+        
+        return(rv$PCAplot)
+      })
+    })
+    
     
     
     #***************************#
@@ -1596,7 +1924,7 @@ observe({
                                 input$PCA_col2_rnaseq_raw,
                                 input$PCA_col3_rnaseq_raw,
                                 input$PCA_col4_rnaseq_raw,
-                                input$PCA_col5_rnaseq_raw)
+                                input$PCA_col5_rnaseq_raw)[1:length(levels(colorFactor))]
             }
             if (length(legendColors) != length(levels(colorFactor))){
               legendColors <- colorsByFactor(colorFactor)$legendColors
@@ -1631,7 +1959,7 @@ observe({
         size = "m",
         footer = tagList(
           fluidRow(
-            column(6,align = "left",
+            column(12,align = "left",
                    shinyWidgets::prettyRadioButtons(
                      inputId = "pca_file_rnaseq_raw",
                      label = NULL,
@@ -1678,7 +2006,7 @@ observe({
     })
     
     #********************************************************************#
-    # Output 6: Overview of pre-processing settings
+    # Output 7: Overview of pre-processing settings
     #********************************************************************#
     # Print table with settings
     output$processingSettings_rnaseq_raw <- DT::renderDataTable({
@@ -1721,6 +2049,7 @@ observe({
         params <- list(processingSettings = rv$processingSettings,
                        experimentFactor = rv$experimentFactor,
                        legendColors = colorsByFactor(rv$experimentFactor)$legendColors,
+                       gxData_fil = rv$gxData_fil,
                        normData = rv$normData,
                        PCAData = rv$PCA_data,
                        normData_vst = rv$normData_vst,
@@ -1852,6 +2181,10 @@ observe({
                    actionButton("download_geneboxplot_rnaseq_raw", 
                                 "Download figure",
                                 icon = shiny::icon("download")),
+                   actionButton("link_geneboxplot_rnaseq_raw", 
+                                "Explain figure",
+                                icon = shiny::icon("question-circle"),
+                                onclick ="window.open('https://arrayanalysis.org/explain/Geneboxplot', '_blank')"),
                    br(),
                    br()
           ),
@@ -1863,6 +2196,10 @@ observe({
                    actionButton("download_boxplots_rnaseq_raw", 
                                 "Download figure",
                                 icon = shiny::icon("download")),
+                   actionButton("link_boxplots_rnaseq_raw", 
+                                "Explain figure",
+                                icon = shiny::icon("question-circle"),
+                                onclick ="window.open('https://arrayanalysis.org/explain/Sampleboxplot', '_blank')"),
                    br(),
                    br(),
                    # customize boxplot
@@ -1884,9 +2221,13 @@ observe({
                    actionButton("download_density_rnaseq_raw", 
                                 "Download figure",
                                 icon = shiny::icon("download")),
+                   actionButton("link_density_rnaseq_raw", 
+                                "Explain figure",
+                                icon = shiny::icon("question-circle"),
+                                onclick ="window.open('https://arrayanalysis.org/explain/Densityplot', '_blank')"),
                    br(),
                    br(),
-                   # customize heatmap
+                   # customize plot
                    tags$div(class = "dropdown",
                             tags$button(class = "dropbtn", icon("cog")),
                             uiOutput("UI_color_density_rnaseq_raw")
@@ -1898,7 +2239,32 @@ observe({
                      shinycssloaders::withSpinner(color="#0dc5c1")
           ),
           
-          # TAB4: Heatmap of sample-sample correlations
+          # TAB4: Raw read count
+          tabPanel("Raw read counts",
+                   icon = icon("fas fa-file"),
+                   br(),
+                   actionButton("download_readcount_rnaseq_raw", 
+                                "Download figure",
+                                icon = shiny::icon("download")),
+                   actionButton("link_readcount_rnaseq_raw", 
+                                "Explain figure",
+                                icon = shiny::icon("question-circle"),
+                                onclick ="window.open('https://arrayanalysis.org/explain/Readcount', '_blank')"),
+                   br(),
+                   br(),
+                   # customize plot
+                   tags$div(class = "dropdown",
+                            tags$button(class = "dropbtn", icon("cog")),
+                            uiOutput("UI_color_readcount_rnaseq_raw")
+                   ),
+                   h2(strong("Bar chart of raw read counts"), align = "center"),
+                   h4("Total read count should be comparable between samples", align = "center"),
+                   plotOutput(outputId = "readcount_rnaseq_raw",
+                              width = "65vw", height = "40vw") %>% 
+                     shinycssloaders::withSpinner(color="#0dc5c1")
+          ),
+          
+          # TAB5: Heatmap of sample-sample correlations
           tabPanel("Correlation plot", 
                    icon = icon("fas fa-mouse-pointer"),
                    h3(strong("Heatmap of sample-sample correlations")),
@@ -1936,6 +2302,10 @@ observe({
                    actionButton('download_heatmap_rnaseq_raw', 
                                 'Download figure',
                                 icon = shiny::icon("download")),
+                   actionButton("link_heatmap_rnaseq_raw", 
+                                "Explain figure",
+                                icon = shiny::icon("question-circle"),
+                                onclick ="window.open('https://arrayanalysis.org/explain/Sampleheatmap', '_blank')"),
                    br(),
                    br(),
                    
@@ -1953,7 +2323,7 @@ observe({
                    
           ),
           
-          # TAB5: PCA score plot
+          # TAB6: PCA score plot
           tabPanel("PCA",
                    icon = icon("fas fa-mouse-pointer"),
                    # Title + text
@@ -1981,7 +2351,7 @@ observe({
                             selectInput(inputId = "xpca_rnaseq_raw", 
                                         label = "x-axis",
                                         choices = c("PC1","PC2","PC3", "PC4", "PC5",
-                                                    "PC6", "PC7", "PC8"),
+                                                    "PC6", "PC7", "PC8")[1:min(8,nrow(rv$metaData_fil))],
                                         selected = "PC1")
                      ),
                      column(3,
@@ -1989,7 +2359,7 @@ observe({
                             selectInput(inputId = "ypca_rnaseq_raw", 
                                         label = "y-axis",
                                         choices = c("PC1","PC2","PC3", "PC4", "PC5", 
-                                                    "PC6", "PC7", "PC8"),
+                                                    "PC6", "PC7", "PC8")[1:min(8,nrow(rv$metaData_fil))],
                                         selected = "PC2")
                      ),
                      column(3,
@@ -1999,7 +2369,7 @@ observe({
                               selectInput(inputId = "zpca_rnaseq_raw", 
                                           label = "z-axis",
                                           choices = c("PC1","PC2","PC3", "PC4", "PC5", 
-                                                      "PC6", "PC7", "PC8"),
+                                                      "PC6", "PC7", "PC8")[1:min(8,nrow(rv$metaData_fil))],
                                           selected = "PC3")
                             )
                      )
@@ -2009,6 +2379,10 @@ observe({
                    actionButton("download_pca_rnaseq_raw", 
                                 "Download figure",
                                 icon = shiny::icon("download")),
+                   actionButton("link_pca_rnaseq_raw", 
+                                "Explain figure",
+                                icon = shiny::icon("question-circle"),
+                                onclick ="window.open('https://arrayanalysis.org/explain/PCA', '_blank')"),
                    br(),
                    br(),
                    
@@ -2030,7 +2404,7 @@ observe({
                    
           ), # EO PCA tabpanel
           
-          # TAB6: Settings table
+          # TAB7: Settings table
           tabPanel("Settings overview",
                    icon = icon("fas fa-file"),
                    h3(strong("Pre-processing settings")),
@@ -2041,7 +2415,7 @@ observe({
                    br(),
                    downloadButton("downloadProcessingSettings_rnaseq_raw", 
                                   "Download table"),
-                   downloadButton("downloadSessionInfo_rnaseq_raw", 
+                   downloadButton("downloadSessionInfo_QC_rnaseq_raw", 
                                   "Session info")
                    
                    
@@ -2325,8 +2699,11 @@ observe({
           text = rv$top_table_list[[2]],
           type = "info")
         
-        # Show microarray statistics tab
+        # Show RNA-seq GSA tab
         showTab("navbar", target = "panel_ORA_rnaseq_raw")
+        rv$ORA_data <- NULL
+        rv$GSEA_data <- NULL
+        
       } else{
         shinybusy::remove_modal_spinner()
         # Show message
@@ -2481,7 +2858,7 @@ observe({
         easyClose = TRUE,
         footer = tagList(
           fluidRow(
-            column(6,align = "left",
+            column(12,align = "left",
                    shinyWidgets::prettyRadioButtons(
                      inputId = "statboxplot_file_rnaseq_raw",
                      label = NULL,
@@ -2583,7 +2960,7 @@ observe({
             size = "m",
             footer = tagList(
               fluidRow(
-                column(6,align = "left",
+                column(12,align = "left",
                        shinyWidgets::prettyRadioButtons(
                          inputId = "Phistogram_file_rnaseq_raw",
                          label = NULL,
@@ -2641,7 +3018,7 @@ observe({
         })
         
         #**********************************#
-        # Modal download to logFC histogram
+        # Modal to download logFC histogram
         #**********************************#
         
         # Download plot
@@ -2683,7 +3060,7 @@ observe({
             size = "m",
             footer = tagList(
               fluidRow(
-                column(6,align = "left",
+                column(12,align = "left",
                        shinyWidgets::prettyRadioButtons(
                          inputId = "logFChistogram_file_rnaseq_raw",
                          label = NULL,
@@ -2809,7 +3186,7 @@ observe({
         size = "m",
         footer = tagList(
           fluidRow(
-            column(6,align = "left",
+            column(12,align = "left",
                    shinyWidgets::prettyRadioButtons(
                      inputId = "volcano_file_rnaseq_raw",
                      label = NULL,
@@ -2929,7 +3306,7 @@ observe({
         size = "m",
         footer = tagList(
           fluidRow(
-            column(6,align = "left",
+            column(12,align = "left",
                    shinyWidgets::prettyRadioButtons(
                      inputId = "MA_file_rnaseq_raw",
                      label = NULL,
@@ -3213,13 +3590,17 @@ observe({
                        icon = icon("fas fa-mouse-pointer"),
                        br(),
                        h3(strong("Top table")),
-                       h5("The top table includes the output of the selected statistical analysis. 
+                       h5("The top table includes the output of the selected statistical comparison. 
                                 Click on the table to explore the data!"),
                        hr(),
                        DT::dataTableOutput(outputId = "top_table_rnaseq_raw") %>% 
                          shinycssloaders::withSpinner(color="#0dc5c1"),
                        downloadButton("download_top_table_rnaseq_raw", 
                                       "Download table"),
+                       actionButton("link_Phistogram_rnaseq_raw", 
+                                    "Explain table",
+                                    icon = shiny::icon("question-circle"),
+                                    onclick ="window.open('https://arrayanalysis.org/explain/Toptable', '_blank')"),
                        br(),
                        br(),
                        
@@ -3243,6 +3624,10 @@ observe({
                        actionButton("download_statboxplot_rnaseq_raw", 
                                     "Download figure",
                                     icon = shiny::icon("download")),
+                       actionButton("link_statboxplot_rnaseq_raw", 
+                                    "Explain figure",
+                                    icon = shiny::icon("question-circle"),
+                                    onclick ="window.open('https://arrayanalysis.org/explain/Geneboxplot', '_blank')"),
                        br(),
                        br()
               ),
@@ -3273,12 +3658,20 @@ observe({
                        actionButton("download_Phistogram_rnaseq_raw", 
                                     "Download figure",
                                     icon = shiny::icon("download")),
+                       actionButton("link_Phistogram_rnaseq_raw", 
+                                    "Explain figure",
+                                    icon = shiny::icon("question-circle"),
+                                    onclick ="window.open('https://arrayanalysis.org/explain/Phistogram', '_blank')"),
                        hr(),
                        plotly::plotlyOutput("logFChistogram_rnaseq_raw")%>% 
                          shinycssloaders::withSpinner(color="#0dc5c1"),
                        actionButton("download_logFChistogram_rnaseq_raw", 
                                     "Download figure",
-                                    icon = shiny::icon("download"))
+                                    icon = shiny::icon("download")),
+                       actionButton("link_logFChistogram_rnaseq_raw", 
+                                    "Explain figure",
+                                    icon = shiny::icon("question-circle"),
+                                    onclick ="window.open('https://arrayanalysis.org/explain/logFChistogram', '_blank')")
                        
               ),
               
@@ -3318,6 +3711,10 @@ observe({
                        actionButton("download_volcano_rnaseq_raw", 
                                     "Download figure",
                                     icon = shiny::icon("download")),
+                       actionButton("link_volcano_rnaseq_raw", 
+                                    "Explain figure",
+                                    icon = shiny::icon("question-circle"),
+                                    onclick ="window.open('https://arrayanalysis.org/explain/Volcanoplot', '_blank')"),
                        br(),
                        hr(),
                        fluidRow(
@@ -3397,6 +3794,10 @@ observe({
                        actionButton("download_MA_rnaseq_raw", 
                                     "Download figure",
                                     icon = shiny::icon("download")),
+                       actionButton("link_MA_rnaseq_raw", 
+                                    "Explain figure",
+                                    icon = shiny::icon("question-circle"),
+                                    onclick ="window.open('https://arrayanalysis.org/explain/MAplot', '_blank')"),
                        br(),
                        hr(),
                        fluidRow(
@@ -3514,7 +3915,7 @@ observe({
                        br(),
                        downloadButton("downloadStatSettings_rnaseq_raw", 
                                       "Download table"),
-                       downloadButton("downloadSessionInfo_rnaseq_raw", 
+                       downloadButton("downloadSessionInfo_SA_rnaseq_raw", 
                                       "Session info")
                        
               ) # EO Settings tabPanel
@@ -3631,7 +4032,7 @@ observe({
       
       # Perform ORA based on logFC/P value threshold(s)
       if (input$topNorThres_rnaseq_raw == "Threshold"){
-        rv$ORA_data <- ORA(top_table = rv$top_table[[input$comparisons_view_ORA_rnaseq_raw]],
+        rv$ORA_list <- ORA(top_table = rv$top_table[[input$comparisons_view_ORA_rnaseq_raw]],
                            geneset = input$geneset_ORA_rnaseq_raw,
                            geneID_col = input$geneID_ORA_rnaseq_raw,
                            geneID_type = input$selID_ORA_rnaseq_raw,
@@ -3642,6 +4043,9 @@ observe({
                            rawadj = input$rawp_ORA_rnaseq_raw,
                            p_thres = input$p_thres_ORA_rnaseq_raw,
                            logFC_thres = input$logFC_thres_ORA_rnaseq_raw)
+        
+        rv$ORA_data <- rv$ORA_list[["data"]]
+        rv$ORA_error <- rv$ORA_list[["error"]]
         
         
         rv$ORA_settings <- data.frame(
@@ -3665,7 +4069,7 @@ observe({
         
         # Perform ORA based on top N most significant genes
       } else{
-        rv$ORA_data <- ORA(top_table = rv$top_table[[input$comparisons_view_ORA_rnaseq_raw]],
+        rv$ORA_list <- ORA(top_table = rv$top_table[[input$comparisons_view_ORA_rnaseq_raw]],
                            geneset = input$geneset_ORA_rnaseq_raw,
                            geneID_col = input$geneID_ORA_rnaseq_raw,
                            geneID_type = input$selID_ORA_rnaseq_raw,
@@ -3676,6 +4080,9 @@ observe({
                            rawadj = NULL,
                            p_thres = NULL,
                            logFC_thres = NULL)
+        
+        rv$ORA_data <- rv$ORA_list[["data"]]
+        rv$ORA_error <- rv$ORA_list[["error"]]
         
         
         rv$ORA_settings <- data.frame(
@@ -3708,20 +4115,20 @@ observe({
         shinybusy::remove_modal_spinner()
         
         # Show error message
-        if (is.null(rv$ORA_data)){
-          sendSweetAlert(
+        if (rv$ORA_error){
+          shinyWidgets::sendSweetAlert(
             session = session,
             title = "Error!",
-            text = "No significant genes!",
+            text = "Oops...something went wrong! Please check whether the correct 
+            gene IDs and statistical thresholds have been selected.",
             type = "error")
-          
           # Show success message
         }else{
-          sendSweetAlert(
+          shinyWidgets::sendSweetAlert(
             session = session,
             title = "Info",
             text = "Overrepresentation analysis has been performed. You can download 
-              the results as well as view them in interactive plots.",
+              the results and view them in interactive plots.",
             type = "info")
           
           #--------------------------------------------------------------#
@@ -3883,7 +4290,7 @@ observe({
               size = "m",
               footer = tagList(
                 fluidRow(
-                  column(6,align = "left",
+                  column(12,align = "left",
                          shinyWidgets::prettyRadioButtons(
                            inputId = "ORAplot_file_rnaseq_raw",
                            label = NULL,
@@ -3979,7 +4386,7 @@ observe({
               size = "m",
               footer = tagList(
                 fluidRow(
-                  column(6,align = "left",
+                  column(12,align = "left",
                          shinyWidgets::prettyRadioButtons(
                            inputId = "ORAnetwork_file_rnaseq_raw",
                            label = NULL,
@@ -4118,6 +4525,10 @@ observe({
                          # Download button
                          downloadButton("download_ORA_table_rnaseq_raw", 
                                         "Download"),
+                         actionButton("link_ORA_table_rnaseq_raw", 
+                                      "Explain table",
+                                      icon = shiny::icon("question-circle"),
+                                      onclick ="window.open('https://arrayanalysis.org/explain/ORAtable', '_blank')"),
                          br(),
                          
                          # Title + description of gene table
@@ -4145,6 +4556,10 @@ observe({
                          actionButton("download_ORAplot_rnaseq_raw", 
                                       "Download figure",
                                       icon = shiny::icon("download")),
+                         actionButton("link_ORAplot_rnaseq_raw", 
+                                      "Explain figure",
+                                      icon = shiny::icon("question-circle"),
+                                      onclick ="window.open('https://arrayanalysis.org/explain/Barchart', '_blank')"),
                          br(),
                          br(),
                          
@@ -4195,6 +4610,10 @@ observe({
                          actionButton("download_ORAnetwork_rnaseq_raw", 
                                       "Download figure",
                                       icon = shiny::icon("download")),
+                         actionButton("link_ORAnetwork_rnaseq_raw", 
+                                      "Explain figure",
+                                      icon = shiny::icon("question-circle"),
+                                      onclick ="window.open('https://arrayanalysis.org/explain/Network', '_blank')"),
                          br(),
                          br(),
                          
@@ -4249,6 +4668,7 @@ observe({
                 #--------------------------------------------------------------#
                 tabPanel("Settings overview",
                          icon = icon("fas fa-file"),
+                         br(),
                          h3(strong("ORA settings")),
                          h5("To enhance reproducibility, download the overview of chosen ORA settings."),
                          hr(),
@@ -4257,7 +4677,7 @@ observe({
                          br(),
                          downloadButton("downloadORASettings_rnaseq_raw", 
                                         "Download table"),
-                         downloadButton("downloadSessionInfo_rnaseq_raw", 
+                         downloadButton("downloadSessionInfo_ORA_rnaseq_raw", 
                                         "Session info")
                          
                 )
@@ -4314,12 +4734,15 @@ observe({
       }
       
       # Perform GSEA:
-      rv$GSEA_data <- performGSEA(top_table = rv$top_table[[input$comparisons_view_ORA_rnaseq_raw]],
+      rv$GSEA_list <- performGSEA(top_table = rv$top_table[[input$comparisons_view_ORA_rnaseq_raw]],
                                   geneset = input$geneset_ORA_rnaseq_raw,
                                   geneID_col = input$geneID_ORA_rnaseq_raw,
                                   geneID_type = input$selID_ORA_rnaseq_raw,
                                   organism = input$organism_ORA_rnaseq_raw,
                                   rankingVar = input$ranking_GSEA_rnaseq_raw)
+      
+      rv$GSEA_data <- rv$GSEA_list[["data"]]
+      rv$GSEA_error <- rv$GSEA_list[["error"]]
       
       if (input$ranking_GSEA_rnaseq_raw == "pvalue"){
         rankvar <- "-log p-value"
@@ -4360,20 +4783,21 @@ observe({
         shinybusy::remove_modal_spinner()
         
         # Show error message
-        if (is.null(rv$GSEA_data)){
-          sendSweetAlert(
+        if (rv$GSEA_error){
+          shinyWidgets::sendSweetAlert(
             session = session,
             title = "Error!",
-            text = "No significant genes!",
+            text = "Oops...something went wrong! Please check whether the correct 
+            gene IDs and statistical thresholds have been selected.",
             type = "error")
           
           # Show success message
         }else{
-          sendSweetAlert(
+          shinyWidgets::sendSweetAlert(
             session = session,
             title = "Info",
             text = "Gene Set Enrichment Analysis has been performed. You can download 
-              the results as well as view them in interactive plots.",
+              the results and view them in interactive plots.",
             type = "info")
           
           #--------------------------------------------------------------#
@@ -4536,7 +4960,7 @@ observe({
               size = "m",
               footer = tagList(
                 fluidRow(
-                  column(6,align = "left",
+                  column(12,align = "left",
                          shinyWidgets::prettyRadioButtons(
                            inputId = "GSEAplot_file_rnaseq_raw",
                            label = NULL,
@@ -4635,7 +5059,7 @@ observe({
               size = "m",
               footer = tagList(
                 fluidRow(
-                  column(6,align = "left",
+                  column(12,align = "left",
                          shinyWidgets::prettyRadioButtons(
                            inputId = "GSEAnetwork_file_rnaseq_raw",
                            label = NULL,
@@ -4773,6 +5197,10 @@ observe({
                          # Download button
                          downloadButton("download_GSEA_table_rnaseq_raw",
                                         "Download"),
+                         actionButton("link_GSEA_table_rnaseq_raw", 
+                                      "Explain table",
+                                      icon = shiny::icon("question-circle"),
+                                      onclick ="window.open('https://arrayanalysis.org/explain/GSEAtable', '_blank')"),
                          br(),
                          
                          # Title + description of gene table
@@ -4800,6 +5228,10 @@ observe({
                          actionButton("download_GSEAplot_rnaseq_raw", 
                                       "Download figure",
                                       icon = shiny::icon("download")),
+                         actionButton("link_GSEAplot_rnaseq_norm", 
+                                      "Explain figure",
+                                      icon = shiny::icon("question-circle"),
+                                      onclick ="window.open('https://arrayanalysis.org/explain/Barchart', '_blank')"),
                          br(),
                          br(),
                          
@@ -4852,6 +5284,10 @@ observe({
                          actionButton("download_GSEAnetwork_rnaseq_raw", 
                                       "Download figure",
                                       icon = shiny::icon("download")),
+                         actionButton("link_GSEAnetwork_rnaseq_raw", 
+                                      "Explain figure",
+                                      icon = shiny::icon("question-circle"),
+                                      onclick ="window.open('https://arrayanalysis.org/explain/Network', '_blank')"),
                          br(),
                          br(),
                          
@@ -4905,6 +5341,7 @@ observe({
                 #--------------------------------------------------------------#
                 tabPanel("Settings overview",
                          icon = icon("fas fa-file"),
+                         br(),
                          h3(strong("GSEA settings")),
                          h5("To enhance reproducibility, download the overview of chosen GSEA settings."),
                          hr(),
@@ -4913,7 +5350,7 @@ observe({
                          br(),
                          downloadButton("downloadGSEASettings_rnaseq_raw", 
                                         "Download table"),
-                         downloadButton("downloadSessionInfo_rnaseq_raw", 
+                         downloadButton("downloadSessionInfo_GSEA_rnaseq_raw", 
                                         "Session info")
                          
                 )
