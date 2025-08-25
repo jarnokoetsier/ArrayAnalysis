@@ -120,7 +120,7 @@ layout: default
       <p class="card-text">Pull the ArrayAnalysis image with the following command:</p>
        <pre>
       <code>
-     docker pull jarnokoetsier/arrayanalysis
+     docker pull jarnokoetsier/arrayanalysis:0.1.1
      </code>
       </pre>
     </div>
@@ -133,7 +133,7 @@ layout: default
             <p class="card-text">Run ArrayAnalysis with the following command:</p>
       <pre>
       <code>
-     docker run -d --rm -p 3838:3838 jarnokoetsier/arrayanalysis
+     docker run -d --rm -p 3838:3838 jarnokoetsier/arrayanalysis:0.1.1
      </code>
       </pre>
     </div>
