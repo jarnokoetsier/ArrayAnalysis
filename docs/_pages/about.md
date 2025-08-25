@@ -28,7 +28,7 @@ layout: default
 		  <p><a href="mailto:arrayanalysis-fhml@maastrichtuniversity.nl" target="_blank" style="color: white;">arrayanalysis-fhml@maastrichtuniversity.nl</a></p>
 		  <br>
 		  <p style="font-size: 30px"><b>GitHub</b></p>
-		  <p><a href="https://github.com/jarnokoetsier/ArrayAnalysis" target="_blank" style="color: white;">jarnokoetsier/ArrayAnalysis</a></p>
+		  <p><a href="https://github.com/ArrayAnalysis/ArrayAnalysis_Shiny" target="_blank" style="color: white;">ArrayAnalysis/ArrayAnalysis_shiny</a></p>
 	  </div>
   </div>
 </div>

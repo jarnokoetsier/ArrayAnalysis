@@ -10,8 +10,8 @@ layout: default
   <div class="col-sm-12 px-3">
 	  <div class="jumbotron p-5 h-100" style="text-align: left">
 		  <h3><b>Where can I ask questions?</b></h3>
-		  <p>You can post your question or start a discussion in the <a href="https://github.com/jarnokoetsier/ArrayAnalysis/discussions">ArrayAnalysis Discussions</a> forum.
-		   If you have identified bugs or have a feature request, you can create an issue on our <a href="https://github.com/jarnokoetsier/ArrayAnalysis/issues">GitHub</a> page.</p>
+		  <p>You can post your question or start a discussion in the <a href="https://github.com/arrayanalysis/ArrayAnalysis_Shiny/discussions">ArrayAnalysis Discussions</a> forum.
+		   If you have identified bugs or have a feature request, you can create an issue on our <a href="https://github.com/arrayanalysis/ArrayAnalysis_Shiny/issues">GitHub</a> page.</p>
 	  </div>
   </div>
 </div>

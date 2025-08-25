@@ -6,8 +6,8 @@ layout: default
 <br>
 <div class="container px-1">
 <p>If you need help, please visit our 'Documentation', 'FAQ', 'Tutorials', or 'Figures & Tables' page. 
- Moreover, you can also post your question or start a discussion in the <a href="https://github.com/jarnokoetsier/ArrayAnalysis/discussions">ArrayAnalysis Discussions</a> forum.
-		   If you have identified bugs or have a feature request, you can create an issue on our <a href="https://github.com/jarnokoetsier/ArrayAnalysis/issues">GitHub</a> page 
+ Moreover, you can also post your question or start a discussion in the <a href="https://github.com/arrayanalysis/ArrayAnalysis_Shiny/discussions">ArrayAnalysis Discussions</a> forum.
+		   If you have identified bugs or have a feature request, you can create an issue on our <a href="https://github.com/arrayanalysis/ArrayAnalysis_Shiny/issues">GitHub</a> page 
 		   or send us an email: <a href="mailto:arrayanalysis-fhml@maastrichtuniversity.nl" target="_blank">arrayanalysis-fhml@maastrichtuniversity.nl</a></p>
 <br>
 <div class="card-deck text-center">
