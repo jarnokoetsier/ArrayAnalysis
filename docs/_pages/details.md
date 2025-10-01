@@ -105,7 +105,7 @@ you can use this option to add gene symbols or Ensembl gene IDs to the statistic
 Click <a href = "https://arrayanalysis.org/explain/Toptable" target="_blank">here</a> for more information on this table.</p>
 <p><b>2. p-value and log<sub>2</sub>FC histograms.</b> These plots show the distribution of p-values and log<sub>2</sub>FCs.
 Click for more information on the <a href = "https://arrayanalysis.org/explain/Phistogram" target="_blank">p-value histogram</a> 
-and <a href = "https://arrayanalysis.org/explain/logFChistogram" target="_blank">log<sub>2</sub>FC histogram</a> .</p>
+and <a href = "https://arrayanalysis.org/explain/logFChistogram" target="_blank">log<sub>2</sub>FC histogram</a>.</p>
 <p><b>3. Volcano plot.</b> Scatter plot of log<sub>2</sub>FC versus -log<sub>10</sub> p-value. 
 Click <a href = "https://arrayanalysis.org/explain/Volcanoplot" target="_blank">here</a> for more information on this figure.</p>
 <p><b>4. MA plot.</b> Scatter plot of mean log<sub>2</sub> expression versus log<sub>2</sub>FC. 
@@ -189,7 +189,7 @@ The edge thickness is proportional to the Jaccard Index (<i>i.e.</i>, number of 
 Click <a href = "https://arrayanalysis.org/explain/Network" target="_blank">here</a> for more information on this figure.</p>
 
 <p><b>4. Settings.</b> Download the overview of the GSEA settings and session info to ensure reproducibility.</p>  
-</div>
+
 <hr>
 <br>
 
@@ -283,7 +283,7 @@ you can use this option to add gene symbols or Ensembl gene IDs to the statistic
 Click <a href = "https://arrayanalysis.org/explain/Toptable" target="_blank">here</a> for more information on this table.</p>
 <p><b>2. p-value and log<sub>2</sub>FC histograms.</b> These plots show the distribution of p-values and log<sub>2</sub>FCs.
 Click for more information on the <a href = "https://arrayanalysis.org/explain/Phistogram" target="_blank">p-value histogram</a> 
-and <a href = "https://arrayanalysis.org/explain/logFChistogram" target="_blank">log<sub>2</sub>FC histogram</a> .</p>
+and <a href = "https://arrayanalysis.org/explain/logFChistogram" target="_blank">log<sub>2</sub>FC histogram</a>.</p>
 <p><b>3. Volcano plot.</b> Scatter plot of log<sub>2</sub>FC versus -log<sub>10</sub> p-value. 
 Click <a href = "https://arrayanalysis.org/explain/Volcanoplot" target="_blank">here</a> for more information on this figure.</p>
 <p><b>4. MA plot.</b> Scatter plot of mean log<sub>2</sub> expression versus log<sub>2</sub>FC. 
@@ -368,7 +368,7 @@ The edge thickness is proportional to the Jaccard Index (<i>i.e.</i>, number of 
 Click <a href = "https://arrayanalysis.org/explain/Network" target="_blank">here</a> for more information on this figure.</p>
 
 <p><b>4. Settings.</b> Download the overview of the GSEA settings and session info to ensure reproducibility.</p>
-</div>
+
 <hr>
 <br>
 
@@ -429,7 +429,7 @@ Please always check the QC plots carefully to decide whether samples should be e
 <p>Data and preprocessing quality can be checked in the different output tables and figures:</p>
 <p><b>1. Normalized expression matrix.</b> A table of normalized expression values is provided and can be downloaded. 
 You can view the expression profile of individual genes by clicking on the table. 
-Click <a href = "https://arrayanalysis.org/explain/Geneboxplot" target="_blank">here</a> for more information on this figure.</p></p>
+Click <a href = "https://arrayanalysis.org/explain/Geneboxplot" target="_blank">here</a> for more information on this figure.</p>
 
 <p><b>2. Boxplots.</b> The boxplots show the distribution of expression values across all samples. 
 Click <a href = "https://arrayanalysis.org/explain/Sampleboxplot" target="_blank">here</a> for more information on this figure.</p>
@@ -471,7 +471,7 @@ you can use this option to add gene symbols or Ensembl gene IDs to the statistic
 Click <a href = "https://arrayanalysis.org/explain/Toptable" target="_blank">here</a> for more information on this table.</p>
 <p><b>2. p-value and log<sub>2</sub>FC histograms.</b> These plots show the distribution of p-values and log<sub>2</sub>FCs.
 Click for more information on the <a href = "https://arrayanalysis.org/explain/Phistogram" target="_blank">p-value histogram</a> 
-and <a href = "https://arrayanalysis.org/explain/logFChistogram" target="_blank">log<sub>2</sub>FC histogram</a> .</p>
+and <a href = "https://arrayanalysis.org/explain/logFChistogram" target="_blank">log<sub>2</sub>FC histogram</a>.</p>
 <p><b>3. Volcano plot.</b> Scatter plot of log<sub>2</sub>FC versus -log<sub>10</sub> p-value. 
 Click <a href = "https://arrayanalysis.org/explain/Volcanoplot" target="_blank">here</a> for more information on this figure.</p>
 <p><b>4. MA plot.</b> Scatter plot of mean log<sub>2</sub> expression versus log<sub>2</sub>FC. 
@@ -556,7 +556,7 @@ The edge thickness is proportional to the Jaccard Index (<i>i.e.</i>, number of 
 Click <a href = "https://arrayanalysis.org/explain/Network" target="_blank">here</a> for more information on this figure.</p>
 
 <p><b>4. Settings.</b> Download the overview of the GSEA settings and session info to ensure reproducibility.</p>
-</div>
+
 <hr>
 <br>
 
@@ -652,7 +652,7 @@ you can use this option to add gene symbols or Ensembl gene IDs to the statistic
 Click <a href = "https://arrayanalysis.org/explain/Toptable" target="_blank">here</a> for more information on this table.</p>
 <p><b>2. p-value and log<sub>2</sub>FC histograms.</b> These plots show the distribution of p-values and log<sub>2</sub>FCs.
 Click for more information on the <a href = "https://arrayanalysis.org/explain/Phistogram" target="_blank">p-value histogram</a> 
-and <a href = "https://arrayanalysis.org/explain/logFChistogram" target="_blank">log<sub>2</sub>FC histogram</a> .</p>
+and <a href = "https://arrayanalysis.org/explain/logFChistogram" target="_blank">log<sub>2</sub>FC histogram</a>.</p>
 <p><b>3. Volcano plot.</b> Scatter plot of log<sub>2</sub>FC versus -log<sub>10</sub> p-value. 
 Click <a href = "https://arrayanalysis.org/explain/Volcanoplot" target="_blank">here</a> for more information on this figure.</p>
 <p><b>4. MA plot.</b> Scatter plot of mean log<sub>2</sub> expression versus log<sub>2</sub>FC. 
@@ -737,5 +737,5 @@ The edge thickness is proportional to the Jaccard Index (<i>i.e.</i>, number of 
 Click <a href = "https://arrayanalysis.org/explain/Network" target="_blank">here</a> for more information on this figure.</p>
 
 <p><b>4. Settings.</b> Download the overview of the GSEA settings and session info to ensure reproducibility.</p>
-</div>
+
 <hr>
