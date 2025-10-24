@@ -25,9 +25,9 @@ layout: default
     <div class="card-body">
       <h5 class="card-title">2. Install ArrayAnalysis</h5>
       <p class="card-text">You can download ArrayAnalysis for
-      <a href = "https://zenodo.org/records/16947312/files/ArrayAnalysis_unix_0.1.1.sh?download=1">Linux</a>,
-      <a href = "https://zenodo.org/records/16947312/files/ArrayAnalysis_macos_0.1.1.dmg?download=1">MacOS</a>, and 
-      <a href = "https://zenodo.org/records/16947312/files/ArrayAnalysis_windows-x64_0.1.1.exe?download=1">Windows</a>.</p>
+      <a href = "https://zenodo.org/records/17431590/files/ArrayAnalysis_unix_0.1.2.sh?download=1">Linux</a>,
+      <a href = "https://zenodo.org/records/17431590/files/ArrayAnalysis_macos_0.1.2.dmg?download=1">MacOS</a>, and 
+      <a href = "https://zenodo.org/records/17431590/files/ArrayAnalysis_windows-x64_0.1.2.exe?download=1">Windows</a>.</p>
       <hr>
       <p style="font-size: 12px">Does file security prevent you from running the file? Click <a href="{{ "/unblock" | relative_url}}">here</a> what to do.</p>
     </div>
@@ -133,7 +133,7 @@ layout: default
             <p class="card-text">Run ArrayAnalysis with the following command:</p>
       <pre>
       <code>
-     docker run -d --rm -p 3838:3838 arrayanalysis/arrayanalysis_shiny:0.1.1
+     docker run -d --rm -p 3838:3838 arrayanalysis/arrayanalysis_shiny:0.1.2
      </code>
       </pre>
     </div>
@@ -160,7 +160,7 @@ layout: default
     <img src="{{ "/assets/img/icons/install_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="inspiration-icon">
     <div class="card-body">
       <h5 class="card-title">2. Download ArrayAnalysis</h5>
-      <p class="card-text">You can download the ArrayAnalysis zip file <a href = "https://zenodo.org/records/16939731/files/jarnokoetsier/ArrayAnalysis_Shiny-v0.1.1.zip?download=1">here</a>. Unzip the file.</p>
+      <p class="card-text">You can download the ArrayAnalysis zip file <a href = "https://zenodo.org/records/17431462/files/jarnokoetsier/ArrayAnalysis_Shiny-v0.1.2.zip?download=1">here</a>. Unzip the file.</p>
     </div>
   </div>
   
