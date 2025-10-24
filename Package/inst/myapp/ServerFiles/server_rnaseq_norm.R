@@ -139,13 +139,10 @@ observe({
     if(nrow(rv$metaData)>0){
       
       # check if some samples are removed
-      if (nrow(rv$metaData) != ncol(rv$gxData)){
-        shinyWidgets::sendSweetAlert(
-          session = session,
-          title = "Warning!",
-          text = "One or more sample(s) in the expression data file do(es) not have metadata available. 
-          These samples are excluded from the analysis.",
-          type = "warning")
+      if (nrow(rv$metaData) < ncol(rv$gxData)){
+        rv$removeSamplesWarning <- TRUE
+      } else{
+        rv$removeSamplesWarning <- FALSE
       }
       
       # Filter expression data for samples with metadata
@@ -235,12 +232,22 @@ observe({
         
         # Show message
         if (nrow(rv$metaData) >= ncol(rv$gxData)){
-          shinyWidgets::sendSweetAlert(
-            session = session,
-            title = "Info",
-            text = "The data has been uploaded. Please check the tables on this 
-                page to see whether the data has been correctly uploaded.",
-            type = "info")
+          
+          if (rv$removeSamplesWarning){
+            shinyWidgets::sendSweetAlert(
+              session = session,
+              title = "Warning!",
+              text = "One or more samples in the expression data file do not have a matching
+                  metadata entry. These samples are excluded from the expression matrix.",
+              type = "warning")
+          } else{
+            shinyWidgets::sendSweetAlert(
+              session = session,
+              title = "Info",
+              text = "Great! Your data is uploaded. 
+            Take a look at the tables on this page to make sure everything uploaded correctly.",
+              type = "info")
+          }
         }
         
         # Show "next" button
@@ -393,8 +400,8 @@ observe({
           shinyWidgets::sendSweetAlert(
             session = session,
             title = "Info",
-            text = "The data has been uploaded. Please check the tables on this 
-                page to see whether the data has been correctly uploaded.",
+            text = "Great! Your data is uploaded. 
+            Take a look at the tables on this page to make sure everything uploaded correctly.",
             type = "info")
         }
         
@@ -673,8 +680,8 @@ observe({
         shinyWidgets::sendSweetAlert(
           session = session,
           title = "Info",
-          text = "The data has been pre-processed. Please check the different 
-              QC plots on this page to assess the pre-processing quality.",
+          text = "Perfect! The data has been pre-processed. Please check the different 
+              QC plots on this page to assess pre-processing quality.",
           type = "info")
       } else{
         shinyWidgets::sendSweetAlert(
@@ -682,7 +689,7 @@ observe({
           title = "Warning",
           text = HTML(paste0("<p>The data has been pre-processed, but the following sample(s) 
           might be outliers:</p><br><p><b>", paste(rv$suggestedOutliers, collapse = ", "),
-                             "</b></p><br><p>Please review the QC plots on this page to assess the pre-processing quality 
+                             "</b></p><br><p>Please review the QC plots on this page to assess pre-processing quality 
           and determine whether these outliers should be removed.</p>")),
           type = "warning",
           html = TRUE)
@@ -1721,48 +1728,48 @@ observe({
         })
         
       }
-      })
+    })
+    
+    observe({
+      req(rv$colorFactor_PCA)
       
-      observe({
-        req(rv$colorFactor_PCA)
+      # Set colors
+      if (length(levels(rv$colorFactor_PCA)) > 5){
+        rv$legendColors_PCA <- colorsByFactor(rv$colorFactor_PCA)$legendColors
+      } else{
+        rv$legendColors_PCA <- c(input$PCA_col1_rnaseq_norm,
+                                 input$PCA_col2_rnaseq_norm,
+                                 input$PCA_col3_rnaseq_norm,
+                                 input$PCA_col4_rnaseq_norm,
+                                 input$PCA_col5_rnaseq_norm)[1:length(levels(rv$colorFactor_PCA))]
+      }
+    })
+    
+    observe({
+      req(rv$legendColors_PCA)
+      req(rv$colorFactor_PCA)
+      
+      # Make PCA plot
+      output$PCA_rnaseq_norm <- plotly::renderPlotly({
         
-        # Set colors
-        if (length(levels(rv$colorFactor_PCA)) > 5){
-          rv$legendColors_PCA <- colorsByFactor(rv$colorFactor_PCA)$legendColors
-        } else{
-          rv$legendColors_PCA <- c(input$PCA_col1_rnaseq_norm,
-                                   input$PCA_col2_rnaseq_norm,
-                                   input$PCA_col3_rnaseq_norm,
-                                   input$PCA_col4_rnaseq_norm,
-                                   input$PCA_col5_rnaseq_norm)[1:length(levels(rv$colorFactor_PCA))]
+        colorFactor <- rv$colorFactor_PCA
+        legendColors <- rv$legendColors_PCA
+        
+        if (length(legendColors) != length(levels(colorFactor))){
+          legendColors <- colorsByFactor(colorFactor)$legendColors
         }
-      })
-      
-      observe({
-        req(rv$legendColors_PCA)
-        req(rv$colorFactor_PCA)
         
-        # Make PCA plot
-        output$PCA_rnaseq_norm <- plotly::renderPlotly({
-          
-          colorFactor <- rv$colorFactor_PCA
-          legendColors <- rv$legendColors_PCA
-          
-          if (length(legendColors) != length(levels(colorFactor))){
-            legendColors <- colorsByFactor(colorFactor)$legendColors
-          }
-          
-          # Make PCA score plot
-          rv$PCAplot <- plot_PCA(PC_data = rv$PCA_data, 
-                                 colorFactor = colorFactor,
-                                 legendColors = legendColors, 
-                                 xpc = as.numeric(stringr::str_remove(input$xpca_rnaseq_norm,"PC")), 
-                                 ypc = as.numeric(stringr::str_remove(input$ypca_rnaseq_norm,"PC")), 
-                                 zpc = ifelse(input$xyz_rnaseq_norm,as.numeric(stringr::str_remove(input$zpca_rnaseq_norm,"PC")),3), 
-                                 xyz = input$xyz_rnaseq_norm)
-          return(rv$PCAplot)
-        })
+        # Make PCA score plot
+        rv$PCAplot <- plot_PCA(PC_data = rv$PCA_data, 
+                               colorFactor = colorFactor,
+                               legendColors = legendColors, 
+                               xpc = as.numeric(stringr::str_remove(input$xpca_rnaseq_norm,"PC")), 
+                               ypc = as.numeric(stringr::str_remove(input$ypca_rnaseq_norm,"PC")), 
+                               zpc = ifelse(input$xyz_rnaseq_norm,as.numeric(stringr::str_remove(input$zpca_rnaseq_norm,"PC")),3), 
+                               xyz = input$xyz_rnaseq_norm)
+        return(rv$PCAplot)
       })
+    })
     
     #***************************#
     # Modal to download figure
@@ -1946,8 +1953,8 @@ observe({
           tabPanel("Expression values",
                    icon = icon("fas fa-mouse-pointer"),
                    h3(strong("Normalized expression values")),
-                   h5("Here you can view the normalized and log-transformed counts. 
-                              Click on the table to explore the data!"),
+                   h5(HTML("Here you can view and download the normalized and log<sub>2</sub>-transformed counts. 
+                              Click on the table explore the data!")),
                    hr(),
                    dataTableOutput(outputId = "exprTable_rnaseq_norm") %>% 
                      withSpinner(color="#0dc5c1"),
@@ -2382,10 +2389,10 @@ observe({
                                            position = "right",
                                            size = "large")
                   ),
-                  choices = c("Ensembl Gene ID",
-                              "Entrez Gene ID",
-                              "Gene Symbol/Name"),
-                  selected = "Entrez Gene ID",
+                  choices = c("Ensembl Gene ID" = "ENSEMBL",
+                              "Entrez Gene ID" = "ENTREZID",
+                              "Gene Symbol/Name" = "SYMBOL"),
+                  selected = whichID(rownames(rv$normData)),
                   multiple = FALSE),
       
       selectInput(inputId = "biomart_attributes_rnaseq_norm",
@@ -2401,10 +2408,11 @@ observe({
                                            position = "right",
                                            size = "large")
                   ),
-                  choices = c("Ensembl Gene ID",
-                              "Entrez Gene ID",
-                              "Gene Symbol/Name"),
-                  selected = "Gene Symbol/Name",
+                  choices = c("Ensembl Gene ID" = "ENSEMBL",
+                              "Entrez Gene ID" = "ENTREZID",
+                              "Gene Symbol/Name" = "SYMBOL"),
+                  selected = ifelse(whichID(rownames(rv$normData)) == "SYMBOL",
+                                    "ENSEMBL", "SYMBOL"),
                   multiple = TRUE)
     )
     
@@ -2622,7 +2630,7 @@ observe({
                             input$statboxplot_col6_rnaseq_norm)
         }
         
-        gene <- rv$top_table[[input$comparisons_view_rnaseq_norm]]$GeneID[input$top_table_rnaseq_norm_rows_selected]
+        gene <- rv$top_table[[input$comparisons_view_rnaseq_norm]]$`Gene ID`[input$top_table_rnaseq_norm_rows_selected]
         sel_row <- which(as.character(rownames(rv$normData)) %in% as.character(gene))
         
         # Make boxplot
@@ -3813,7 +3821,26 @@ observe({
                     label = "Which column of the top table contains the gene IDs?",
                     choices = colnames(rv$top_table[[1]])[col_choice],
                     selected = colnames(rv$top_table[[1]])[1],
-                    multiple = FALSE)
+                    multiple = FALSE),
+        
+        # Which gene IDs do they column contain?
+        selectInput(inputId = "selID_ORA_rnaseq_norm",
+                    label =  tags$span(
+                      "Which gene ID to use?", 
+                      tags$span(
+                        icon(
+                          name = "question-circle",
+                        ) 
+                      ) |>
+                        prompter::add_prompt(message = "Select which gene ID is 
+                                               used in the top table.", 
+                                             position = "right",
+                                             size = "large")
+                    ),
+                    choices = c("Ensembl Gene ID" = "ENSEMBL", 
+                                "Entrez Gene ID" = "ENTREZID", 
+                                "Gene Symbol/Name" = "SYMBOL"),
+                    selected = whichID(rv$top_table[[1]][,1]))
         
       )
     })
@@ -3948,7 +3975,7 @@ observe({
           shinyWidgets::sendSweetAlert(
             session = session,
             title = "Info",
-            text = "Overrepresentation analysis has been performed. You can download 
+            text = "Great! Overrepresentation Analysis has been performed. You can now download 
               the results as well as view them in interactive plots.",
             type = "info")
           
@@ -4035,7 +4062,7 @@ observe({
             
             output$`p-value` <- format(output$`p-value`, scientific=TRUE, digits = 3)
             output$`adj. p-value` <- format(output$`adj. p-value`, scientific=TRUE, digits = 3)
-            output$meanExpr <- round(output$meanExpr,3)
+            output$`Mean Expr` <- round(output$`Mean Expr`,3)
             output$log2FC <- round(output$log2FC,3)
             output$`log2FC SE` <- round(output$`log2FC SE`,3)
             
@@ -4617,7 +4644,7 @@ observe({
           shinyWidgets::sendSweetAlert(
             session = session,
             title = "Info",
-            text = "Gene Set Enrichment Analysis has been performed. You can download 
+            text = "Great! Gene Set Enrichment Analysis has been performed. You can now download 
               the results as well as view them in interactive plots.",
             type = "info")
           
@@ -4704,7 +4731,7 @@ observe({
             
             output$`p-value` <- format(output$`p-value`, scientific=TRUE, digits = 3)
             output$`adj. p-value` <- format(output$`adj. p-value`, scientific=TRUE, digits = 3)
-            output$meanExpr <- round(output$meanExpr,3)
+            output$`Mean Expr` <- round(output$`Mean Expr`,3)
             output$log2FC <- round(output$log2FC,3)
             output$`log2FC SE` <- round(output$`log2FC SE`,3)
             
@@ -5100,7 +5127,7 @@ observe({
                          
                          # Title + description of the network diagram
                          h3(strong("Network diagram")),
-                         h5("The network diagram visualize the similarity between the most significant gene sets."),
+                         h5("The network diagram visualizes the similarity between the most significant gene sets."),
                          hr(),
                          actionButton("download_GSEAnetwork_rnaseq_norm", 
                                       "Download figure",

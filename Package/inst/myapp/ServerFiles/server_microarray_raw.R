@@ -148,12 +148,9 @@ observe({
       
       # Check whether all expression samples have metadata available
       if (nrow(rv$metaData) < length(rv$celfiles)){
-        shinyWidgets::sendSweetAlert(
-          session = session,
-          title = "Warning!",
-          text = "One or more samples in the expression data file do not have meta
-                  data available. These samples are excluded from the analysis.",
-          type = "warning")
+        rv$removeSamplesWarning <- TRUE
+      } else{
+        rv$removeSamplesWarning <- FALSE
       }
       
       
@@ -243,12 +240,22 @@ observe({
         
         # Show message
         if (nrow(rv$metaData) >= length(rv$celfiles)){
-          shinyWidgets::sendSweetAlert(
-            session = session,
-            title = "Info",
-            text = "The data has been uploaded. Please check the tables on this 
-                page to see whether the data has been correctly uploaded.",
-            type = "info")
+          
+          if (rv$removeSamplesWarning){
+            shinyWidgets::sendSweetAlert(
+              session = session,
+              title = "Warning!",
+              text = "One or more samples in the expression data file do not have a matching
+                  metadata entry. These samples are excluded from the expression matrix.",
+              type = "warning")
+          } else{
+            shinyWidgets::sendSweetAlert(
+              session = session,
+              title = "Info",
+              text = "Great! Your data is uploaded. 
+            Take a look at the tables on this page to make sure everything uploaded correctly.",
+              type = "info")
+          }
         }
         
         # Show "next" button
@@ -427,8 +434,8 @@ observe({
           shinyWidgets::sendSweetAlert(
             session = session,
             title = "Info",
-            text = "The data has been succesfully uploaded. Please check 
-                  the tables on this page to see whether the data has been correctly uploaded.",
+            text = "Great! Your data is uploaded. 
+            Take a look at the tables on this page to make sure everything uploaded correctly.",
             type = "info")
         }
         
@@ -700,8 +707,8 @@ observe({
         shinyWidgets::sendSweetAlert(
           session = session,
           title = "Info",
-          text = "The data has been pre-processed. Please check the different 
-              QC plots on this page to assess the pre-processing quality.",
+          text = "Perfect! The data has been pre-processed. Please check the different 
+              QC plots on this page to assess pre-processing quality.",
           type = "info")
       } else{
         shinyWidgets::sendSweetAlert(
@@ -709,7 +716,7 @@ observe({
           title = "Warning",
           text = HTML(paste0("<p>The data has been pre-processed, but the following sample(s) 
           might be outliers:</p><br><p><b>", paste(rv$suggestedOutliers, collapse = ", "),
-                             "</b></p><br><p>Please review the QC plots on this page to assess the pre-processing quality 
+                             "</b></p><br><p>Please review the QC plots on this page to assess pre-processing quality 
           and determine whether these outliers should be removed.</p>")),
           type = "warning",
           html = TRUE)
@@ -2012,8 +2019,8 @@ observe({
           tabPanel("Expression values",
                    icon = icon("fas fa-mouse-pointer"),
                    h3(strong("Normalized expression values")),
-                   h5("Here you can view the normalized and log-transformed intensities. 
-                              Click on the table to explore the data!"),
+                   h5(HTML("Here you can view and download the normalized and log<sub>2</sub>-transformed intensities. 
+                              Click on the table explore the data!")),
                    hr(),
                    DT::dataTableOutput(outputId = "exprTable_microarray_raw") %>% 
                      withSpinner(color="#0dc5c1"),
@@ -2468,10 +2475,10 @@ observe({
                                            position = "right",
                                            size = "large")
                   ),
-                  choices = c("Ensembl Gene ID",
-                              "Entrez Gene ID",
-                              "Gene Symbol/Name"),
-                  selected = "Gene Symbol/Name",
+                  choices = c("Ensembl Gene ID" = "ENSEMBL",
+                              "Entrez Gene ID" = "ENTREZID",
+                              "Gene Symbol/Name" = "SYMBOL"),
+                  selected = "SYMBOL",
                   multiple = TRUE)
     )
     
@@ -2727,7 +2734,7 @@ observe({
                             input$statboxplot_col6_microarray_raw)
         }
         
-        gene <- rv$top_table[[input$comparisons_view_microarray_raw]]$GeneID[input$top_table_microarray_raw_rows_selected]
+        gene <- rv$top_table[[input$comparisons_view_microarray_raw]]$`Gene ID`[input$top_table_microarray_raw_rows_selected]
         sel_row <- which(as.character(rownames(rv$normMatrix)) %in% as.character(gene))
         
         # Make boxplot
@@ -3926,7 +3933,26 @@ observe({
                     label = "Which column of the top table contains the gene IDs?",
                     choices = colnames(rv$top_table[[1]])[col_choice],
                     selected = colnames(rv$top_table[[1]])[1],
-                    multiple = FALSE)
+                    multiple = FALSE),
+        
+        # Which gene IDs do they column contain?
+        selectInput(inputId = "selID_ORA_microarray_raw",
+                    label = tags$span(
+                      "Which gene ID to use?", 
+                      tags$span(
+                        icon(
+                          name = "question-circle",
+                        ) 
+                      ) |>
+                        prompter::add_prompt(message = "Select which gene ID is 
+                                               used in the top table.", 
+                                             position = "right",
+                                             size = "large")
+                    ),
+                    choices = c("Ensembl Gene ID" = "ENSEMBL", 
+                                "Entrez Gene ID" = "ENTREZID", 
+                                "Gene Symbol/Name" = "SYMBOL"),
+                    selected = whichID(rv$top_table[[1]][,1]))
       )
     })
   })
@@ -4059,7 +4085,7 @@ observe({
           shinyWidgets::sendSweetAlert(
             session = session,
             title = "Info",
-            text = "Overrepresentation analysis has been performed. You can download 
+            text = "Great! Overrepresentation Analysis has been performed. You can now download 
               the results as well as view them in interactive plots.",
             type = "info")
           
@@ -4147,7 +4173,7 @@ observe({
               
               output$`p-value` <- format(output$`p-value`, scientific=TRUE, digits = 3)
               output$`adj. p-value` <- format(output$`adj. p-value`, scientific=TRUE, digits = 3)
-              output$meanExpr <- round(output$meanExpr,3)
+              output$`Mean Expr` <- round(output$`Mean Expr`,3)
               output$log2FC <- round(output$log2FC,3)
               output$`log2FC SE` <- round(output$`log2FC SE`,3)
               
@@ -4733,7 +4759,7 @@ observe({
           shinyWidgets::sendSweetAlert(
             session = session,
             title = "Info",
-            text = "Gene Set Enrichment Analysis has been performed. You can download 
+            text = "Great! Gene Set Enrichment Analysis has been performed. You can now download 
               the results as well as view them in interactive plots.",
             type = "info")
           
@@ -4820,7 +4846,7 @@ observe({
             
             output$`p-value` <- format(output$`p-value`, scientific=TRUE, digits = 3)
             output$`adj. p-value` <- format(output$`adj. p-value`, scientific=TRUE, digits = 3)
-            output$meanExpr <- round(output$meanExpr,3)
+            output$`Mean Expr` <- round(output$`Mean Expr`,3)
             output$log2FC <- round(output$log2FC,3)
             output$`log2FC SE` <- round(output$`log2FC SE`,3)
             
@@ -5216,7 +5242,7 @@ observe({
                          
                          # Title + description of the network diagram
                          h3(strong("Network diagram")),
-                         h5("The network diagram visualize the similarity between the most significant gene sets."),
+                         h5("The network diagram visualizes the similarity between the most significant gene sets."),
                          hr(),
                          actionButton("download_GSEAnetwork_microarray_raw", 
                                       "Download figure",

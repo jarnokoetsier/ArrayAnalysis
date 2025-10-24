@@ -120,7 +120,7 @@ layout: default
       <p class="card-text">Pull the ArrayAnalysis image with the following command:</p>
        <pre>
       <code>
-     docker pull arrayanalysis/arrayanalysis_shiny:0.1.1
+     docker pull arrayanalysis/arrayanalysis_shiny:0.1.2
      </code>
       </pre>
     </div>

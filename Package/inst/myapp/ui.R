@@ -14,7 +14,7 @@ ui <- tagList(
                            margin: 0;
                            padding: 0;
                            }
-                            .navbar-nav > li:nth-child(18) {
+                            .navbar-nav > li:nth-child(19) {
                            float: right;
                             }
                            
@@ -105,6 +105,39 @@ ui <- tagList(
                #  Home panel                        
                
                ###################################################################
+               tabPanel("Loading", 
+                        value = "loading_panel", 
+                        icon = icon("sync"), 
+                        class = "my_style_1",
+                        
+                        # Set spacing between top of page and text box
+                        br(),
+                        br(),
+                        br(),
+                        br(),
+                        br(),
+                        br(),
+                        
+                        fluidRow(
+                          column(6, offset = 3, 
+                                 align = "center", 
+                                 style = "background-color:rgba(255, 255, 255, 0.95); border-radius: 15px;",
+                                 
+                                 # Line break
+                                 br(),
+                                 
+                                 # ArrayAnalysis logo
+                                 img(src = "logo_main.PNG", width = "100%"),
+                                 h5(ArrayAnalysis_version, align = "center"),
+                                 
+                                 # Welcome message
+                                 h1(strong(span(style = "color:#000000", 
+                                                "Loading..."))),
+                                 # Line break
+                                 br()
+                          )
+                        )
+               ),
                
                tabPanel("Home", 
                         value = "home_panel", 
@@ -336,7 +369,7 @@ ui <- tagList(
                           
                           h2(strong("Pre-processing")),
                           
-                          h5("In this pre-processing step, you can remove samples 
+                          h5("In the pre-processing step, you can remove samples 
                            (e.g., outliers), perform normalization, 
                            and choose your desired probeset annotation."),
                           
@@ -416,7 +449,7 @@ ui <- tagList(
                             inputId = "normMeth_microarray_raw",
                             label = NULL,
                             choices = c("RMA","GCRMA","PLIER")),
-
+                          
                           shinyWidgets::prettyRadioButtons(
                             inputId = "perGroup_microarray_raw", 
                             label = NULL, 
@@ -537,9 +570,10 @@ ui <- tagList(
                         sidebarPanel(
                           h2(strong("Statistical analysis")),
                           h5("In the statistical analysis step, 
-                        you can find differentially expressed genes by selecting 
-                        which groups to compare to each other and 
-                           which covariates to add to the statistical model."),
+                        you can select which groups to compare to each other and 
+                           which covariates to add to the statistical model. 
+                             Moreover, you have the option to add additional gene IDs 
+                             (Ensembl IDs, Entrez IDs, and Gene Symbols) to the output."),
                           hr(),
                           
                           #******************************************************#
@@ -598,8 +632,11 @@ ui <- tagList(
                                 name = "question-circle",
                               ) 
                             ) |>
-                              prompter::add_prompt(message = "Add gene annotations to 
-                                       the output.", 
+                              prompter::add_prompt(message = "Select to add gene annotations to 
+                                       the output. For instance, if your data uses Ensembl IDs, 
+                                                   you can add an extra column with 
+                                                   gene symbols to the statistics table 
+                                                   to aid with the interpretation of your findings.", 
                                                    position = "right",
                                                    size = "large")
                           ))),
@@ -667,7 +704,7 @@ ui <- tagList(
                           conditionalPanel(
                             condition = "input.ORA_or_GSEA_microarray_raw == 'ORA'",
                             h5("With",strong("Overrepresentation Analysis (ORA),"),"dysregulated 
-                          processes and pathways can be idenified. These processes/pathways 
+                          processes and pathways can be identified. These processes/pathways 
                           are identified by testing whether their genes are overrepresented among the (most) significant genes."),
                           ),
                           
@@ -860,24 +897,6 @@ ui <- tagList(
                           # Which columns of the top table contains the gene ids?
                           uiOutput("UI_geneID_ORA_microarray_raw"),
                           
-                          # Which gene IDs do they column contain?
-                          selectInput(inputId = "selID_ORA_microarray_raw",
-                                      label = tags$span(
-                                        "Which gene ID to use?", 
-                                        tags$span(
-                                          icon(
-                                            name = "question-circle",
-                                          ) 
-                                        ) |>
-                                          prompter::add_prompt(message = "Select which gene ID is 
-                                               used in the top table.", 
-                                                               position = "right",
-                                                               size = "large")
-                                      ),
-                                      choices = c("Ensembl Gene ID" = "ENSEMBL", 
-                                                  "Entrez Gene ID" = "ENTREZID", 
-                                                  "Gene Symbol/Name" = "SYMBOL"),
-                                      selected = "ENTREZID"),
                           br(),
                           # Calculate!
                           h4(strong(tags$span(
@@ -892,10 +911,10 @@ ui <- tagList(
                                                    size = "large")
                           ))),
                           shinyWidgets::actionBttn(inputId = "calculate_ORA_microarray_raw",
-                                     label = "Calculate",
-                                     style = "simple",
-                                     color = "warning",
-                                     icon = icon("sync")),
+                                                   label = "Calculate",
+                                                   style = "simple",
+                                                   color = "warning",
+                                                   icon = icon("sync")),
                           br(),
                           hr(),
                           uiOutput("UI_ORAreport_microarray_raw"),
@@ -942,7 +961,7 @@ ui <- tagList(
                           h5("The expression data should be supplied as a .tsv/.csv file or as a Series 
                            Matrix File.", "Click ", 
                              downloadLink('downloadexpr_example_microarray_norm', 
-                                                    'here'),
+                                          'here'),
                              "for an example expression matrix in csv format.",
                              "A Series Matrix File can be downloaded from the ",
                              a("GEO website.", 
@@ -1063,7 +1082,7 @@ ui <- tagList(
                           
                           h2(strong("Pre-processing")),
                           
-                          h5("In this pre-processing step, you can remove samples 
+                          h5("In the pre-processing step, you can remove samples 
                            (e.g., outliers) and perform transformation and normalization."),
                           
                           hr(),
@@ -1217,7 +1236,9 @@ ui <- tagList(
                           
                           h5("In the statistical analysis step, 
                         you can select which groups to compare to each other and 
-                           which covariates to add to the statistical model."),
+                           which covariates to add to the statistical model. 
+                             Moreover, you have the option to add additional gene IDs 
+                             (Ensembl IDs, Entrez IDs, and Gene Symbols) to the output."),
                           
                           hr(),
                           h4(strong(tags$span(
@@ -1239,7 +1260,7 @@ ui <- tagList(
                           br(),
                           
                           h4(strong(tags$span(
-                            "2. Add covariated",
+                            "2. Add covariates",
                             tags$span(
                               icon(
                                 name = "question-circle",
@@ -1261,8 +1282,11 @@ ui <- tagList(
                                 name = "question-circle",
                               ) 
                             ) |>
-                              prompter::add_prompt(message = "Add gene annotations to 
-                                       the output.", 
+                              prompter::add_prompt(message = "Select to add gene annotations to 
+                                       the output. For instance, if your data uses Ensembl IDs, 
+                                                   you can add an extra column with 
+                                                   gene symbols to the statistics table 
+                                                   to aid with the interpretation of your findings.", 
                                                    position = "right",
                                                    size = "large")
                           ))),
@@ -1289,10 +1313,10 @@ ui <- tagList(
                                                    size = "large")
                           ))),
                           shinyWidgets::actionBttn(inputId = "calculate_statistics_microarray_norm",
-                                     label = "Calculate",
-                                     style = "simple",
-                                     color = "warning",
-                                     icon = icon("sync")),
+                                                   label = "Calculate",
+                                                   style = "simple",
+                                                   color = "warning",
+                                                   icon = icon("sync")),
                           
                           br(),
                           
@@ -1330,7 +1354,7 @@ ui <- tagList(
                           conditionalPanel(
                             condition = "input.ORA_or_GSEA_microarray_norm == 'ORA'",
                             h5("With",strong("Overrepresentation Analysis (ORA),"),"dysregulated 
-                          processes and pathways can be idenified. These processes/pathways 
+                          processes and pathways can be identified. These processes/pathways 
                           are identified by testing whether their genes are overrepresented among the (most) significant genes."),
                           ),
                           
@@ -1340,7 +1364,7 @@ ui <- tagList(
                           processes and pathways. These processes/pathways are identified by testing whether 
                                their genes show concordant changes in the data."),
                           ),
-                        
+                          
                           hr(),
                           
                           h4(strong(tags$span(
@@ -1522,25 +1546,8 @@ ui <- tagList(
                           # Which columns of the top table contains the gene ids?
                           uiOutput("UI_geneID_ORA_microarray_norm"),
                           
-                          # Which gene IDs do they column contain?
-                          selectInput(inputId = "selID_ORA_microarray_norm",
-                                      label = tags$span(
-                                        "Which gene ID to use?", 
-                                        tags$span(
-                                          icon(
-                                            name = "question-circle",
-                                          ) 
-                                        ) |>
-                                          prompter::add_prompt(message = "Select which gene ID is 
-                                               used in the top table.", 
-                                                               position = "right",
-                                                               size = "large")
-                                      ),
-                                      choices = c("Ensembl Gene ID" = "ENSEMBL", 
-                                                  "Entrez Gene ID" = "ENTREZID", 
-                                                  "Gene Symbol/Name" = "SYMBOL"),
-                                      selected = "ENTREZID"),
                           br(),
+                          
                           # Calculate!
                           h4(strong(tags$span(
                             "5. Perform analysis",
@@ -1554,10 +1561,10 @@ ui <- tagList(
                                                    size = "large")
                           ))),
                           shinyWidgets::actionBttn(inputId = "calculate_ORA_microarray_norm",
-                                     label = "Calculate",
-                                     style = "simple",
-                                     color = "warning",
-                                     icon = icon("sync")),
+                                                   label = "Calculate",
+                                                   style = "simple",
+                                                   color = "warning",
+                                                   icon = icon("sync")),
                           br(),
                           hr(),
                           uiOutput("UI_ORAreport_microarray_norm"),
@@ -1654,15 +1661,15 @@ ui <- tagList(
                           
                           # Confirm upload
                           shinyWidgets::actionBttn(inputId = "upload_rnaseq_raw",
-                                     label = "Read data",
-                                     style = "simple",
-                                     color = "primary",
-                                     icon = icon("fas fa-upload")),
+                                                   label = "Read data",
+                                                   style = "simple",
+                                                   color = "primary",
+                                                   icon = icon("fas fa-upload")),
                           shinyWidgets::actionBttn(inputId = "example_rnaseq_raw",
-                                     label = "Run example",
-                                     style = "simple",
-                                     color = "warning",
-                                     icon = icon("cloud-arrow-up")),
+                                                   label = "Run example",
+                                                   style = "simple",
+                                                   color = "warning",
+                                                   icon = icon("cloud-arrow-up")),
                           
                           
                           uiOutput("next_upload_rnaseq_raw")
@@ -1689,7 +1696,7 @@ ui <- tagList(
                           
                           h2(strong("Pre-processing")),
                           
-                          h5("In this pre-processing step, you can remove samples 
+                          h5("In the pre-processing step, you can remove samples 
                            (e.g., outliers) and perform gene filtering and normalization."),
                           
                           hr(),
@@ -1712,9 +1719,9 @@ ui <- tagList(
                           ))),
                           
                           shinyWidgets::awesomeCheckbox(inputId = "outlier_rnaseq_raw",
-                                          label = "Keep all samples", 
-                                          value = TRUE,
-                                          status = "danger"),
+                                                        label = "Keep all samples", 
+                                                        value = TRUE,
+                                                        status = "danger"),
                           
                           uiOutput("UI_outlier_rnaseq_raw"),
                           br(),
@@ -1729,7 +1736,7 @@ ui <- tagList(
                             ) |>
                               prompter::add_prompt(message = "The experimental groups are the 
                                        groups that you would like to compare to each other 
-                                       in the statistical analysis (e.g., disease or treatment status). ", 
+                                       in the statistical analysis (e.g., disease or treatment status).", 
                                                    position = "right",
                                                    size = "large")
                           ))),
@@ -1776,10 +1783,10 @@ ui <- tagList(
                           
                           
                           shinyWidgets::actionBttn(inputId = "start_preprocessing_rnaseq_raw",
-                                     label = "Calculate",
-                                     style = "simple",
-                                     color = "warning",
-                                     icon = icon("sync")),
+                                                   label = "Calculate",
+                                                   style = "simple",
+                                                   color = "warning",
+                                                   icon = icon("sync")),
                           
                           br(),
                           
@@ -1810,7 +1817,9 @@ ui <- tagList(
                           
                           h5("In the statistical analysis step, 
                         you can select which groups to compare to each other and 
-                           which covariates to add to the statistical model."),
+                           which covariates to add to the statistical model. 
+                             Moreover, you have the option to add additional gene IDs 
+                             (Ensembl IDs, Entrez IDs, and Gene Symbols) to the output."),
                           
                           hr(),
                           h4(strong(tags$span(
@@ -1869,9 +1878,11 @@ ui <- tagList(
                                 name = "question-circle",
                               ) 
                             ) |>
-                              prompter::add_prompt(message = "Add gene annotations 
-                              (e.g., Ensembl gene IDs, Entrez gene IDs, and/or HGNC symbols) to 
-                                       the output.", 
+                              prompter::add_prompt(message = "Select to add gene annotations to 
+                                       the output. For instance, if your data uses Ensembl IDs, 
+                                                   you can add an extra column with 
+                                                   gene symbols to the statistics table 
+                                                   to aid with the interpretation of your findings.", 
                                                    position = "right",
                                                    size = "large")
                           ))),
@@ -1898,10 +1909,10 @@ ui <- tagList(
                                                    size = "large")
                           ))),
                           shinyWidgets::actionBttn(inputId = "calculate_statistics_rnaseq_raw",
-                                     label = "Calculate",
-                                     style = "simple",
-                                     color = "warning",
-                                     icon = icon("sync")),
+                                                   label = "Calculate",
+                                                   style = "simple",
+                                                   color = "warning",
+                                                   icon = icon("sync")),
                           
                           br(),
                           
@@ -1939,7 +1950,7 @@ ui <- tagList(
                           conditionalPanel(
                             condition = "input.ORA_or_GSEA_rnaseq_raw == 'ORA'",
                             h5("With",strong("Overrepresentation Analysis (ORA),"),"dysregulated 
-                          processes and pathways can be idenified. These processes/pathways 
+                          processes and pathways can be identified. These processes/pathways 
                           are identified by testing whether their genes are overrepresented among the (most) significant genes."),
                           ),
                           
@@ -2131,27 +2142,8 @@ ui <- tagList(
                           # Which columns of the top table contains the gene ids?
                           uiOutput("UI_geneID_ORA_rnaseq_raw"),
                           
-                          # Which gene IDs do they column contain?
-                          selectInput(inputId = "selID_ORA_rnaseq_raw",
-                                      label = tags$span(
-                                        "Which gene ID to use?", 
-                                        tags$span(
-                                          icon(
-                                            name = "question-circle",
-                                          ) 
-                                        ) |>
-                                          prompter::add_prompt(message = "Select which gene ID is 
-                                               used in the top table.", 
-                                                               position = "right",
-                                                               size = "large")
-                                      ),
-                                      choices = c("Ensembl Gene ID" = "ENSEMBL", 
-                                                  "Entrez Gene ID" = "ENTREZID", 
-                                                  "Gene Symbol/Name" = "SYMBOL"),
-                                      selected = "ENTREZID"),
-                          
-                          
                           br(),
+                          
                           # Calculate!
                           h4(strong(tags$span(
                             "5. Perform analysis",
@@ -2298,7 +2290,7 @@ ui <- tagList(
                           
                           h2(strong("Pre-processing")),
                           
-                          h5("In this pre-processing step, you can remove samples 
+                          h5("In the pre-processing step, you can remove samples 
                            (e.g., outliers) and perform gene filtering and normalization."),
                           
                           hr(),
@@ -2321,9 +2313,9 @@ ui <- tagList(
                           ))),
                           
                           shinyWidgets::awesomeCheckbox(inputId = "outlier_rnaseq_norm",
-                                          label = "Keep all samples", 
-                                          value = TRUE,
-                                          status = "danger"),
+                                                        label = "Keep all samples", 
+                                                        value = TRUE,
+                                                        status = "danger"),
                           
                           uiOutput("UI_outlier_rnaseq_norm"),
                           br(),
@@ -2471,7 +2463,9 @@ ui <- tagList(
                           
                           h5("In the statistical analysis step, 
                         you can select which groups to compare to each other and 
-                           which covariates to add to the statistical model."),
+                           which covariates to add to the statistical model. 
+                             Moreover, you have the option to add additional gene IDs 
+                             (Ensembl IDs, Entrez IDs, and Gene Symbols) to the output."),
                           
                           hr(),
                           h4(strong(tags$span(
@@ -2513,8 +2507,11 @@ ui <- tagList(
                                 name = "question-circle",
                               ) 
                             ) |>
-                              prompter::add_prompt(message = "Add gene annotations to 
-                                       the output.", 
+                              prompter::add_prompt(message = "Select to add gene annotations to 
+                                       the output. For instance, if your data uses Ensembl IDs, 
+                                                   you can add an extra column with 
+                                                   gene symbols to the statistics table 
+                                                   to aid with the interpretation of your findings.", 
                                                    position = "right",
                                                    size = "large")
                           ))),
@@ -2582,7 +2579,7 @@ ui <- tagList(
                           conditionalPanel(
                             condition = "input.ORA_or_GSEA_rnaseq_norm == 'ORA'",
                             h5("With",strong("Overrepresentation Analysis (ORA),"),"dysregulated 
-                          processes and pathways can be idenified. These processes/pathways 
+                          processes and pathways can be identified. These processes/pathways 
                           are identified by testing whether their genes are overrepresented among the (most) significant genes."),
                           ),
                           
@@ -2774,25 +2771,8 @@ ui <- tagList(
                           
                           uiOutput("UI_geneID_ORA_rnaseq_norm"),
                           
-                          # Which gene IDs do they column contain?
-                          selectInput(inputId = "selID_ORA_rnaseq_norm",
-                                      label =  tags$span(
-                                        "Which gene ID to use?", 
-                                        tags$span(
-                                          icon(
-                                            name = "question-circle",
-                                          ) 
-                                        ) |>
-                                          prompter::add_prompt(message = "Select which gene ID is 
-                                               used in the top table.", 
-                                                               position = "right",
-                                                               size = "large")
-                                      ),
-                                      choices = c("Ensembl Gene ID" = "ENSEMBL", 
-                                                  "Entrez Gene ID" = "ENTREZID", 
-                                                  "Gene Symbol/Name" = "SYMBOL"),
-                                      selected = "ENTREZID"),
                           br(),
+                          
                           # Calculate!
                           h4(strong(tags$span(
                             "5. Perform analysis",
