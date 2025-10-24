@@ -24,21 +24,14 @@ if (is.na(wd)) {
   # If R is not bundled
   } else{
     
-    # If the libPath is already defined
-    if (length(.libPaths())>0){
-      lib_path <- .libPaths()[1]
-      
-    # If the libPath is not defined yet  
-    } else{
-      lib_path <- file.path(Sys.getenv("USERPROFILE"), "Documents", "R", "win-library", paste0(R.Version()$major, ".", R.Version()$minor))
+      lib_path <- file.path(Sys.getenv("R_LIBS_USER"))
       
       # Create the directory if it doesn't exist
       if (!dir.exists(lib_path)) {
-        dir.create(lib_path, recursive = TRUE)
+        dir.create(lib_path, showWarnings = FALSE, recursive = TRUE)
       }
       
       .libPaths(lib_path)
-    }
   }
 
   #============================================================================#
