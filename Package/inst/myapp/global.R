@@ -88,7 +88,9 @@ for (pkg in 1:nrow(CRANpackages)) {
 # Get required Bioconductor packages:
 BiocPackages <- read.table("Objects/Bioconductorpackages.txt", header = TRUE)
 
-BiocManager::install(version = "3.21", ask = FALSE, force = TRUE)
+if (BiocManager::version() == "3.22"){
+  BiocManager::install(version = "3.21", ask = FALSE, force = TRUE) 
+}
 for (pkg in 1:nrow(BiocPackages)) {
   if (!requireNamespace(BiocPackages$name[pkg], quietly = TRUE)){
     BiocManager::install(BiocPackages$name[pkg], ask = FALSE,
