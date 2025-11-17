@@ -2638,34 +2638,34 @@ observe({
           
           # If custom annotation = ENTREZ, link to NCBI website
           if(rv$ProbeAnnotation == "ENTREZG"){
-            output$GeneID <- paste0(
+            output$`Gene ID` <- paste0(
               '<a ',
               'href=',
               paste(
                 "https://www.ncbi.nlm.nih.gov/gene/",
-                output$GeneID,
+                output$`Gene ID`,
                 sep = ''
               ),
               ' target="_blank"',
               '>',
-              output$GeneID,
+              output$`Gene ID`,
               '</a>'
             )
           }
           
           # If custom annotation = ENSG, link to ENSEMBL website
           if(rv$ProbeAnnotation == "ENSG"){
-            output$GeneID <- paste0(
+            output$`Gene ID` <- paste0(
               '<a ',
               'href=',
               paste(
                 "http://www.ensembl.org/id/",
-                output$GeneID,
+                output$`Gene ID`,
                 sep = ''
               ),
               ' target="_blank"',
               '>',
-              output$GeneID,
+              output$`Gene ID`,
               '</a>'
             )
           }
@@ -3982,7 +3982,6 @@ observe({
                       "Mus musculus" = "org.Mm.eg.db",
                       "Rattus norvegicus" = "org.Rn.eg.db"
         )
-        
         if (!requireNamespace(pkg, quietly = TRUE))
           BiocManager::install(pkg, ask = FALSE)
         require(as.character(pkg), character.only = TRUE)
@@ -4126,8 +4125,8 @@ observe({
                   '<a ',
                   'href=',
                   paste0(
-                    "https://www.genome.jp/pathway/",
-                    output$ID, ".html"
+                    "https://www.kegg.jp/pathway/",
+                    output$ID
                   ),
                   ' target="_blank"',
                   '>',
@@ -4804,8 +4803,8 @@ observe({
                 '<a ',
                 'href=',
                 paste0(
-                  "https://www.genome.jp/pathway/",
-                  output$ID, ".html"
+                  "https://www.kegg.jp/pathway/",
+                  output$ID
                 ),
                 ' target="_blank"',
                 '>',

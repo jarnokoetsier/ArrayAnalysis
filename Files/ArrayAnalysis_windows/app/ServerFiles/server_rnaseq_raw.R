@@ -45,7 +45,7 @@ observe({
   #----------------------------------------------------------------------#
   
   observeEvent(input$startAnalysis,{
-    
+
     # Show RNA-seq (raw) upload tab
     showTab("navbar", target = "panel_upload_rnaseq_raw")
     
@@ -75,6 +75,7 @@ observe({
     # Go to microarray tab
     updateNavbarPage(session, "navbar",
                      selected = "panel_upload_rnaseq_raw")
+    
     
     # Example metadata file
     output$downloadmeta_example_rnaseq_raw <- downloadHandler(
@@ -4196,8 +4197,8 @@ observe({
                 '<a ',
                 'href=',
                 paste0(
-                  "https://www.genome.jp/pathway/",
-                  output$ID, ".html"
+                  "https://www.kegg.jp/pathway/",
+                  output$ID
                 ),
                 ' target="_blank"',
                 '>',
@@ -4870,8 +4871,8 @@ observe({
                 '<a ',
                 'href=',
                 paste0(
-                  "https://www.genome.jp/pathway/",
-                  output$ID, ".html"
+                  "https://www.kegg.jp/pathway/",
+                  output$ID
                 ),
                 ' target="_blank"',
                 '>',

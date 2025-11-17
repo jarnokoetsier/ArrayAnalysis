@@ -3875,7 +3875,6 @@ observe({
                       "Mus musculus" = "org.Mm.eg.db",
                       "Rattus norvegicus" = "org.Rn.eg.db"
         )
-        
         if (!requireNamespace(pkg, quietly = TRUE))
           BiocManager::install(pkg, ask = FALSE)
         require(as.character(pkg), character.only = TRUE)
@@ -4017,8 +4016,8 @@ observe({
                 '<a ',
                 'href=',
                 paste0(
-                  "https://www.genome.jp/pathway/",
-                  output$ID, ".html"
+                  "https://www.kegg.jp/pathway/",
+                  output$ID
                 ),
                 ' target="_blank"',
                 '>',
@@ -4586,7 +4585,6 @@ observe({
                       "Mus musculus" = "org.Mm.eg.db",
                       "Rattus norvegicus" = "org.Rn.eg.db"
         )
-        
         if (!requireNamespace(pkg, quietly = TRUE))
           BiocManager::install(pkg, ask = FALSE)
         require(as.character(pkg), character.only = TRUE)
@@ -4692,8 +4690,8 @@ observe({
                 '<a ',
                 'href=',
                 paste0(
-                  "https://www.genome.jp/pathway/",
-                  output$ID, ".html"
+                  "https://www.kegg.jp/pathway/",
+                  output$ID
                 ),
                 ' target="_blank"',
                 '>',
