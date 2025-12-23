@@ -28,6 +28,18 @@ Get started by choosing a tutorial below!</p>
   </div>
 </div>
 <br>
+<div class="row">
+  <div class="col-sm-12 px-3">
+	  <div class="jumbotron p-5 h-100" style="text-align: left">
+	  <p class="lead">Tutorial 2 |</p>
+		  <h3><b>Characterizing the Rett Transcriptome</b></h3>
+		  <p>Follow this tutorial to re-analyze RNA sequencing data from Rett syndrome post-mortem brain tissue
+		  (<a href = "https://www-ncbi-nlm-nih-gov.mu.idm.oclc.org/geo/query/acc.cgi?acc=GSE128380" target = "_blank">GSE128380</a>).</p>
+		  <p><b>Keywords:</b> RNA-seq; Rett syndrome; post-mortem brain</p>
+		  <p><a class="btn btn-outline-dark btn-lg my-3" href="{{ "/tutorials/tutorial2" | relative_url}}" role="button">Follow tutorial</a></p>
+	  </div>
+  </div>
+</div>
 </div>
 
 
