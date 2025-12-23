@@ -35,7 +35,7 @@ Get started by choosing a tutorial below!</p>
 		  <h3><b>Characterizing the Rett Transcriptome</b></h3>
 		  <p>Follow this tutorial to re-analyze RNA sequencing data from Rett syndrome post-mortem brain tissue
 		  (<a href = "https://www-ncbi-nlm-nih-gov.mu.idm.oclc.org/geo/query/acc.cgi?acc=GSE128380" target = "_blank">GSE128380</a>).</p>
-		  <p><b>Keywords:</b> RNA-seq; Rett syndrome; post-mortem brain</p>
+		  <p><b>Keywords:</b> RNA-seq; Rett syndrome; Post-mortem brain</p>
 		  <p><a class="btn btn-outline-dark btn-lg my-3" href="{{ "/tutorials/tutorial2" | relative_url}}" role="button">Follow tutorial</a></p>
 	  </div>
   </div>

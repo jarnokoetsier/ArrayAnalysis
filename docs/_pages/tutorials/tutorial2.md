@@ -230,7 +230,7 @@ Here you can see that 110 genes are downregulated.</p>
 <div class="row">
 <div class="col-sm-12 px-3">
 <div class="jumbotron p-5 h-100 bg-white border">
-<h4><b>Question 4:</b> What processes and pathways are altered in Rett syndrome?</h4>
+<h4><b>Question 8:</b> What processes and pathways are altered in Rett syndrome?</h4>
 <details>
 <summary>Show answer</summary>
 <br>
