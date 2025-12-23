@@ -40,6 +40,7 @@ Get started by choosing a tutorial below!</p>
 	  </div>
   </div>
 </div>
+<br>
 </div>
 
 
