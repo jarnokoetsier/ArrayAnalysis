@@ -16,7 +16,9 @@ layout: default
     <img src="{{ "/assets/img/icons/R_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="sharing-icon">
     <div class="card-body">
       <h5 class="card-title">1. Install R</h5>
-      <p class="card-text">If you don't have R (version 4.4.0 or higher) on your computer, please first install <a href = "https://cran.r-project.org/" target="_blank">R</a>.</p>
+        <p class="card-text">If you don't have R (version 4.4.0 or higher) on your computer, please first install <a href = "https://cran.r-project.org/" target="_blank">R</a>. 
+      If you work on a Windows system, you also need to 
+      install <a href = "https://cran.r-project.org/bin/windows/Rtools/" target="_blank">Rtools</a>.</p> 
     </div>
   </div>
   
@@ -25,9 +27,9 @@ layout: default
     <div class="card-body">
       <h5 class="card-title">2. Install ArrayAnalysis</h5>
       <p class="card-text">You can download ArrayAnalysis for
-      <a href = "https://zenodo.org/records/17631211/files/ArrayAnalysis_unix_0.1.3.sh?download=1">Linux</a>,
-      <a href = "https://zenodo.org/records/17631211/files/ArrayAnalysis_macos_0.1.3.dmg?download=1">MacOS</a>, and 
-      <a href = "https://zenodo.org/records/17631211/files/ArrayAnalysis_windows-x65_0.1.3.exe?download=1">Windows</a>.</p>
+      <a href = "https://zenodo.org/records/19957063/files/ArrayAnalysis_unix_0.1.4.sh?download=1">Linux</a>,
+      <a href = "https://zenodo.org/records/19957063/files/ArrayAnalysis_macos_0.1.4.dmg?download=1">MacOS</a>, and 
+      <a href = "https://zenodo.org/records/19957063/files/ArrayAnalysis_windows-x64_0.1.4.exe?download=1">Windows</a>.</p>
       <hr>
       <p style="font-size: 12px">Does file security prevent you from running the file? Click <a href="{{ "/unblock" | relative_url}}">here</a> what to do.</p>
     </div>
@@ -120,7 +122,7 @@ layout: default
       <p class="card-text">Pull the ArrayAnalysis image with the following command:</p>
        <pre>
       <code>
-     docker pull arrayanalysis/arrayanalysis_shiny:0.1.3
+     docker pull arrayanalysis/arrayanalysis_shiny:0.1.4
      </code>
       </pre>
     </div>
@@ -133,7 +135,7 @@ layout: default
             <p class="card-text">Run ArrayAnalysis with the following command:</p>
       <pre>
       <code>
-     docker run -d --rm -p 3838:3838 arrayanalysis/arrayanalysis_shiny:0.1.3
+     docker run -d --rm -p 3838:3838 arrayanalysis/arrayanalysis_shiny:0.1.4
      </code>
       </pre>
     </div>
@@ -160,7 +162,7 @@ layout: default
     <img src="{{ "/assets/img/icons/install_logo.png" | relative_url}}" class="card-img-top px-4 py-1" alt="inspiration-icon">
     <div class="card-body">
       <h5 class="card-title">2. Download ArrayAnalysis</h5>
-      <p class="card-text">You can download the ArrayAnalysis zip file <a href = "https://zenodo.org/records/17631199/files/jarnokoetsier/ArrayAnalysis_Shiny-v0.1.3.zip?download=1">here</a>. Unzip the file.</p>
+      <p class="card-text">You can download the ArrayAnalysis zip file <a href = "https://zenodo.org/records/19957055/files/jarnokoetsier/ArrayAnalysis_Shiny-v0.1.4.zip?download=1">here</a>. Unzip the file.</p>
     </div>
   </div>
   
