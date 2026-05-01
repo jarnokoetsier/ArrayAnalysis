@@ -35,4 +35,5 @@ Imports:
 	rmarkdown (>= 2.29),
 	circlize (>= 0.4.16),
 	igraph (>= 2.1.1),
-	ggraph (>= 2.2.1)
+	ggraph (>= 2.2.1),
+	ggtangle (>= 0.1.2)

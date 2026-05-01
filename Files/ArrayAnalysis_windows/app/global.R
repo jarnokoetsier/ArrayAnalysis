@@ -4,7 +4,7 @@
 #==============================================================================#
 
 # ArrayAnalysis version:
-ArrayAnalysis_version <- "ArrayAnalysis version 0.1.3"
+ArrayAnalysis_version <- "ArrayAnalysis version 0.1.4"
 online <- FALSE
 
 #******************************************************************************#
@@ -89,9 +89,9 @@ for (pkg in 1:nrow(CRANpackages)) {
 BiocPackages <- read.table("Objects/Bioconductorpackages.txt", header = TRUE)
 
 # Downgrade Bioconductor version if necessary
-if (BiocManager::version() == "3.22"){
-  BiocManager::install(version = "3.21", ask = FALSE, force = TRUE)
-}
+# if (BiocManager::version() == "3.22"){
+#   BiocManager::install(version = "3.21", ask = FALSE, force = TRUE)
+# }
 
 for (pkg in 1:nrow(BiocPackages)) {
   if (!requireNamespace(BiocPackages$name[pkg], quietly = TRUE)){
