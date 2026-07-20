@@ -23,7 +23,7 @@ layout: default
 	  <div class="jumbotron p-5 bg-info text-white h-100" style="text-align: left">
 		  <p style="font-size: 30px"><b>Cite</b></p>
 		  <p>Koetsier J, Cinar O., Willighagen EL, …, Eijssen LMT. User-friendly transcriptomics with ArrayAnalysis. bioRxiv. 2026 Jul 18. 
-		  doi: <a href="https://doi.org/10.64898/2026.07.13.738193" target="_blank" style="color: white;">10.64898/2026.07.13.738193</a></p>
+		  doi: <u><a href="https://doi.org/10.64898/2026.07.13.738193" target="_blank" style="color: white;">10.64898/2026.07.13.738193</a></u></p>
 		  <br>
 		  <p style="font-size: 30px"><b>Email</b></p>
 		  <p><a href="mailto:arrayanalysis-fhml@maastrichtuniversity.nl" target="_blank" style="color: white;">arrayanalysis-fhml@maastrichtuniversity.nl</a></p>
