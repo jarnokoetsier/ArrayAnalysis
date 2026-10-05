@@ -157,7 +157,7 @@ getMetaData <- function(path, celfiles, filetype){
     
     if (filetype == "Series Matrix File"){
         # Read Series Matrix file
-        gse <- GEOquery::getGEO(filename=path)
+        gse <- GEOquery::getGEO(filename=path, returnType = 'ExpressionSet')
         
         # Extract meta data
         metaData <- Biobase::phenoData(gse)@data
@@ -1938,22 +1938,20 @@ getStatistics <- function(normMatrix,
                 }
                 
                 #Get annotations
-                annotation_list <- tryCatch({
-                    ensembl <- biomaRt::useMart("ensembl")
-                    ensembl <- biomaRt::useDataset(biomart_dataset, mart=ensembl)
+                if (!(biomart_filters %in% c("gene_name", "entrezgene_id", "ensembl_gene_id"))){
+                    # ensembl <- biomaRt::useMart("ensembl")
+                    # ensembl <- biomaRt::useDataset(biomart_dataset, mart=ensembl)
+                    ensembl <- biomaRt::useEnsembl(biomart = "genes", dataset = biomart_dataset)
                     annotations <- biomaRt::getBM(attributes=biomart_attributes1,
                                                   filters = biomart_filters1,
                                                   values = top_table[[t]]$`Gene ID`,
                                                   mart = ensembl)
                     
-                    message <- "Nice! Statistical analysis has been performed. 
-          Gene annotation was performed with biomaRt. You can now download 
-              the results and view them in interactive plots."
-                    dataset <- paste0(biomart_dataset, " (", searchDatasets(mart = ensembl, pattern = "hsapiens")$version, ")")
-                    list(annotations, message, dataset)
-                },
-                error = function(cond){
-                    
+                    message <- "Nice! Statistical analysis has been performed.
+                Gene annotation was performed with biomaRt. You can now download
+                    the results and view them in interactive plots."
+                    dataset <- paste0(biomart_dataset, " (", searchDatasets(mart = ensembl, pattern = "hsapiens")$version, ")") 
+                }else{
                     # Load annotation package
                     pkg <- switch(biomart_dataset,
                                   "hsapiens_gene_ensembl" = "org.Hs.eg.db",
@@ -2014,15 +2012,10 @@ getStatistics <- function(normMatrix,
                     colnames(annotations) <- temp_col
                     
                     message <- "Nice! Statistical analysis has been performed. 
-          The Ensembl database was not available.
-          So, the gene annotation was performed with the Bioconductor annotation package (Org.Xx.eg.db). 
           You can now download the results and view them in interactive plots."
-                    dataset <- paste0(pkg, " (", packageVersion(pkg),")")
-                    list(annotations, message, dataset)
-                })
-                annotations <- annotation_list[[1]]
-                message <- annotation_list[[2]]
-                dataset <- annotation_list[[3]]
+                    dataset <- paste0(pkg, " (", packageVersion(pkg),")") 
+                }
+                
                 
                 # Convert entrezgene id to character
                 if("entrezgene_id" %in% biomart_attributes){
@@ -2093,14 +2086,16 @@ makelogFCHistogram <- function(logFC, color = "#d3d3d3", bins = 100, static = FA
     p <- ggplot2::ggplot(data = plotDF, ggplot2::aes(x = Value)) +
         ggplot2::geom_histogram(bins = bins, colour = color_edge, fill = color) +
         ggplot2::labs(title = "logFC histogram") +
-        ggplot2::xlab("logFC") +
+        ggplot2::xlab(expression(log[2]~"FC")) +
         ggplot2::ylab("Count") +
         ggplot2::theme_classic() +
         ggplot2::theme(plot.title = ggplot2::element_text(face = "bold", hjust = 0.5))
     
     # Return plot
     if (!static){
-        return(plotly::ggplotly(p))
+        p <- plotly::ggplotly(p) %>%
+            layout(xaxis = list(title = 'log<sub>2</sub>FC'), 
+                   yaxis = list(title = 'Count'))
     } else{
         return(p)
     }
@@ -2143,7 +2138,10 @@ makePHistogram <- function(P, color = "#d3d3d3", bins = 100, static = FALSE){
     
     # Return plot
     if (!static){
-        return(plotly::ggplotly(p))
+        p <- plotly::ggplotly(p) %>%
+            layout(xaxis = list(title = 'p-value'), 
+                   yaxis = list(title = 'Count'))
+        return(p)
     } else{
         return(p)
     }
@@ -4030,23 +4028,21 @@ getStatistics_RNASeq <- function(rawMatrix,
                     top_table[[t]][,n] <- signif(top_table[[t]][,n],3)
                 }
                 
-                #Get annotations
-                annotation_list <- tryCatch({
-                    ensembl <- biomaRt::useMart("ensembl")
-                    ensembl <- biomaRt::useDataset(biomart_dataset, mart=ensembl)
+                # Get annotation
+                if (!(biomart_filters %in% c("gene_name", "entrezgene_id", "ensembl_gene_id"))){
+                    # ensembl <- biomaRt::useMart("ensembl")
+                    # ensembl <- biomaRt::useDataset(biomart_dataset, mart=ensembl)
+                    ensembl <- biomaRt::useEnsembl(biomart = "genes", dataset = biomart_dataset)
                     annotations <- biomaRt::getBM(attributes=biomart_attributes1,
                                                   filters = biomart_filters1,
                                                   values = top_table[[t]]$`Gene ID`,
                                                   mart = ensembl)
                     
-                    message <- "Nice! Statistical analysis has been performed. 
-          Gene annotation was performed with biomaRt. You can now download 
-              the results and view them in interactive plots."
-                    dataset <- paste0(biomart_dataset, " (", searchDatasets(mart = ensembl, pattern = "hsapiens")$version, ")")
-                    list(annotations, message, dataset)
-                },
-                error = function(cond){
-                    
+                    message <- "Nice! Statistical analysis has been performed.
+                Gene annotation was performed with biomaRt. You can now download
+                    the results and view them in interactive plots."
+                    dataset <- paste0(biomart_dataset, " (", searchDatasets(mart = ensembl, pattern = "hsapiens")$version, ")") 
+                } else{
                     # Load annotation package
                     pkg <- switch(biomart_dataset,
                                   "hsapiens_gene_ensembl" = "org.Hs.eg.db",
@@ -4090,8 +4086,8 @@ getStatistics_RNASeq <- function(rawMatrix,
                     
                     # Join with geneIDs
                     annotations <- dplyr::left_join(data.frame(Gene_ID = top_table[[t]]$`Gene ID`),
-                                             annotations,
-                                             by = c("Gene_ID" = biomart_filters2))
+                                                    annotations,
+                                                    by = c("Gene_ID" = biomart_filters2))
                     colnames(annotations)[1] <- "Gene ID"
                     
                     # Change column names back
@@ -4107,15 +4103,9 @@ getStatistics_RNASeq <- function(rawMatrix,
                     colnames(annotations) <- temp_col
                     
                     message <- "Nice! Statistical analysis has been performed. 
-          The Ensembl database was not available.
-          So, the gene annotation was performed with the bioconductor annotation package (Org.Xs.eg.db). 
           You can now download the results and view them in interactive plots."
                     dataset <- paste0(pkg, " (", packageVersion(pkg),")")
-                    list(annotations, message, dataset)
-                })
-                annotations <- annotation_list[[1]]
-                message <- annotation_list[[2]]
-                dataset <- annotation_list[[3]]
+                }
                 
                 # Convert entrezgene id to character
                 if("entrezgene_id" %in% biomart_attributes){
@@ -4312,22 +4302,21 @@ getStatistics_RNASeq_processed <- function(normMatrix,
                 }
                 
                 #Get annotations
-                annotation_list <- tryCatch({
-                    ensembl <- biomaRt::useMart("ensembl")
-                    ensembl <- biomaRt::useDataset(biomart_dataset, mart=ensembl)
+                if (!(biomart_filters %in% c("gene_name", "entrezgene_id", "ensembl_gene_id"))){
+                    # ensembl <- biomaRt::useMart("ensembl")
+                    # ensembl <- biomaRt::useDataset(biomart_dataset, mart=ensembl)
+                    ensembl <- biomaRt::useEnsembl(biomart = "genes", dataset = biomart_dataset)
                     annotations <- biomaRt::getBM(attributes=biomart_attributes1,
                                                   filters = biomart_filters1,
                                                   values = top_table[[t]]$`Gene ID`,
                                                   mart = ensembl)
                     
-                    message <- "Nice! Statistical analysis has been performed. 
-          Gene annotation was performed with biomaRt. You can now download 
-              the results and view them in interactive plots."
+                    message <- "Nice! Statistical analysis has been performed.
+                Gene annotation was performed with biomaRt. You can now download
+                    the results and view them in interactive plots."
                     dataset <- paste0(biomart_dataset, " (", searchDatasets(mart = ensembl, pattern = "hsapiens")$version, ")")
                     list(annotations, message, dataset)
-                },
-                error = function(cond){
-                    
+                }else{
                     # Load annotation package
                     pkg <- switch(biomart_dataset,
                                   "hsapiens_gene_ensembl" = "org.Hs.eg.db",
@@ -4388,15 +4377,9 @@ getStatistics_RNASeq_processed <- function(normMatrix,
                     colnames(annotations) <- temp_col
                     
                     message <- "Nice! Statistical analysis has been performed. 
-          The Ensembl database was not available.
-          So, the gene annotation was performed with the bioconductor annotation package (Org.Xx.eg.db). 
           You can now download the results and view them in interactive plots."
                     dataset <- paste0(pkg, " (", packageVersion(pkg),")")
-                    list(annotations, message, dataset)
-                })
-                annotations <- annotation_list[[1]]
-                message <- annotation_list[[2]]
-                dataset <- annotation_list[[3]]
+                }
                 
                 # Convert entrezgene id to character
                 if("entrezgene_id" %in% biomart_attributes){
