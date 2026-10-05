@@ -8,7 +8,7 @@ layout: default
 <div class="row">
   <div class="col-sm-12 px-3">
 	  <div class="jumbotron p-5 h-100" style="text-align: justify">
-	      <p class="lead">October 2, 2026 |</p>
+	      <p class="lead">October 5, 2026 |</p>
 		  <h1><b>Version 0.1.5</b></h1>
 		  <ul>
 		  	<li>Org.Xx.eg.db replaces BiomaRt for gene ID mapping</li>
