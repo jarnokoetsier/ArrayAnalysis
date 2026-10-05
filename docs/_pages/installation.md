@@ -122,7 +122,7 @@ layout: default
       <p class="card-text">Pull the ArrayAnalysis image with the following command:</p>
        <pre>
       <code>
-     docker pull arrayanalysis/arrayanalysis_shiny:0.1.4
+     docker pull arrayanalysis/arrayanalysis_shiny:{{ site.data.version.number }}
      </code>
       </pre>
     </div>
@@ -135,7 +135,7 @@ layout: default
             <p class="card-text">Run ArrayAnalysis with the following command:</p>
       <pre>
       <code>
-     docker run -d --rm -p 3838:3838 arrayanalysis/arrayanalysis_shiny:0.1.4
+     docker run -d --rm -p 3838:3838 arrayanalysis/arrayanalysis_shiny:{{ site.data.version.number }}
      </code>
       </pre>
     </div>
