@@ -72,7 +72,7 @@ Please always check the QC plots carefully to decide whether samples should be e
 <p>Data and preprocessing quality can be checked in the different output tables and figures:</p>
 <p><b>1. Normalized expression matrix.</b> A table of normalized expression values is provided and can be downloaded. 
 You can view the expression profile of individual genes by clicking on the table. 
-Click <a href = "https://arrayanalysis.org/explain/Geneboxplot" target="_blank">here</a> for more information on this figure.</p></p>
+Click <a href = "https://arrayanalysis.org/explain/Geneboxplot" target="_blank">here</a> for more information on this figure.</p>
 
 <p><b>2. Boxplots.</b> The boxplots show the distribution of expression values across all samples. 
 Click <a href = "https://arrayanalysis.org/explain/Sampleboxplot" target="_blank">here</a> for more information on this figure.</p>
@@ -247,7 +247,7 @@ Please always check the QC plots carefully to decide whether samples should be e
 <p>Data and preprocessing quality can be checked in the different output tables and figures:</p>
 <p><b>1. Normalized expression matrix.</b> A table of normalized expression values is provided and can be downloaded. 
 You can view the expression profile of individual genes by clicking on the table. 
-Click <a href = "https://arrayanalysis.org/explain/Geneboxplot" target="_blank">here</a> for more information on this figure.</p></p>
+Click <a href = "https://arrayanalysis.org/explain/Geneboxplot" target="_blank">here</a> for more information on this figure.</p>
 
 <p><b>2. Boxplots.</b> The boxplots show the distribution of expression values across all samples. 
 Click <a href = "https://arrayanalysis.org/explain/Sampleboxplot" target="_blank">here</a> for more information on this figure.</p>
@@ -428,7 +428,7 @@ Please always check the QC plots carefully to decide whether samples should be e
 <p>Data and preprocessing quality can be checked in the different output tables and figures:</p>
 <p><b>1. Normalized expression matrix.</b> A table of normalized expression values is provided and can be downloaded. 
 You can view the expression profile of individual genes by clicking on the table. 
-Click <a href = "https://arrayanalysis.org/explain/Geneboxplot" target="_blank">here</a> for more information on this figure.</p></p>
+Click <a href = "https://arrayanalysis.org/explain/Geneboxplot" target="_blank">here</a> for more information on this figure.</p>
 
 <p><b>2. Boxplots.</b> The boxplots show the distribution of expression values across all samples. 
 Click <a href = "https://arrayanalysis.org/explain/Sampleboxplot" target="_blank">here</a> for more information on this figure.</p>
@@ -612,7 +612,7 @@ Please always check the QC plots carefully to decide whether samples should be e
 <p>Data and preprocessing quality can be checked in the different output tables and figures:</p>
 <p><b>1. Normalized expression matrix.</b> A table of normalized expression values is provided and can be downloaded. 
 You can view the expression profile of individual genes by clicking on the table. 
-Click <a href = "https://arrayanalysis.org/explain/Geneboxplot" target="_blank">here</a> for more information on this figure.</p></p>
+Click <a href = "https://arrayanalysis.org/explain/Geneboxplot" target="_blank">here</a> for more information on this figure.</p>
 
 <p><b>2. Boxplots.</b> The boxplots show the distribution of expression values across all samples. 
 Click <a href = "https://arrayanalysis.org/explain/Sampleboxplot" target="_blank">here</a> for more information on this figure.</p>
