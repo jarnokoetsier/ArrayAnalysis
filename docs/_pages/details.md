@@ -5,8 +5,11 @@ layout: details
 ---
 
 <div id="header">
+
+
+
 <h1 class="title toc-ignore" style="color: #004080;"><b>ArrayAnalysis Documentation</b></h1>
-<p></p>
+<p>Check our <a href = "https://arrayanalysis.org" target="_blank">website</a> for the most recent information, tutorials, and FAQs.</p>
 </div>
 <br>
 
@@ -95,9 +98,7 @@ To run the analysis, you can provide three inputs:</p>
 <p><b>1. Statistical comparison(s) 📊</b> Select one or more statistical comparisons of interest. The direction of the statistical comparison is usually defined 
 as <code>Case - Control</code>.</p>
 <p><b>2. Covariates ⚙️</b> Adjust for continuous (<i>e.g.</i>, age) and categorical (<i>e.g.</i>, sex, tissue) covariates.</p>
-<p><b>3. Gene annotation 🔖</b> Add gene annotations from the Ensembl database using the 
-<a href = "https://bioconductor.org/packages/release/bioc/html/biomaRt.html" target = "_blank">biomaRt package</a>. For example, if your data uses ENTREZ gene IDs, 
-you can use this option to add gene symbols or Ensembl gene IDs to the statistics output. Please note that enabling this option increases the runtime of the analysis</p>
+<p><b>3. Gene annotation 🔖</b> Add gene annotations using the relevant Bioconductor annotation package (org.Xx.eg.db). For example, if your data uses ENTREZ gene IDs, you can use this option to add gene symbols or Ensembl gene IDs to the statistics output. Please note that enabling this option increases the runtime of the analysis</p>
 <br>
 <p><h4><b>Output</b></h4></p>
 <p>For each of the selected statistical comparisons, the following output are provided:</p>
@@ -141,7 +142,7 @@ Gene Ontology-Biological Process (GO-BP), -Cellular Component (GO-CC), and -Mole
 <li>Applying a p-value and log<sub>2</sub>FC threshold, or</li>
 <li>Selecting the top N most significantly up/downregulated genes.</li>
 </ul>
-<p>👉 The background gene list includes all genes that passed QC.</p>
+<p>👉 The background gene list includes all genes that passed gene filtering.</p>
 
 <p><b>4. Gene identifier 🔖</b> Select which column in the statistics table contains the gene identifiers, 
 and specify the identifier type (<i>e.g.</i>, Entrez Gene, Ensembl Gene, or Gene Symbol) and organism.</p>
@@ -189,7 +190,7 @@ The edge thickness is proportional to the Jaccard Index (<i>i.e.</i>, number of 
 Click <a href = "https://arrayanalysis.org/explain/Network" target="_blank">here</a> for more information on this figure.</p>
 
 <p><b>4. Settings.</b> Download the overview of the GSEA settings and session info to ensure reproducibility.</p>  
-
+</div>
 <hr>
 <br>
 
@@ -273,9 +274,7 @@ To run the analysis, you can provide three inputs:</p>
 <p><b>1. Statistical comparison(s) 📊</b> Select one or more statistical comparisons of interest. The direction of the statistical comparison is usually defined 
 as <code>Case - Control</code>.</p>
 <p><b>2. Covariates ⚙️</b> Adjust for continuous (<i>e.g.</i>, age) and categorical (<i>e.g.</i>, sex, tissue) covariates.</p>
-<p><b>3. Gene annotation 🔖</b> Add gene annotations from the Ensembl database using the 
-<a href = "https://bioconductor.org/packages/release/bioc/html/biomaRt.html" target = "_blank">biomaRt package</a>. For example, if your data uses ENTREZ gene IDs, 
-you can use this option to add gene symbols or Ensembl gene IDs to the statistics output. Please note that enabling this option increases the runtime of the analysis</p>
+<p><b>3. Gene annotation 🔖</b> Add gene annotations using the relevant Bioconductor annotation package (org.Xx.eg.db). For example, if your data uses ENTREZ gene IDs, you can use this option to add gene symbols or Ensembl gene IDs to the statistics output. Please note that enabling this option increases the runtime of the analysis</p>
 <br>
 <p><h4><b>Output</b></h4></p>
 <p>For each of the selected statistical comparisons, the following output are provided:</p>
@@ -320,7 +319,7 @@ Gene Ontology-Biological Process (GO-BP), -Cellular Component (GO-CC), and -Mole
 <li>Applying a p-value and log<sub>2</sub>FC threshold, or</li>
 <li>Selecting the top N most significantly up/downregulated genes.</li>
 </ul>
-<p>👉 The background gene list includes all genes that passed QC.</p>
+<p>👉 The background gene list includes all genes that passed gene filtering.</p>
 
 <p><b>4. Gene identifier 🔖</b> Select which column in the statistics table contains the gene identifiers, 
 and specify the identifier type (<i>e.g.</i>, Entrez Gene, Ensembl Gene, or Gene Symbol) and organism.</p>
@@ -368,7 +367,7 @@ The edge thickness is proportional to the Jaccard Index (<i>i.e.</i>, number of 
 Click <a href = "https://arrayanalysis.org/explain/Network" target="_blank">here</a> for more information on this figure.</p>
 
 <p><b>4. Settings.</b> Download the overview of the GSEA settings and session info to ensure reproducibility.</p>
-
+</div>
 <hr>
 <br>
 
@@ -429,7 +428,7 @@ Please always check the QC plots carefully to decide whether samples should be e
 <p>Data and preprocessing quality can be checked in the different output tables and figures:</p>
 <p><b>1. Normalized expression matrix.</b> A table of normalized expression values is provided and can be downloaded. 
 You can view the expression profile of individual genes by clicking on the table. 
-Click <a href = "https://arrayanalysis.org/explain/Geneboxplot" target="_blank">here</a> for more information on this figure.</p>
+Click <a href = "https://arrayanalysis.org/explain/Geneboxplot" target="_blank">here</a> for more information on this figure.</p></p>
 
 <p><b>2. Boxplots.</b> The boxplots show the distribution of expression values across all samples. 
 Click <a href = "https://arrayanalysis.org/explain/Sampleboxplot" target="_blank">here</a> for more information on this figure.</p>
@@ -461,9 +460,7 @@ as <code>Case - Control</code>.</p>
 <p><b>2. Covariates ⚙️</b> Adjust for continuous (<i>e.g.</i>, age) and categorical (<i>e.g.</i>, sex, tissue) covariates.</p>
 <p><b>3. log<sub>2</sub>FC shrinkage 📉</b> Shrink imprecise log<sub>2</sub>FCs towards 0 with the <a href = "https://doi.org/10.1093/bioinformatics/bty895" target="_blank">apeglm</a> method. 
 This option is recommended to get more accurate log<sub>2</sub>FCs estimates.</p>
-<p><b>4. Gene annotation 🔖</b> Add gene annotations from the Ensembl database using the 
-<a href = "https://bioconductor.org/packages/release/bioc/html/biomaRt.html" target = "_blank">biomaRt package</a>. For example, if your data uses ENTREZ gene IDs, 
-you can use this option to add gene symbols or Ensembl gene IDs to the statistics output. Please note that enabling this option increases the runtime of the analysis</p>
+<p><b>4. Gene annotation 🔖</b> Add gene annotations using the relevant Bioconductor annotation package (org.Xx.eg.db). For example, if your data uses ENTREZ gene IDs, you can use this option to add gene symbols or Ensembl gene IDs to the statistics output. Please note that enabling this option increases the runtime of the analysis</p>
 <br>
 <p><h4><b>Output</b></h4></p>
 <p>For each of the selected statistical comparisons, the following output are provided:</p>
@@ -508,7 +505,7 @@ Gene Ontology-Biological Process (GO-BP), -Cellular Component (GO-CC), and -Mole
 <li>Applying a p-value and log<sub>2</sub>FC threshold, or</li>
 <li>Selecting the top N most significantly up/downregulated genes.</li>
 </ul>
-<p>👉 The background gene list includes all genes that passed QC.</p>
+<p>👉 The background gene list includes all genes that passed gene filtering.</p>
 
 <p><b>4. Gene identifier 🔖</b> Select which column in the statistics table contains the gene identifiers, 
 and specify the identifier type (<i>e.g.</i>, Entrez Gene, Ensembl Gene, or Gene Symbol) and organism.</p>
@@ -556,7 +553,7 @@ The edge thickness is proportional to the Jaccard Index (<i>i.e.</i>, number of 
 Click <a href = "https://arrayanalysis.org/explain/Network" target="_blank">here</a> for more information on this figure.</p>
 
 <p><b>4. Settings.</b> Download the overview of the GSEA settings and session info to ensure reproducibility.</p>
-
+</div>
 <hr>
 <br>
 
@@ -689,7 +686,7 @@ Gene Ontology-Biological Process (GO-BP), -Cellular Component (GO-CC), and -Mole
 <li>Applying a p-value and log<sub>2</sub>FC threshold, or</li>
 <li>Selecting the top N most significantly up/downregulated genes.</li>
 </ul>
-<p>👉 The background gene list includes all genes that passed QC.</p>
+<p>👉 The background gene list includes all genes that passed gene filtering.</p>
 
 <p><b>4. Gene identifier 🔖</b> Select which column in the statistics table contains the gene identifiers, 
 and specify the identifier type (<i>e.g.</i>, Entrez Gene, Ensembl Gene, or Gene Symbol) and organism.</p>
@@ -737,5 +734,7 @@ The edge thickness is proportional to the Jaccard Index (<i>i.e.</i>, number of 
 Click <a href = "https://arrayanalysis.org/explain/Network" target="_blank">here</a> for more information on this figure.</p>
 
 <p><b>4. Settings.</b> Download the overview of the GSEA settings and session info to ensure reproducibility.</p>
-
+</div>
 <hr>
+
+</div>
